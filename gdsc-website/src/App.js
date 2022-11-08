@@ -1,11 +1,14 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
-import ButtonAppBar from './Components/ButtonAppBar';
+import ResponsiveAppBar from './Components/ResponsiveAppBar';
+import SwipeableTextMobileStepper from './Components/SwipeableTextMobileStepper';
+import StickyFooter from './Components/StickyFooter';
 export default function App() {
   return (
     <div> 
-      <ButtonAppBar />
-      <Button variant="contained">Hello World</Button>
+      <ResponsiveAppBar />
+      <SwipeableTextMobileStepper />
+      <SwipeableTextMobileStepper />
+      <StickyFooter />
     </div>
   );
 }
