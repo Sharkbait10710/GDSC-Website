@@ -1,12 +1,11 @@
-import './App.css';
-import Button from './Components/Button';
-function App() {
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import ButtonAppBar from './Components/ButtonAppBar';
+export default function App() {
   return (
-    <div className="App">
-      <Button />
-      <p>Something</p>
+    <div> 
+      <ButtonAppBar />
+      <Button variant="contained">Hello World</Button>
     </div>
   );
 }
-
-export default App;
