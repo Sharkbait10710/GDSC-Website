@@ -1,0 +1,25 @@
+@media only screen and (min-width: 900px) {
+    .imagepartial {
+       display: none;
+       height: 5vh;
+       padding-right: 1vh;
+    }
+    .imagefull {
+        display: block;
+        height: 5vh;
+        padding-right: 1vh;
+    }
+} 
+
+@media only screen and (max-width: 900px) {
+    .imagepartial {
+       display: block;
+       height: 5vh;
+       padding-right: 1vh;
+    }
+    .imagefull {
+        display: none;
+        height: 5vh;
+        padding-right: 1vh;
+    }
+} 
