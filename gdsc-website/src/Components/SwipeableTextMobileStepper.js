@@ -1,8 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import MobileStepper from "@mui/material/MobileStepper";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
@@ -41,7 +39,7 @@ function SwipeableTextMobileStepper() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#ffffff",
+        main: "#000000",
       },
       secondary: {
         main: "#000000",
@@ -69,27 +67,16 @@ function SwipeableTextMobileStepper() {
         sx={{
           maxWidth: 800,
           flexGrow: 1,
-          pt: 20,
+          pt: 10,
+          width: 1500,
         }}
       >
-        <Paper
-          square
-          elevation={0}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            height: 50,
-            pl: 2,
-            bgcolor: "background.default",
-          }}
-        >
-          <Typography>{images[activeStep].label}</Typography>
-        </Paper>
         <Grid
           container
           justifyContent="center"
           alignItems="center"
           direction="row"
+          width="100%"
         >
           <Grid item justifyContent="center" alignItems="center" xs={1}>
             <Button
@@ -97,10 +84,10 @@ function SwipeableTextMobileStepper() {
               onClick={handleBack}
               disabled={activeStep === 0}
             >
-            <KeyboardDoubleArrowLeftIcon fontSize="large" width="50px" color="secondary" />
+              <KeyboardDoubleArrowLeftIcon fontSize="large" color="secondary" />
             </Button>
           </Grid>
-          <Grid item justifyContent="center" alignItems="center" xs={8}>
+          <Grid item justifyContent="center" alignItems="center" xs={10}>
             <AutoPlaySwipeableViews
               axis={theme.direction === "rtl" ? "x-reverse" : "x"}
               index={activeStep}
@@ -114,7 +101,7 @@ function SwipeableTextMobileStepper() {
                       component="img"
                       sx={{
                         display: "block",
-                        maxWidth: 800,
+                        maxWidth: 1500,
                         overflow: "hidden",
                         width: "100%",
                       }}
