@@ -7,6 +7,7 @@ import Container from '@mui/material/Container';
 import ResponsiveAppBar from './Components/ResponsiveAppBar';
 import SwipeableTextMobileStepper from './Components/SwipeableTextMobileStepper';
 import StickyFooter from './Components/StickyFooter';
+
 export default function App() {
   return (
     <div> 
@@ -18,7 +19,7 @@ export default function App() {
           justifyContent="center"
           alignItems="center">
           <SwipeableTextMobileStepper />
-          <SwipeableTextMobileStepper />
+          
         </Grid>
       </Container>
       <StickyFooter />
