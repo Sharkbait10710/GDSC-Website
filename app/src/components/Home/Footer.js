@@ -35,9 +35,6 @@ const Footer = () => {
                 duration: 1
             }}
             style={{
-                borderLeft: "solid #b1b3b5",
-                borderRight: "solid #b1b3b5",
-                borderWidth: "1px",
 
                 display: "flex",
                 alignItems: "center",

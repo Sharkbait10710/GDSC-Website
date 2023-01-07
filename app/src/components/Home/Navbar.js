@@ -119,7 +119,7 @@ const Navbar = () => {
                             position: "relative",
                             left: "32.7%",
                             top: "8%"
-                        }}><img src={Berkeley_logo} alt="school" height={60}/></a>
+                        }}><motion.img whileHover={{scale: 1.2}} src={Berkeley_logo} alt="school" height={60}/></a>
                 </motion.div>
                 <motion.div
                     variants={linkVariant}

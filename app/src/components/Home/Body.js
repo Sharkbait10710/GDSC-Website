@@ -126,7 +126,7 @@ const Body = () => {
                             {img == 5 && 
                             <motion.div
                                 initial = {{
-                                    x: direction*200,
+                                    x: -direction*200,
                                     opacity: 0
                                 }}
                                 animate={{
@@ -134,13 +134,13 @@ const Body = () => {
                                     opacity: 1
                                 }}
                                 transition={{
-                                    duration: 1.6
+                                    duration: 1.5
                                 }}
                                 exit={{
-                                    x: -direction*200,
+                                    x: direction*200,
                                     opacity: 0,
                                     transition: {
-                                        duration: 0.4
+                                        duration: 0.1
                                     }
                                 }}
                                 style={{
