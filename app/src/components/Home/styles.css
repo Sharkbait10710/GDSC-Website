@@ -1,0 +1,11 @@
+.navbar-link {
+    font-family:        'Maven Pro';
+    font-size:          30px;
+    margin:             1%;
+    cursor:             pointer;
+}
+
+.navbar-link a {
+    text-decoration:    none;
+    color:              black;
+}
