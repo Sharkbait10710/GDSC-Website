@@ -1,16 +1,13 @@
 // Node imports
 import * as React           from "react"
-import { Route, Switch }    from "react-router-dom"
-import motion               from "framer-motion"
 
 // Component imports
 import Navbar               from "../components/Home/Navbar"
 import Body                 from "../components/Home/Body"      
 import Footer               from "../components/Home/Footer"      
 
-// Image imports
-import logo                 from "../imgs/GDSC_Logo.png"
 const Home = () => {
+    
     return (
         <div
             style={{
