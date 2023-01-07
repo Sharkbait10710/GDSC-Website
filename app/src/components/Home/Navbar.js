@@ -1,4 +1,5 @@
 // Node imports
+import * as React           from "react"
 import { motion }           from "framer-motion"
 
 // Image imports
@@ -8,6 +9,25 @@ import Berkeley_logo        from "../../imgs/Berkeley.png"
 import                      './styles.css'
 
 const Navbar = () => {
+    const [windowSize, setWindowSize] = React.useState(getWindowSize());
+
+    React.useEffect(() => {
+        function handleWindowResize() {
+        setWindowSize(getWindowSize());
+        }
+
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+        window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
+
+    function getWindowSize() {
+        const {innerWidth, innerHeight} = window;
+        return {innerWidth, innerHeight};
+    }
+
     const delaytoShow = 1.5;
 
     const linkVariant = {
@@ -55,45 +75,6 @@ const Navbar = () => {
                 height: "10%",
             }}>
                 <motion.div
-                    variants={appear}
-                    initial="hidden"
-                    animate="visible"
-                    className="navbar-link">
-                    <a  
-                        href="#"
-                        style={{
-                            position: "absolute",
-                            left: "16%",
-                            top: "3%",
-                            borderBottom: "solid #4885ed"
-                        }}>GDSC</a>
-                    <a  
-                        href="https://eecs.berkeley.edu/"
-                        style={{
-                            position: "absolute",
-                            right: "20.7%",
-                            top: "2%"
-                        }}><img src={Berkeley_logo} alt="school" height={60}/></a>
-                </motion.div>
-                <motion.div
-                    variants={linkVariant}
-                    whileHover="hover"
-                    initial="hidden"
-                    animate="visible"
-                    transition="transition"
-                    className="navbar-link"><a href="#">About</a></motion.div>
-                <motion.div
-                    variants={linkVariant}
-                    whileHover="hover"
-                    initial="hidden"
-                    animate="visible"
-                    transition="transition"
-                    className="navbar-link"
-                    style={{
-                        marginRight: "0%"
-                    }}><a href="#">Projects</a></motion.div>
-                
-                <motion.div
                     initial={{
                         x: "45vw",
                         y: "50vh",
@@ -110,10 +91,59 @@ const Navbar = () => {
                     }}
                     style={{
                         position: 'absolute',
-                        left: 0
+                        right: '94vw',
+                        top: '3.3vh'
                     }}>
                     <img src={GDSC_logo} alt="GDSC" height={40}/>
                 </motion.div>
+                <motion.div
+                    variants={appear}
+                    initial="hidden"
+                    animate="visible"
+                    className="navbar-link">
+                    <motion.a  
+                        variants={linkVariant}
+                        whileHover={{
+                            scale: 1.2,
+                            borderBottom: "solid #4885ed"
+                        }}
+                        href="#"
+                        className="navbar-link"
+                        style={{
+                            position: "absolute",
+                            left: "16%",
+                        }}>GDSC</motion.a>
+                    <a  
+                        href="https://eecs.berkeley.edu/"
+                        style={{
+                            position: "relative",
+                            left: "32.7%",
+                            top: "8%"
+                        }}><img src={Berkeley_logo} alt="school" height={60}/></a>
+                </motion.div>
+                <motion.div
+                    variants={linkVariant}
+                    whileHover={{
+                        scale: 1.2,
+                        borderBottom: "solid #f4c20d"
+                    }}
+                    initial="hidden"
+                    animate="visible"
+                    transition="transition"
+                    className="navbar-link"><a href="#">About</a></motion.div>
+                <motion.div
+                    variants={linkVariant}
+                    whileHover={{
+                        scale: 1.2,
+                        borderBottom: "solid #3cba54"
+                    }}
+                    initial="hidden"
+                    animate="visible"
+                    transition="transition"
+                    className="navbar-link"
+                    style={{
+                        marginRight: "0%"
+                    }}><a href="#">Projects</a></motion.div>
 
         </div>
     );

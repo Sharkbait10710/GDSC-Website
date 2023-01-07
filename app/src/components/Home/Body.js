@@ -20,10 +20,11 @@ const Body = () => {
         return 0;
     })
 
-    const [previmg, setprevImg] = useState(() => {
+    const [direction, setDirection] = useState(() => {
         return 0;
     })
 
+    const infoSlides = [info_1, info_2, info_3, info_4, info_5]
     const googleColors = ["#4885ed", "#f4c20d", "#3cba54", "#db3236"];
     const delaytoShow = 1.5;
 
@@ -59,7 +60,7 @@ const Body = () => {
                 <IconButton 
                     onClick={() => {
                         setImg(img == 0 ? 5 : (Math.abs(img-1))%6)
-                        setTimeout(() => setprevImg((Math.abs(img-1))%6), 500)
+                        setDirection(-1)
                     }}
                     size="large">
                     <NavigateBeforeIcon fontSize="inherit" />
@@ -93,24 +94,67 @@ const Body = () => {
 
                     overflow: "hidden"
                 }}>
-                {img == 0 && <img src={info_1} alt="info_1" height={630}/>}
-                {img == 1 && <img src={info_2} alt="info_2" height={630}/>}
-                {img == 2 && <img src={info_3} alt="info_3" height={630}/>}
-                {img == 3 && <img src={info_4} alt="info_4" height={630}/>}
-                {img == 4 && <img src={info_5} alt="info_5" height={630}/>}
-                {img == 5 && 
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            justifyContent: "center",
-
-                            fontFamily: "Noto Sans"
-                        }}>
-                        Connect with us!
-                        <img src={info_6} alt="info_6" height={500}/>    
-                    </div>}
+                {
+                    [0, 1, 2, 3, 4].map((ele) =>
+                        <AnimatePresence initial={false} custom={direction}>
+                            {img == ele && 
+                            <motion.img 
+                                initial = {{
+                                    x: direction*200,
+                                    opacity: 0
+                                }}
+                                animate={{
+                                    x: 0,
+                                    opacity: 1
+                                }}
+                                transition={{
+                                    duration: 1 
+                                }}
+                                exit={{
+                                    x: -direction*200,
+                                    opacity: 0,
+                                    transition: {
+                                        duration: 0.1
+                                    }
+                                }}
+                                src={infoSlides[ele]} 
+                                alt={"info_"+ele} 
+                                height={630}/>} 
+                        </AnimatePresence>)
+                }
+                <AnimatePresence initial={false} custom={direction}>
+                            {img == 5 && 
+                            <motion.div
+                                initial = {{
+                                    x: direction*200,
+                                    opacity: 0
+                                }}
+                                animate={{
+                                    x: 0,
+                                    opacity: 1
+                                }}
+                                transition={{
+                                    duration: 1.6
+                                }}
+                                exit={{
+                                    x: -direction*200,
+                                    opacity: 0,
+                                    transition: {
+                                        duration: 0.4
+                                    }
+                                }}
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+        
+                                    fontFamily: "Noto Sans"
+                                }}>
+                                Connect with us!
+                                <img src={info_6} alt="info_6" height={500}/>    
+                        </motion.div>}
+                    </AnimatePresence>
 
             </motion.div>
 
@@ -124,7 +168,7 @@ const Body = () => {
                 <IconButton 
                     onClick={() => {
                         setImg((img+ 1)%6)
-                        setTimeout(() => setprevImg((Math.abs(img-1))%6), 500)
+                        setDirection(1)
                     }}
                     size="large">
                     <NavigateNextIcon fontSize="inherit" />

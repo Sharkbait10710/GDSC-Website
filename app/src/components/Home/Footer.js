@@ -52,7 +52,7 @@ const Footer = () => {
                     display: "flex",
                     alignItems: "center"
                 }}><img src={seal} alt="seal" height="40px"/> <span style={{marginLeft: "5px", fontFamily: "Noto Sans"}}>UC Berkeley</span></div>
-            <a href="https://about.google/"><img src={trademark} alt="trademark" height="40px"/></a>
+            <motion.a whileHover={{scale: 1.2}} href="https://about.google/"><img src={trademark} alt="trademark" height="40px"/></motion.a>
         </motion.div>
     )
 }
