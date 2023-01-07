@@ -46,15 +46,16 @@ const Body = () => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-evenly",
-
-                border: "solid black",
                 height: "80vh",
                 width: "80%"
             }}>
             <motion.div
                 variants={appear}
                 initial="hidden"
-                animate="visible">
+                animate="visible"
+                whileHover={{
+                    scale: 1.6
+                }}>
                 <IconButton 
                     onClick={() => {
                         setImg(img == 0 ? 5 : (Math.abs(img-1))%6)
@@ -87,162 +88,17 @@ const Body = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
 
-                    border: "solid black",
                     height: "87%",
                     width: "80%",
 
                     overflow: "hidden"
                 }}>
-                <AnimatePresence initial={false}>
-                    {img == 0 && 
-                        <motion.div
-                        initial={{
-                            x: "75vw"
-                        }}
-                        animate={{
-                            x: "0vw"
-                        }}
-                        transition={{
-                            duration: 1,
-                            stiffness: 0
-                        }}
-                            exit={{ x:  previmg == 5 && img == 0 ? "100vw" :
-                                        img > previmg ? "100vw" :
-                                        previmg == 0 && img == 5 ? "-100vw":
-                                        "-100vw",
-                                    transition: {
-                                        duration: 1
-                                    }}}>
-                            <img src={info_1} alt="info_1" height={630}/>
-                        </motion.div>}
-                </AnimatePresence>
-                <AnimatePresence initial={false}>
-                    {img == 1 && 
-                        <motion.div
-                        initial={{
-                            x: "75vw"
-                        }}
-                        animate={{
-                            x: "0vw"
-                        }}
-                        transition={{
-                            duration: 2,
-                            stiffness: 0
-                        }}
-                            exit={{ x:  previmg == 5 && img == 0 ? "100vw" :
-                                        img > previmg ? "100vw" :
-                                        previmg == 0 && img == 5 ? "-100vw":
-                                        "-100vw",
-                                        transition: {
-                                            duration: 1
-                                        }}}>
-                            <img src={info_2} alt="info_2" height={630}/>
-                        </motion.div>}
-                </AnimatePresence>
-                <AnimatePresence initial={false}>
-                    {img == 2 && 
-                        <motion.div
-                        initial={{
-                            x: "75vw"
-                        }}
-                        animate={{
-                            x: "0vw"
-                        }}
-                        transition={{
-                            duration: 2,
-                            stiffness: 0
-                        }}
-                            exit={{ x:  previmg == 5 && img == 0 ? "100vw" :
-                                        img > previmg ? "100vw" :
-                                        previmg == 0 && img == 5 ? "-100vw":
-                                        "-100vw",
-                                        transition: {
-                                            duration: 1
-                                        }}}>
-                            <img src={info_3} alt="info_3" height={630}/>
-                        </motion.div>}
-                </AnimatePresence>
-                <AnimatePresence initial={false}>
-                    {img == 3 && 
-                        <motion.div
-                        initial={{
-                            x: "75vw"
-                        }}
-                        animate={{
-                            x: "0vw"
-                        }}
-                        transition={{
-                            duration: 2,
-                            stiffness: 0
-                        }}
-                            exit={{ x:  previmg == 5 && img == 0 ? "100vw" :
-                                        img > previmg ? "100vw" :
-                                        previmg == 0 && img == 5 ? "-100vw":
-                                        "-100vw",
-                                        transition: {
-                                            duration: 1
-                                        }}}>
-                            <img src={info_4} alt="info_4" height={630}/>
-                        </motion.div>}
-                </AnimatePresence>
-                <AnimatePresence initial={false}>
-                    {img == 4 && 
-                        <motion.div
-                        initial={{
-                            x: "75vw"
-                        }}
-                        animate={{
-                            x: "0vw"
-                        }}
-                        transition={{
-                            duration: 2,
-                            stiffness: 0
-                        }}
-                            exit={{ x:  previmg == 5 && img == 0 ? "100vw" :
-                                        img > previmg ? "100vw" :
-                                        previmg == 0 && img == 5 ? "-100vw":
-                                        "-100vw",
-                                        transition: {
-                                            duration: 1
-                                        }}}>
-                            <img src={info_5} alt="info_5" height={630}/>
-                        </motion.div>}
-                </AnimatePresence>
-                <AnimatePresence initial={false}>
-                    {img == 5 && 
-                        <motion.div
-                        initial={{
-                            x: "75vw"
-                        }}
-                        animate={{
-                            x: "0vw"
-                        }}
-                        transition={{
-                            duration: 2,
-                            stiffness: 0
-                        }}
-                            exit={{ x:  previmg == 5 && img == 0 ? "100vw" :
-                                        img > previmg ? "100vw" :
-                                        previmg == 0 && img == 5 ? "-100vw":
-                                        "-100vw",
-                                        transition: {
-                                            duration: 1
-                                        }}}>
-                            <div
-                                style={{
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-
-                                    fontFamily: "Google Sans"
-                                }}>
-                                Connect with us!
-                                <img src={info_6} alt="info_6" height={500}/>    
-                            </div>
-                        </motion.div>}
-                </AnimatePresence>
-                {/* {img == 5 && 
+                {img == 0 && <img src={info_1} alt="info_1" height={630}/>}
+                {img == 1 && <img src={info_2} alt="info_2" height={630}/>}
+                {img == 2 && <img src={info_3} alt="info_3" height={630}/>}
+                {img == 3 && <img src={info_4} alt="info_4" height={630}/>}
+                {img == 4 && <img src={info_5} alt="info_5" height={630}/>}
+                {img == 5 && 
                     <div
                         style={{
                             display: "flex",
@@ -250,12 +106,29 @@ const Body = () => {
                             alignItems: "center",
                             justifyContent: "center",
 
-                            fontFamily: "Google Sans"
+                            fontFamily: "Noto Sans"
                         }}>
                         Connect with us!
                         <img src={info_6} alt="info_6" height={500}/>    
-                    </div>} */}
+                    </div>}
 
+            </motion.div>
+
+            <motion.div
+                variants={appear}
+                initial="hidden"
+                animate="visible"
+                whileHover={{
+                    scale: 1.6
+                }}>
+                <IconButton 
+                    onClick={() => {
+                        setImg((img+ 1)%6)
+                        setTimeout(() => setprevImg((Math.abs(img-1))%6), 500)
+                    }}
+                    size="large">
+                    <NavigateNextIcon fontSize="inherit" />
+                </IconButton>
             </motion.div>
 
             <motion.div
@@ -270,21 +143,7 @@ const Body = () => {
                 transition={{
                     delay: delaytoShow,
                     duration: 1
-                }}>
-                <IconButton 
-                    onClick={() => {
-                        setImg((img+ 1)%6)
-                        setTimeout(() => setprevImg((Math.abs(img-1))%6), 500)
-                    }}
-                    size="large">
-                    <NavigateNextIcon fontSize="inherit" />
-                </IconButton>
-            </motion.div>
-
-            <motion.div
-                variants={appear}
-                initial="hidden"
-                animate="visible"
+                }}
                 style={{
                     display: "flex",
                     position: "absolute",
@@ -317,7 +176,6 @@ const Body = () => {
                             
                 )}
             </motion.div>
-            img {img}
         </div>
     )
 }

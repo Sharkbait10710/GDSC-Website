@@ -42,7 +42,7 @@ const Navbar = () => {
             }
         },
     }
-    
+
     return (
         <div
             style={{
@@ -96,7 +96,7 @@ const Navbar = () => {
                 <motion.div
                     initial={{
                         x: "45vw",
-                        y: "35vh",
+                        y: "50vh",
                         scale: 4
                     }}
                     animate={{
