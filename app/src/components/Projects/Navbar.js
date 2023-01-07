@@ -28,7 +28,7 @@ const Navbar = () => {
         return {innerWidth, innerHeight};
     }
 
-    const delaytoShow = 1.5;
+    const delaytoShow = 0;
 
     const linkVariant = {
         hidden: {

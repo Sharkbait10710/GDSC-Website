@@ -6,7 +6,8 @@ import {
 // MUI imports
 
 // Page imports
-import Home from "./pages/Home"
+import Home     from "./pages/Home"
+import Projects from "./pages/Projects"
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Router>
         <Routes>
           <Route path= "/" element={<Home />}/>
+          <Route path= "/Projects" element={<Projects />}/>
         </Routes>
       </Router>
     </div>
