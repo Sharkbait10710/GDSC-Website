@@ -130,7 +130,7 @@ const Navbar = () => {
                     initial="hidden"
                     animate="visible"
                     transition="transition"
-                    className="navbar-link"><a href="#">About</a></motion.div>
+                    className="navbar-link"><a href="/">About</a></motion.div>
                 <motion.div
                     variants={linkVariant}
                     whileHover={{
