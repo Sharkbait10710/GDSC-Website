@@ -1,0 +1,27 @@
+{
+    "arr": [
+        {
+            "index": "0",
+            "title": "What Does GDSC stand for?",
+            "subtitle": "Google Developer Student Club",
+            "points": [
+                {
+                    "main": "Improve quality of life with software",
+                    "sub": []
+                },
+                {
+                    "main": "Build software technical knowledge",
+                    "sub": [
+                        "Tensor Flow",
+                        "Web Development",
+                        "Firebase"
+                    ]
+                },
+                {
+                    "main":"Apply our knowledge to problems in our community",
+                    "sub": []
+                } 
+            ]
+        }
+    ]
+}
