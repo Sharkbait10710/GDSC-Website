@@ -31,7 +31,7 @@ const Carousel = (props) => {
             const diff = 10;
             return Math.min(oldProgress + diff, 100);
           });
-        }, 1000);
+        }, 1500);
     
         return () => {
           clearInterval(timer);
@@ -77,7 +77,7 @@ const Carousel = (props) => {
                                 x: "-1000vw",
                                 transition: {
                                     delay: 0,
-                                    duration: 1
+                                    duration: 1.5
                                 }
                             }}
                             className="slide">

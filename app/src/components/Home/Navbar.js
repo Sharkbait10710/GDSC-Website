@@ -8,7 +8,7 @@ import Berkeley_logo        from "../../imgs/Berkeley.png"
 //CSS import
 import                      './styles.css'
 
-const Navbar = () => {
+const Navbar = (props) => {
     const [windowSize, setWindowSize] = React.useState(getWindowSize());
 
     React.useEffect(() => {
@@ -72,7 +72,7 @@ const Navbar = () => {
                 top: "0%",
 
                 width: "80%",
-                height: "10%",
+                height: "10%"
             }}>
                 <motion.div
                     initial={{
@@ -92,45 +92,48 @@ const Navbar = () => {
                     style={{
                         position: 'absolute',
                         right: '94vw',
-                        top: '3.3vh'
+                        top: '3.3%'
                     }}>
-                    <img src={GDSC_logo} alt="GDSC" height={40}/>
+                    <img src={GDSC_logo} alt="GDSC" height={50}/>
                 </motion.div>
-                <motion.div
-                    variants={appear}
-                    initial="hidden"
-                    animate="visible"
-                    className="navbar-link">
-                    <motion.a  
-                        variants={linkVariant}
-                        whileHover={{
-                            scale: 1.2,
-                            borderBottom: "solid #4885ed"
-                        }}
-                        href="#"
-                        className="navbar-link"
-                        style={{
-                            position: "absolute",
-                            left: "16%",
-                        }}>GDSC</motion.a>
-                    <a  
-                        href="https://eecs.berkeley.edu/"
-                        style={{
-                            position: "relative",
-                            left: "32.7%",
-                            top: "8%"
-                        }}><motion.img whileHover={{scale: 1.2}} src={Berkeley_logo} alt="school" height={60}/></a>
-                </motion.div>
+
                 <motion.div
                     variants={linkVariant}
                     whileHover={{
                         scale: 1.2,
-                        borderBottom: "solid #f4c20d"
+                        borderBottom: "solid #4885ed"
                     }}
                     initial="hidden"
                     animate="visible"
                     transition="transition"
-                    className="navbar-link"><a href="#">About</a></motion.div>
+                    className="navbar-link"
+                    style={{
+                        fontFamily: "Google Sans",
+                        position: "absolute",
+                        top: "2%",
+                        left: "16%",
+                        fontWeight: 500
+                    }}><a href="https://qr.link/ynzrLA">GDSC</a>
+                </motion.div>
+
+                <motion.div
+                    variants={linkVariant}
+                    whileHover={{
+                        scale: 1.2,
+                        borderBottom: "solid #e84438"
+                    }}
+                    initial="hidden"
+                    animate="visible"
+                    transition="transition"
+                    className="navbar-link"
+                    style={{
+                        marginRight: "10%",
+                        fontFamily: "Google Sans",
+                        position: "absolute",
+                        top: "2%"
+                    }}><a href="https://qr.link/ynzrLA">Join Us</a>
+                </motion.div>
+
                 <motion.div
                     variants={linkVariant}
                     whileHover={{
@@ -142,8 +145,12 @@ const Navbar = () => {
                     transition="transition"
                     className="navbar-link"
                     style={{
-                        marginRight: "0%"
-                    }}><a href="/Projects">Projects</a></motion.div>
+                        marginRight: "0%",
+                        fontFamily: "Google Sans",
+                        position: "absolute",
+                        top: "2%"
+                    }}><a href="/Projects" onClick={props.setFunction}>Projects</a>
+                </motion.div>
 
         </div>
     );
