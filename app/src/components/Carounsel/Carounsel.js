@@ -28,7 +28,6 @@ const Carounsel = (props) => {
             style={{
                 height: "100%",
                 width: "100%",
-                border: "1px solid",
                 overflow: "hidden"
             }}>
                 {props.data["arr"].map((ele) => {
@@ -49,15 +48,19 @@ const Carounsel = (props) => {
                                 }}
                                 exit={{
                                     x: "-100vh"
-                                }}>
+                                }}
+                                class="slide">
                                 <h1>{ele["title"]}</h1>
-                                <h2>{ele["subtitle"]}</h2>
+                                <h2
+                                    style={{
+                                        color: ele["subtitleColor"]
+                                    }}>{ele["subtitle"]}</h2>
                                 {
                                     ele["points"].map((ele2) => {
                                         return <div>
                                                 <h3>{ele2["main"]}</h3>
                                                 {ele2["sub"].map((ele3) => {
-                                                    return <p>{ele3}</p>
+                                                    return <p>- {ele3}</p>
                                                 })}
                                         </div>
                                     })
@@ -77,7 +80,8 @@ const Carounsel = (props) => {
                     position: "absolute",
                     right: "0%",
                     top: "0%",
-                    height: "100%"
+                    height: "100%",
+                    zIndex: -1
                 }}>
                 <img 
                     src={bg_1} 

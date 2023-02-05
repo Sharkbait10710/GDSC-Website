@@ -4,6 +4,7 @@
             "index": "0",
             "title": "What Does GDSC stand for?",
             "subtitle": "Google Developer Student Club",
+            "subtitleColor": "#1a73e8",
             "points": [
                 {
                     "main": "Improve quality of life with software",

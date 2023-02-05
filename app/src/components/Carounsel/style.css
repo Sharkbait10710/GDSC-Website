@@ -1,4 +1,27 @@
 h1 {
-    color: red;
-    font-family: "Roboto";
+    font-size: 80px;
+    font-weight: 10;
+    opacity: 0.75;
+    margin-bottom: -20px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 25px;
+    font-weight: bold;
+    color: gray;
+}
+
+p {
+    margin-left: 40px;
+    font-size: 20px;
+}
+.slide {
+    font-family: "Google Sans";
+    opacity: 0.6;
+    margin-left: 4%;
+    margin-top: 6%;
 }
