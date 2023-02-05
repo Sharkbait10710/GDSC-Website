@@ -22,14 +22,16 @@ const Carousel = (props) => {
         setTimeout(() => setInit(0), 2000);
         const timer = setInterval(() => {
           setProgress((oldProgress) => {
-            if (oldProgress === 100) {
-                setslideNum((slideNum + 1) % 2)
+            if (oldProgress >= 100) {
+                setslideNum((oldslideNum) => {
+                    return (oldslideNum + 1) % 2
+                })
                 return 0
             }
             const diff = 10;
             return Math.min(oldProgress + diff, 100);
           });
-        }, 500);
+        }, 1000);
     
         return () => {
           clearInterval(timer);
@@ -55,7 +57,6 @@ const Carousel = (props) => {
                 width: "100%",
                 overflow: "hidden"
             }}>
-                {slideNum} {props.data["arr"].length}
             {props.data["arr"].map((ele) => {
                 return <AnimatePresence key={ele["index"]}>
                     {slideNum == ele["index"]
@@ -106,9 +107,7 @@ const Carousel = (props) => {
 
                     display: "flex",
                     height: "15%",
-                    width: "80%",
-
-                    border: "1px solid"
+                    width: "80%"
                 }}>
                     {
                         props.data["arr"].map((ele)=> {
@@ -142,7 +141,12 @@ const Carousel = (props) => {
                                 <p style={{
                                     marginLeft: "0"
                                     }}
-                                    className="Hover">{ele["subtitle"]}</p>
+                                    className="Hover">
+                                        <a onClick={() => {
+                                            setslideNum(ele["index"])
+                                            setProgress(0)
+                                        }}>{ele["subtitle"]}</a>
+                                </p>
                             </div>
                         })
                     }

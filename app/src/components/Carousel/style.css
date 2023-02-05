@@ -34,4 +34,5 @@ p {
 
 .Hover:hover {
     opacity: 1;
+    cursor: pointer;
 }
