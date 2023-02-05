@@ -47,6 +47,66 @@
                     ]
                 } 
             ]
+        },
+        {
+            "index": "2",
+            "title": "Organization",
+            "subtitle": "Staying connected",
+            "subtitleColor": "#0f9d58",
+            "points": [
+                {
+                    "main": "Project owners lead their scrums",
+                    "sub": []
+                },
+                {
+                    "main": "Project members are part of scrums",
+                    "sub": []
+                },
+                {
+                    "main":"General members participate in general meetings",
+                    "sub": []
+                },
+                {
+                    "main": "Everyone is welcome to participate in all events!",
+                    "sub": []
+                }
+            ]
+        },
+        {
+            "index": "3",
+            "title": "Career Growth",
+            "subtitle": "Did you say Google?",
+            "subtitleColor": "#e84438",
+            "points": [
+                {
+                    "main": "Host Speakers from a variety of fields and companies to talk about what they do!",
+                    "sub": []
+                },
+                {
+                    "main": "Ability to network with different companies and get your foot in the door",
+                    "sub": []
+                }
+            ]
+        },
+        {
+            "index": "4",
+            "title": "Technical Talks",
+            "subtitle": "Learning, learning, learning",
+            "subtitleColor": "#1a73e8",
+            "points": [
+                {
+                    "main": "Bi-weekly technical talks ranging from",
+                    "sub": [
+                        "ML",
+                        "Javascript",
+                        "Cloud computing"
+                    ]
+                },
+                {
+                    "main": "Concept levels range from broad overview to deep dive",
+                    "sub": []
+                }
+            ]
         }
     ]
 }

@@ -1,5 +1,5 @@
 // Node imports
-import { motion, AnimatePresence }  from "framer-motion"
+import { motion, AnimatePresence, m }  from "framer-motion"
 import { useState, useEffect }      from "react"
 import Box                          from '@mui/material/Box'; 
 import LinearProgress               from '@mui/material/LinearProgress';
@@ -24,7 +24,7 @@ const Carousel = (props) => {
           setProgress((oldProgress) => {
             if (oldProgress >= 100) {
                 setslideNum((oldslideNum) => {
-                    return (oldslideNum + 1) % 2
+                    return (oldslideNum + 1) % props.data["arr"].length
                 })
                 return 0
             }
@@ -70,7 +70,7 @@ const Carousel = (props) => {
                                 opacity: 1
                             }}
                             transition={{
-                                delay: init ? props.delaytoShow : 0.5,
+                                delay: init ? props.delaytoShow : 1,
                                 duration: 1
                             }}
                             exit={{
@@ -118,7 +118,6 @@ const Carousel = (props) => {
                                     maxWidth: "20%",
                                     display: "flex",
                                     flexDirection: "column",
-                                    justifyContent: "center",
                                     padding: "5px",
 
                                     textOverflow: "ellipsis"
