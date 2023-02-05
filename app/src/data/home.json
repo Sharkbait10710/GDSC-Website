@@ -23,6 +23,30 @@
                     "sub": []
                 } 
             ]
+        },
+        {
+            "index": "1",
+            "title": "Problems?",
+            "subtitle": "Solving Problems is only the last half",
+            "subtitleColor": "#fbbc04",
+            "points": [
+                {
+                    "main": "Finding problems is the first half",
+                    "sub": []
+                },
+                {
+                    "main": "Develop intuitive project specs",
+                    "sub": []
+                },
+                {
+                    "main":"Examples",
+                    "sub": [
+                        "Data visualization tools for non-software people",
+                        "Making IoT Software Development Simpler",
+                        "Generic website for non-software clubs"
+                    ]
+                } 
+            ]
         }
     ]
 }

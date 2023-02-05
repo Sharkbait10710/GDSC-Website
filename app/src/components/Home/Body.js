@@ -11,7 +11,7 @@ import NavigateNextIcon             from "@mui/icons-material/NavigateNext"
 import homeData                     from "../../data/home.json"
 
 // Custom
-import Carounsel                    from "../Carounsel/Carounsel"
+import Carousel                    from "../Carousel/Carousel"
 const Body = () => {
     const delaytoShow = 1.5;
 
@@ -37,7 +37,7 @@ const Body = () => {
                 height: "80vh",
                 width: "80%"
             }}>
-            <Carounsel delaytoShow={delaytoShow} data={homeData}/>
+            <Carousel delaytoShow={delaytoShow} data={homeData}/>
         </div>
     )
 }
