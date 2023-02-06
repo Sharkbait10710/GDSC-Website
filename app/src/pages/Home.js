@@ -8,8 +8,9 @@ import Footer               from "../components/Home/Footer"
 
 // Image imports
 import bgImg                from "../imgs/bgImg.jpg"
-const Home = () => {
-    
+
+const Home = (props) => {
+
     return (
         <div
             style={{
@@ -22,16 +23,9 @@ const Home = () => {
                 right: 0,
                 bottom: 0
             }}>
-            <img 
-                style={{
-                    width: "100vw",
-                    position: 'absolute',
-                    opacity: 0.2
-                }}
-                src={bgImg}/>
-            <Navbar />
-            <Body />
-            <Footer />
+            <Navbar init={props.init} setFunction={props.setFunction}/>
+            <Body init={props.init}/>
+            <Footer init={props.init}/>
         </div>
     )
 }

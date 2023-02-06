@@ -1,9 +1,10 @@
 // Node imports
+import * as React   from "react"
 import { motion }   from "framer-motion"
 
 import seal         from "../../imgs/Berkeley_Seal.png"
-import trademark    from "../../imgs/google_trademark.png"
-const Footer = () => {
+
+const Footer = (props) => {
     const delaytoShow = 1.5;
 
     const appear = {
@@ -18,12 +19,30 @@ const Footer = () => {
             }
         },
     }
+    const [windowSize, setWindowSize] = React.useState(getWindowSize());
+
+    React.useEffect(() => {
+        function handleWindowResize() {
+        setWindowSize(getWindowSize());
+        }
+
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+        window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
+
+    function getWindowSize() {
+        const {innerWidth, innerHeight} = window;
+        return {innerWidth, innerHeight};
+    }
 
     return(
         <motion.div
             variants={appear}
             initial={{
-                opacity: 0,
+                opacity: props.init ? 0 : 1,
                 y: "100vh"
             }}
             animate={{
@@ -31,25 +50,26 @@ const Footer = () => {
                 opacity: 1
             }}
             transition={{
-                delay: delaytoShow,
-                duration: 1
+                delay: delaytoShow-1,
+                duration: 2
             }}
             style={{
 
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-between",
-
+                justifyContent: windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? "space-between" : "center",
+  
                 padding: "10px",
                 height: "7%",
-                width: "80%"
+                width: "80%",
+
             }}>
             <div
                 style={{
                     display: "flex",
-                    alignItems: "center"
-                }}><img src={seal} alt="seal" height="40px"/> <span style={{marginLeft: "5px", fontFamily: "Noto Sans"}}>UC Berkeley</span></div>
-            <motion.a whileHover={{scale: 1.2}} href="https://about.google/"><img src={trademark} alt="trademark" height="40px"/></motion.a>
+                    alignItems: "center",
+                    fontSize: "20px"
+                }}><img src={seal} alt="seal" height="40px"/> <span style={{marginLeft: "5px", fontFamily: "Google Sans"}}>UC Berkeley</span></div>
         </motion.div>
     )
 }

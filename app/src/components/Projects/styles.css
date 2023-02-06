@@ -9,3 +9,11 @@
     text-decoration:    none;
     color:              black;
 }
+
+.Hover {
+    text-decoration: none;
+    opacity: 1;
+}
+.Hover:hover {
+    text-decoration: underline;
+}
