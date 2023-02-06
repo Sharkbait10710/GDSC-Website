@@ -131,7 +131,7 @@ const Navbar = (props) => {
                         fontFamily: "Google Sans",
                         position: "absolute",
                         top: "2%"
-                    }}><a href="https://qr.link/ynzrLA">Join Us</a>
+                    }}><a href="https://forms.gle/95Kx8NHm6eyaCkeS8">Join Us</a>
                 </motion.div>
 
                 {windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 && <motion.div
