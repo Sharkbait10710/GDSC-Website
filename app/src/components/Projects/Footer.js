@@ -34,10 +34,7 @@ const Footer = () => {
 
                 padding: "10px",
                 height: "7%",
-                width: "80%",
-
-                position: "absolute",
-                bottom: "1%"
+                width: "80%"
             }}>
             <div
                 style={{

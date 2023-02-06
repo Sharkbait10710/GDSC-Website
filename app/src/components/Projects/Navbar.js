@@ -8,6 +8,7 @@ import GDSC_logo            from "../../imgs/GDSC_Logo.png"
 //CSS import
 import                      './styles.css'
 
+
 const Navbar = (props) => {
     const [windowSize, setWindowSize] = React.useState(getWindowSize());
 

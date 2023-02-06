@@ -1,0 +1,16 @@
+{
+    "arr": [
+        {
+            "name": "StudyApp",
+            "description": "Free Quizlet that supports latex",
+            "github": "https://github.com/Sharkbait10710/StudyApp",
+            "icon": "https://cdn3.iconfinder.com/data/icons/education-and-learning-hexagon-2/128/9-512.png"
+        },
+        {
+            "name": "Imagehost-API-2",
+            "description": "overhaul of my incomplete image hosting api. This new express-based RESTful image hosting API uses multer to download images to server and SQLite to store image data.",
+            "github": "https://github.com/koizura/Imagehost-API-2",
+            "icon": "https://avatars.githubusercontent.com/u/14708343?v=4"
+        }
+    ]
+}
