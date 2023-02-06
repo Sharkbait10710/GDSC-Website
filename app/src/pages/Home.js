@@ -24,7 +24,7 @@ const Home = (props) => {
                 bottom: 0
             }}>
             <Navbar init={props.init} setFunction={props.setFunction}/>
-            <Body />
+            <Body init={props.init}/>
             <Footer init={props.init}/>
         </div>
     )

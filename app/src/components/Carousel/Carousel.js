@@ -47,7 +47,7 @@ const Carousel = (props) => {
                 opacity: 1
             }}
             transition={{
-                delay: props.delaytoShow,
+                delay: props.init ? props.delaytoShow : 0,
                 duration: 1
             }}
             style={{
@@ -68,7 +68,7 @@ const Carousel = (props) => {
                                 opacity: 1
                             }}
                             transition={{
-                                delay: init ? props.delaytoShow : 1,
+                                delay: props.init ? props.delaytoShow : 1,
                                 duration: 1
                             }}
                             exit={{
@@ -106,7 +106,7 @@ const Carousel = (props) => {
                     opacity: 1
                 }}
                 transition={{
-                    delay: props.delaytoShow,
+                    delay: props.initinit ? props.delaytoShow : 0,
                     duration: 1
                 }}
                 style={{
@@ -165,6 +165,10 @@ const Carousel = (props) => {
                 }}
                 animate={{
                     opacity: 1
+                }}
+                transition={{
+                    delay: props.init ? props.delaytoShow : 0,
+                    duration: 1
                 }}
                 style={{
                     position: "absolute",
