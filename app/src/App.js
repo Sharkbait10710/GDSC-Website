@@ -14,8 +14,28 @@ function App() {
     return true
   })
 
-  return (
+  const [windowSize, setWindowSize] = React.useState(getWindowSize());
 
+    React.useEffect(() => {
+        function handleWindowResize() {
+        setWindowSize(getWindowSize());
+        }
+
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+        window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
+
+    function getWindowSize() {
+        const {innerWidth, innerHeight} = window;
+        return {innerWidth, innerHeight};
+    }
+
+
+  return (
+    
     <div id="app">
       {page === "Home" && <Home init={init} setFunction={() => {
         setPage("Projects")

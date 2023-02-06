@@ -1,8 +1,10 @@
+// React
+import * as React                  from "react"
 // Data
 import homeData                     from "../../data/home.json"
 
 // Custom
-import Carousel                    from "../Carousel/Carousel"
+import Carousel                     from "../Carousel/Carousel"
 const Body = (props) => {
     const delaytoShow = 1.5;
 
@@ -18,7 +20,26 @@ const Body = (props) => {
             }
         },
     }
+    
+    const [windowSize, setWindowSize] = React.useState(getWindowSize());
 
+    React.useEffect(() => {
+        function handleWindowResize() {
+        setWindowSize(getWindowSize());
+        }
+
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+        window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
+
+    function getWindowSize() {
+        const {innerWidth, innerHeight} = window;
+        return {innerWidth, innerHeight};
+    }
+    
     return(
         <div
             style={{
@@ -28,7 +49,7 @@ const Body = (props) => {
                 height: "80vh",
                 width: "80%"
             }}>
-            <Carousel init={props.init} delaytoShow={delaytoShow} data={homeData}/>
+            {windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 && <Carousel init={props.init} delaytoShow={delaytoShow} data={homeData}/>}
         </div>
     )
 }

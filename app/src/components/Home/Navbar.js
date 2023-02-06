@@ -4,30 +4,10 @@ import { motion }           from "framer-motion"
 
 // Image imports
 import GDSC_logo            from "../../imgs/GDSC_Logo.png"
-import Berkeley_logo        from "../../imgs/Berkeley.png"
 //CSS import
 import                      './styles.css'
 
 const Navbar = (props) => {
-    const [windowSize, setWindowSize] = React.useState(getWindowSize());
-
-    React.useEffect(() => {
-        function handleWindowResize() {
-        setWindowSize(getWindowSize());
-        }
-
-        window.addEventListener('resize', handleWindowResize);
-
-        return () => {
-        window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
-
-    function getWindowSize() {
-        const {innerWidth, innerHeight} = window;
-        return {innerWidth, innerHeight};
-    }
-
     const delaytoShow = 1.5;
 
     const linkVariant = {
@@ -63,6 +43,25 @@ const Navbar = (props) => {
         },
     }
 
+    const [windowSize, setWindowSize] = React.useState(getWindowSize());
+
+    React.useEffect(() => {
+        function handleWindowResize() {
+        setWindowSize(getWindowSize());
+        }
+
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+        window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
+
+    function getWindowSize() {
+        const {innerWidth, innerHeight} = window;
+        return {innerWidth, innerHeight};
+    }
+    
     return (
         <div
             style={{
@@ -74,28 +73,29 @@ const Navbar = (props) => {
                 width: "80%",
                 height: "10%"
             }}>
-                <motion.div
+                {<motion.div
                     initial={{
                         x: props.init ? "45vw" : "10vw",
                         y: props.init ? "50vh" : "0vh",
                         scale: props.init ? 4 : 1
                     }}
                     animate={{
-                        x: "10vw",
-                        y: "0vh",
-                        scale: 1
+                        x: windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? "10vw" : "0vw",
+                        y: windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? "0vh": "0vh",
+                        scale: windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? 1: 2
                     }}
                     transition={{
-                        delay:      delaytoShow,
-                        duration:   1
+                        delay:     windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? delaytoShow : 0,
+                        duration:   windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? 2 : 0
                     }}
                     style={{
                         position: 'absolute',
-                        right: '94vw',
-                        top: '3.3%'
+                        right: windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? '94vw' : 
+                            windowSize.innerWidth >= 700 ? '45vw' : '35vw',
+                        top: windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? '3.3%' : '40vh'
                     }}>
                     <img src={GDSC_logo} alt="GDSC" height={50}/>
-                </motion.div>
+                </motion.div>}
 
                 <motion.div
                     variants={linkVariant}
@@ -134,7 +134,7 @@ const Navbar = (props) => {
                     }}><a href="https://qr.link/ynzrLA">Join Us</a>
                 </motion.div>
 
-                <motion.div
+                {windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 && <motion.div
                     variants={linkVariant}
                     whileHover={{
                         scale: 1.2,
@@ -150,7 +150,7 @@ const Navbar = (props) => {
                         position: "absolute",
                         top: "2%"
                     }}><a onClick={props.setFunction}>Projects</a>
-                </motion.div>
+                </motion.div>}
 
         </div>
     );
