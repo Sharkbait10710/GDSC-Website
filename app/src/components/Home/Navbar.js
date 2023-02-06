@@ -32,7 +32,7 @@ const Navbar = (props) => {
 
     const linkVariant = {
         hidden: {
-            y: '-10vh'  
+            y: props.init ? '-10vh' : '0vh'  
         },
         visible: {
             y: '0vh',
@@ -76,9 +76,9 @@ const Navbar = (props) => {
             }}>
                 <motion.div
                     initial={{
-                        x: "45vw",
-                        y: "50vh",
-                        scale: 4
+                        x: props.init ? "45vw" : "10vw",
+                        y: props.init ? "50vh" : "0vh",
+                        scale: props.init ? 4 : 1
                     }}
                     animate={{
                         x: "10vw",
@@ -113,7 +113,7 @@ const Navbar = (props) => {
                         top: "2%",
                         left: "16%",
                         fontWeight: 500
-                    }}><a href="https://qr.link/ynzrLA">GDSC</a>
+                    }}><a>GDSC</a>
                 </motion.div>
 
                 <motion.div
@@ -149,7 +149,7 @@ const Navbar = (props) => {
                         fontFamily: "Google Sans",
                         position: "absolute",
                         top: "2%"
-                    }}><a href="/Projects" onClick={props.setFunction}>Projects</a>
+                    }}><a onClick={props.setFunction}>Projects</a>
                 </motion.div>
 
         </div>

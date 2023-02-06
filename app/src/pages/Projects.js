@@ -6,9 +6,7 @@ import Navbar               from "../components/Projects/Navbar"
 import Body                 from "../components/Projects/Body"      
 import Footer               from "../components/Projects/Footer"      
 
-// Image imports
-import bgImg                from "../imgs/bgImg.jpg"
-const Projects = () => {
+const Projects = (props) => {
     
     return (
         <div
@@ -22,14 +20,8 @@ const Projects = () => {
                 right: 0,
                 bottom: 0
             }}>
-            <img 
-                style={{
-                    width: "100vw",
-                    position: 'absolute',
-                    opacity: 0.2
-                }}
-                src={bgImg}/>
-            <Navbar />
+
+            <Navbar setFunction={props.setFunction}/>
             <Body />
             <Footer />
         </div>

@@ -2,8 +2,8 @@
 import { motion }   from "framer-motion"
 
 import seal         from "../../imgs/Berkeley_Seal.png"
-import trademark    from "../../imgs/google_trademark.png"
-const Footer = () => {
+
+const Footer = (props) => {
     const delaytoShow = 1.5;
 
     const appear = {
@@ -23,8 +23,8 @@ const Footer = () => {
         <motion.div
             variants={appear}
             initial={{
-                opacity: 0,
-                y: "100vh"
+                opacity: props.init ? 0 : 1,
+                y: props.init ? 0 : "100vh"
             }}
             animate={{
                 y: 0,

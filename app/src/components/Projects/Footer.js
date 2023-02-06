@@ -2,7 +2,7 @@
 import { motion }   from "framer-motion"
 
 import seal         from "../../imgs/Berkeley_Seal.png"
-import trademark    from "../../imgs/google_trademark.png"
+
 const Footer = () => {
     const delaytoShow = 1.5;
 
@@ -23,16 +23,8 @@ const Footer = () => {
         <motion.div
             variants={appear}
             initial={{
-                opacity: 0,
-                y: "100vh"
-            }}
-            animate={{
                 y: 0,
                 opacity: 1
-            }}
-            transition={{
-                delay: delaytoShow,
-                duration: 1
             }}
             style={{
 
@@ -50,9 +42,9 @@ const Footer = () => {
             <div
                 style={{
                     display: "flex",
-                    alignItems: "center"
-                }}><img src={seal} alt="seal" height="40px"/> <span style={{marginLeft: "5px", fontFamily: "Noto Sans"}}>UC Berkeley</span></div>
-            <motion.a whileHover={{scale: 1.2}} href="https://about.google/"><img src={trademark} alt="trademark" height="40px"/></motion.a>
+                    alignItems: "center",
+                    fontSize: "20px"
+                }}><img src={seal} alt="seal" height="40px"/> <span style={{marginLeft: "5px", fontFamily: "Google Sans"}}>UC Berkeley</span></div>
         </motion.div>
     )
 }

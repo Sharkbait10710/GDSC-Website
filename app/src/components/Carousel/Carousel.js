@@ -1,14 +1,12 @@
 // Node imports
-import { motion, AnimatePresence, m }  from "framer-motion"
+import { motion, AnimatePresence }  from "framer-motion"
 import { useState, useEffect }      from "react"
-import Box                          from '@mui/material/Box'; 
 import LinearProgress               from '@mui/material/LinearProgress';
 
 // CSS
 import './style.css'
 // Imgs
 import bg_1                         from "../../imgs/carounsel_bg_1.png"
-import bg_2                         from "../../imgs/carounsel_bg_2.png"
 
 const Carousel = (props) => {
     const [slideNum, setslideNum] = useState(0)
@@ -41,8 +39,8 @@ const Carousel = (props) => {
     return (
         <motion.div
             initial={{
-                y: "100vh",
-                opacity: 0
+                y: props.init ? "100vh" : "0vh",
+                opacity: props.init ? 0 : 1
             }}
             animate={{
                 y: "0vh",

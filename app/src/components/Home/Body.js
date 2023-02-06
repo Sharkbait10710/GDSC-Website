@@ -1,18 +1,9 @@
-// Node imports
-import { motion, AnimatePresence }  from "framer-motion"
-import { useState }                 from "react" 
-
-// MUI imports
-import { IconButton }               from "@mui/material"
-import NavigateBeforeIcon           from "@mui/icons-material/NavigateBefore"
-import NavigateNextIcon             from "@mui/icons-material/NavigateNext"
-
 // Data
 import homeData                     from "../../data/home.json"
 
 // Custom
 import Carousel                    from "../Carousel/Carousel"
-const Body = () => {
+const Body = (props) => {
     const delaytoShow = 1.5;
 
     const appear = {
@@ -37,7 +28,7 @@ const Body = () => {
                 height: "80vh",
                 width: "80%"
             }}>
-            <Carousel delaytoShow={delaytoShow} data={homeData}/>
+            <Carousel init={props.init} delaytoShow={delaytoShow} data={homeData}/>
         </div>
     )
 }

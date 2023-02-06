@@ -9,7 +9,7 @@ import Footer               from "../components/Home/Footer"
 // Image imports
 import bgImg                from "../imgs/bgImg.jpg"
 
-const Home = () => {
+const Home = (props) => {
 
     return (
         <div
@@ -23,9 +23,9 @@ const Home = () => {
                 right: 0,
                 bottom: 0
             }}>
-            <Navbar />
+            <Navbar init={props.init} setFunction={props.setFunction}/>
             <Body />
-            <Footer />
+            <Footer init={props.init}/>
         </div>
     )
 }
