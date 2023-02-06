@@ -81,7 +81,7 @@ const Navbar = (props) => {
                     }}
                     animate={{
                         x: windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? "10vw" : "0vw",
-                        y: windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? "0vh": "0vh",
+                        y: "0vh",
                         scale: windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? 1: 2
                     }}
                     transition={{
@@ -111,7 +111,7 @@ const Navbar = (props) => {
                         fontFamily: "Google Sans",
                         position: "absolute",
                         top: "2%",
-                        left: "16%",
+                        left: windowSize.innerWidth <= 1300 && windowSize.innerWidth >=880  ? "78%" : "16%",
                         fontWeight: 500
                     }}><a>GDSC</a>
                 </motion.div>
