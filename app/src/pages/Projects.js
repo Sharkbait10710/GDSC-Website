@@ -21,7 +21,7 @@ const Projects = (props) => {
                 bottom: 0
             }}>
 
-            <Navbar setFunction={props.setFunction}/>
+            <Navbar sizeWidth={props.sizeWidth} sizeHeight={props.sizeHeight} setFunction={props.setFunction}/>
             <Body />
             <Footer />
         </div>

@@ -23,7 +23,7 @@ const Body = () => {
                 marginTop: "1%",
                 display: "flex",
                 flexDirection: "column",
-                width: "90%",
+                width: "95%",
                 height: "100%"
             }}>
                 <div
@@ -31,10 +31,8 @@ const Body = () => {
                         width: "100%",
                         height: "5px",
                         backgroundColor: "gray",
-
-                        position: "relative",
-                        left: "5px",
-                        top: "5px",
+                        
+                        marginTop: "15px",
                         opacity: "0.6"
                     }}/>
             {
@@ -42,62 +40,58 @@ const Body = () => {
                     return <div
                         style={{
                             width: "100%",
-                            height: "20%",
+                            height: "30%",
                             display: "flex",
                             flexDirection: "column",
-
-                            paddingBottom: "40px",
                             borderBottom: "5.7px solid rgba(128, 128, 128, .6)"
                         }}>
                             <div
                                 style={{
                                     display: "flex",
                                     justifyContent: "space-between",
-                                    alignItems: "center"
+                                    alignItems: "center",
+                                        
+                                    height: "100%"
                                 }}>
                                     <div
                                        style={{
                                         display: "flex",
-                                        flexDirection: "column"
+                                        flexDirection: "column",
+                                        width: "60%",
+                                        height: "100%",
+
+                                        overflow: "hidden"
                                        }}>
                                         <div
                                             style={{
-                                                height: "100%",
-                                                width: "30%",
                                                 fontFamily: "Google Sans",
                                                 fontSize: "30px",
 
-                                                position: "relative",
-                                                left: "30px",
-                                                top: "30px",
+                                                paddingLeft: "10px",
+                                                paddingTop: "20px",
 
                                                 opacity: 1
                                             }}><a className="Hover" style={{color: "#1a73e8"}} href={ele["github"]}>{ele["name"]}</a></div>
                                         <div
                                             style={{
-                                                height: "100%",
-                                                width: "50%",
+                                                width: "90%",
                                                 fontFamily: "Google Sans",
                                                 fontSize: "25px",
+                                                
+                                                paddingLeft: "10px"
 
-                                                position: "relative",
-                                                left: "30px",
-                                                top: "40px"
-                                            }}>{ele["description"]}</div>
+                                            }}
+                                            className="scrolling">{ele["description"]}</div>
                                     </div>
                                     <div
                                         style={{
                                             width: "100px",
                                             height: "100px",
-
-                                            position: "relative",
-                                            top: "30px",
                                             
                                             display: "flex",
                                             justifyContent: "center",
                                             alignItems: "center",
-
-                                            marginTop: "2%",
+                                            
                                             marginRight: "50px"
                                         }}><img src={ele["icon"]} height="100%"/></div>
                                 </div>

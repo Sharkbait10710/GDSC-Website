@@ -17,3 +17,7 @@
 .Hover:hover {
     text-decoration: underline;
 }
+
+.scrolling {
+    text-overflow: ellipsis;
+}

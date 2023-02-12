@@ -73,7 +73,9 @@ const Navbar = (props) => {
                 top: "0%",
 
                 width: "80%",
-                height: "10%"
+                height: "10%",
+
+                marginBottom: "10px"
             }}>
                 <motion.div
                     initial={{
@@ -83,13 +85,13 @@ const Navbar = (props) => {
                     }}
                     style={{
                         position: 'absolute',
-                        right: '94vw',
+                        right: props.sizeWidth == 3 ? '94vw' : "56vw",
                         top: '3.3%'
                     }}>
-                    <img src={GDSC_logo} alt="GDSC" height={50}/>
+                    <img src={GDSC_logo} alt="GDSC" onClick={props.setFunction} style={{cursor: "pointer"}}height={50}/>
                 </motion.div>
 
-                <motion.div
+                {props.sizeWidth == 3 && <motion.div
                     variants={linkVariant}
                     whileHover={{
                         scale: 1.2,
@@ -102,11 +104,13 @@ const Navbar = (props) => {
                     style={{
                         fontFamily: "Google Sans",
                         position: "absolute",
-                        top: "2%",
-                        left: "16%",
+                        top: props.sizeWidth == 2 ? "1%" : props.sizeHeight != 1 ? "2%" : "0.5%",
+                        left: props.sizeWidth == 3 ? "18%": "16%",
                         fontWeight: 500
-                    }}><a onClick={props.setFunction}>GDSC</a>
-                </motion.div>
+                    }}>
+                        {props.sizeWidth != 3 && <a onClick={props.setFunction}>GDSC</a>}
+                        {props.sizeWidth == 3 && <a onClick={props.setFunction}>Google Developer Student Club</a>}
+                </motion.div>}
         </div>
     );
 }

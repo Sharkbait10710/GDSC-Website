@@ -53,13 +53,13 @@ const Carousel = (props) => {
             style={{
                 height: "100%",
                 width: "100%",
-                overflow: "hidden"
+                overflow: props.sizeWidth == 3 ? "hidden" : "" 
             }}>
             <div
                 style={{
                     height: "75%",
                     position: "absolute",
-                    overflow: "hidden"
+                    overflow: props.sizeWidth == 3 ? "hidden" : ""
                 }}
                 >
                 {props.data["arr"].map((ele) => {

@@ -39,8 +39,8 @@ function App() {
   var bigWidth     = windowSize.innerWidth >= 1640
   var sizeWidth    = bigWidth ? 3 : mediumWidth ? 2 : 1
 
-  var mediumHeight = windowSize.innerHeight >= 900 && !bigHeight
-  var bigHeight    = windowSize.innerHeight >= 1640
+  var mediumHeight = windowSize.innerHeight >= 600 && !bigHeight
+  var bigHeight    = windowSize.innerHeight >= 900
   var sizeHeight   = bigHeight ? 3 : mediumHeight ? 2 : 1
 
   return (
@@ -50,7 +50,7 @@ function App() {
         setPage("Projects")
         setInit(false)
         }}/>}
-      {page === "Projects" && <Projects setFunction={() => setPage("Home")}/>}
+      {page === "Projects" && <Projects sizeWidth={sizeWidth} sizeHeight={sizeHeight} setFunction={() => setPage("Home")}/>}
     </div>
   );
 }

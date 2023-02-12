@@ -1,9 +1,12 @@
 // Node imports
-import * as React           from "react"
-import { motion }           from "framer-motion"
+import * as React                   from "react"
+import { motion, AnimatePresence }  from "framer-motion"
+
+// MUI Icons
+import MenuIcon                     from '@mui/icons-material/Menu';
 
 // Image imports
-import GDSC_logo            from "../../imgs/GDSC_Logo.png"
+import GDSC_logo                    from "../../imgs/GDSC_Logo.png"
 //CSS import
 import                      './styles.css'
 
@@ -29,6 +32,10 @@ const Navbar = (props) => {
         }
     }
     
+    const [showOptions, setshowOptions] = React.useState(() => {
+        return false
+    })
+
     return (
         <div
             style={{
@@ -42,7 +49,7 @@ const Navbar = (props) => {
             }}>
                 {<motion.div
                     initial={{
-                        x: props.init ? "45vw" : "10vw",
+                        x: props.init && props.sizeWidth != 1 ? "45vw" : "10vw",
                         y: props.init ? "50vh" : "0vh",
                         scale: props.init ? 4 : 1
                     }}
@@ -57,7 +64,7 @@ const Navbar = (props) => {
                     }}
                     style={{
                         position: 'absolute',
-                        right:'94vw',
+                        right: props.sizeWidth != 1 ? '94vw' : "50%",
                         top: '3.3%'
                     }}>
                     <img src={GDSC_logo} alt="GDSC" height={50}/>
@@ -76,15 +83,27 @@ const Navbar = (props) => {
                     style={{
                         fontFamily: "Google Sans",
                         position: "absolute",
-                        top: "2%",
+                        top: props.sizeWidth == 3 ? "2%" : "2.3%",
                         left: "16%",
                         fontWeight: 500
                     }}>
                         {props.sizeWidth == 3 && <a>Google Developer Student Club</a>}
-                        {props.sizeWidth != 3 && <a>GDSC</a>}
+                        {props.sizeWidth != 3 && props.sizeWidth != 1 && <a>GDSC</a>}
                 </motion.div>
-
-                <motion.div
+                {props.sizeWidth == 1 && <motion.div
+                    initial={{
+                        opacity: props.init ? 0 : 1
+                    }}
+                    animate={{
+                        opacity: 1
+                    }}
+                    transition={{
+                        delay: 1,
+                        duration: 1
+                    }}>
+                    <a onClick={(() => setshowOptions(!showOptions))}><MenuIcon/></a>
+                    </motion.div>}
+                {props.sizeWidth != 1 && <motion.div
                     variants={linkVariant}
                     whileHover={{
                         scale: 1.2,
@@ -95,14 +114,14 @@ const Navbar = (props) => {
                     transition="transition"
                     className="navbar-link"
                     style={{
-                        marginRight: "10%",
+                        marginRight: "15%",
                         fontFamily: "Google Sans",
                         position: "absolute",
                         top: "2%"
                     }}><a href="https://forms.gle/95Kx8NHm6eyaCkeS8">Join Us</a>
-                </motion.div>
+                </motion.div>}
 
-                <motion.div
+                {props.sizeWidth != 1 && <motion.div
                     variants={linkVariant}
                     whileHover={{
                         scale: 1.2,
@@ -118,8 +137,55 @@ const Navbar = (props) => {
                         position: "absolute",
                         top: "2%"
                     }}><a onClick={props.setFunction}>Projects</a>
-                </motion.div>
+                </motion.div>}
+                <AnimatePresence>
+                    {showOptions && props.sizeWidth == 1 &&
+                        <motion.div
+                            initial={{
+                                y: "100vh"
+                            }}
+                            animate={{
+                                y: "0vh"
+                            }}
+                            transition={{
+                                duration: 0.5
+                            }}
+                            exit={{
+                                y: "100vh",
+                                transition: {
+                                    duration: 0.5
+                                }
+                            }}
+                            style={{
+                                position: "absolute",
+                                top: "12%",
+                                right: "-4%",
+                                marginRight: "0px",
+                                zIndex: 1,
+                                
+                                display: "flex",
+                                flexDirection: "column",
+                                backgroundColor: "white",
 
+                                width: "100%",
+                                height: "76%",
+                                fontSize: "100px",
+                                fontFamily: "Google Sans",
+
+                                overflowY: 'scroll'
+                            }}
+                            className="navbar-link">
+                                <div
+                                    style={{
+                                        width: "90%",
+                                        height: "5px",
+                                        backgroundColor: "#e84438",
+                                        position: "absolute"
+                                    }}/>
+                                <div onClick={props.setFunction}>Projects</div>
+                                <div>Join Us</div>
+                    </motion.div>}
+                </AnimatePresence>
         </div>
     );
 }

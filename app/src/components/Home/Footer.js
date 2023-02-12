@@ -5,7 +5,7 @@ import { motion }   from "framer-motion"
 import seal         from "../../imgs/Berkeley_Seal.png"
 
 const Footer = (props) => {
-    const delaytoShow = 1.5;
+    const delaytoShow = 1;
 
     const appear = {
         hidden: {
