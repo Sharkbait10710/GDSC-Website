@@ -57,9 +57,13 @@ const Carousel = (props) => {
             }}>
             <div
                 style={{
-                    height: "75%",
+                    height: props.sizeWidth == 1 ? "100%" : "75%",
+                    width: props.sizeWidth == 1 ? "110%" : "",
+                    paddingRight: props.sizeWidth != 3 ? "140px" : "",
                     position: "absolute",
-                    overflow: props.sizeWidth == 3 ? "hidden" : ""
+                    top: props.sizeWidth == 1 ? "10%" : "",
+                    overflowY: props.sizeWidth == 1 ? "scroll" : "hidden",
+                    msScrollbarTrackColor: "orange"
                 }}
                 >
                 {props.data["arr"].map((ele) => {
@@ -86,7 +90,11 @@ const Carousel = (props) => {
                                     }
                                 }}
                                 className="slide">
-                                <h1>{ele["title"]}</h1>
+                                <h1
+                                    style={{
+                                        fontSize: props.sizeWidth == 1 ? "30px" : "",
+                                        marginTop: props.sizeWidth == 1 ? "20%" : ""
+                                    }}>{ele["title"]}</h1>
                                 <h2
                                     style={{
                                         color: ele["subtitleColor"]
@@ -134,9 +142,7 @@ const Carousel = (props) => {
                                     maxWidth: "20%",
                                     display: "flex",
                                     flexDirection: "column",
-                                    padding: "5px",
-
-                                    textOverflow: "ellipsis"
+                                    padding: "5px"
                                 }}>
                                 <div
                                     style={{

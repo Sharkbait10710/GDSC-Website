@@ -64,8 +64,8 @@ const Navbar = (props) => {
                     }}
                     style={{
                         position: 'absolute',
-                        right: props.sizeWidth != 1 ? '94vw' : "50%",
-                        top: '3.3%'
+                        right: props.sizeWidth != 1 ? '94vw' : props.sizeHeight == 1 ? "45%" : "50%",
+                        top: props.sizeHeight == 1 ? '5%' : '3.3%'
                     }}>
                     <img src={GDSC_logo} alt="GDSC" height={50}/>
                 </motion.div>}
@@ -100,6 +100,9 @@ const Navbar = (props) => {
                     transition={{
                         delay: 1,
                         duration: 1
+                    }}
+                    style={{
+                        marginTop: props.sizeHeight == 1 ? "20%" : "5%"
                     }}>
                     <a onClick={(() => setshowOptions(!showOptions))}><MenuIcon/></a>
                     </motion.div>}
@@ -158,7 +161,7 @@ const Navbar = (props) => {
                             }}
                             style={{
                                 position: "absolute",
-                                top: "12%",
+                                top: props.sizeHeight == 1 ? "20%" : "12%",
                                 right: "-4%",
                                 marginRight: "0px",
                                 zIndex: 1,
@@ -168,8 +171,8 @@ const Navbar = (props) => {
                                 backgroundColor: "white",
 
                                 width: "100%",
-                                height: "76%",
-                                fontSize: "100px",
+                                height: props.sizeHeight == 1 ? "100%" : "76%",
+                                fontSize: props.sizeHeight == 1 ? "70px" : "100px",
                                 fontFamily: "Google Sans",
 
                                 overflowY: 'scroll'

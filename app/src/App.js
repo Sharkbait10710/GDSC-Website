@@ -46,7 +46,7 @@ function App() {
   return (
     
     <div id="app">
-      {page === "Home" && <Home init={init} sizeWidth={sizeWidth} delay={delay} setFunction={() => {
+      {page === "Home" && <Home init={init} sizeWidth={sizeWidth} sizeHeight={sizeHeight} delay={delay} setFunction={() => {
         setPage("Projects")
         setInit(false)
         }}/>}

@@ -6,7 +6,7 @@ import projectData                  from "../../data/projects.json"
 
 // CSS
 import                              './styles.css'
-const Body = () => {
+const Body = (props) => {
 
     return(
         <motion.div
@@ -20,7 +20,7 @@ const Body = () => {
                 duration: 1
             }}
             style={{
-                marginTop: "1%",
+                marginTop: props.sizeHeight == 1 ? "20%" : "1%",
                 display: "flex",
                 flexDirection: "column",
                 width: "95%",

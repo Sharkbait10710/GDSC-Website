@@ -85,8 +85,8 @@ const Navbar = (props) => {
                     }}
                     style={{
                         position: 'absolute',
-                        right: props.sizeWidth == 3 ? '94vw' : "56vw",
-                        top: '3.3%'
+                        right: props.sizeWidth != 1 ? '94vw' : props.sizeHeight == 1 ? "45%" : "50%",
+                        top: props.sizeHeight == 1 ? '5%' : '3.3%'
                     }}>
                     <img src={GDSC_logo} alt="GDSC" onClick={props.setFunction} style={{cursor: "pointer"}}height={50}/>
                 </motion.div>

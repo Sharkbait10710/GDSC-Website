@@ -22,7 +22,7 @@ const Projects = (props) => {
             }}>
 
             <Navbar sizeWidth={props.sizeWidth} sizeHeight={props.sizeHeight} setFunction={props.setFunction}/>
-            <Body />
+            <Body sizeHeight={props.sizeHeight}/>
             <Footer />
         </div>
     )
