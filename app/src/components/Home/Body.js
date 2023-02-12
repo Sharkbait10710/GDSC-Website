@@ -17,7 +17,7 @@ const Body = (props) => {
                 height: "80vh",
                 width: "80%"
             }}>
-            <Carousel init={props.init} delaytoShow={props.delay} data={homeData} sizeWidth={props.sizeWidth}/>
+            <Carousel init={props.init} delaytoShow={props.delay} data={homeData} sizeWidth={props.sizeWidth} sizeHeight={props.sizeHeight}/>
         </div>
     )
 }

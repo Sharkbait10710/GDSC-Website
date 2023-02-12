@@ -8,7 +8,7 @@ import MenuIcon                     from '@mui/icons-material/Menu';
 // Image imports
 import GDSC_logo                    from "../../imgs/GDSC_Logo.png"
 //CSS import
-import                      './styles.css'
+import                              './styles.css'
 
 const Navbar = (props) => {
 
@@ -83,14 +83,14 @@ const Navbar = (props) => {
                     style={{
                         fontFamily: "Google Sans",
                         position: "absolute",
-                        top: props.sizeWidth == 3 ? "2%" : "2.3%",
-                        left: "16%",
+                        top: props.sizeWidth == 3 ? "2%" : props.sizeHeight == 1 ? "4.3%" : "2.3%",
+                        left: "17.5%",
                         fontWeight: 500
                     }}>
                         {props.sizeWidth == 3 && <a>Google Developer Student Club</a>}
                         {props.sizeWidth != 3 && props.sizeWidth != 1 && <a>GDSC</a>}
                 </motion.div>
-                {props.sizeWidth == 1 && <motion.div
+                {props.sizeWidth != 3 && <motion.div
                     initial={{
                         opacity: props.init ? 0 : 1
                     }}
@@ -102,11 +102,11 @@ const Navbar = (props) => {
                         duration: 1
                     }}
                     style={{
-                        marginTop: props.sizeHeight == 1 ? "20%" : "5%"
+                        marginTop: props.sizeHeight == 1 && props.sizeWidth == 1 ? "50px" : "5%"
                     }}>
                     <a onClick={(() => setshowOptions(!showOptions))}><MenuIcon/></a>
                     </motion.div>}
-                {props.sizeWidth != 1 && <motion.div
+                {props.sizeWidth == 3 && <motion.div
                     variants={linkVariant}
                     whileHover={{
                         scale: 1.2,
@@ -117,14 +117,50 @@ const Navbar = (props) => {
                     transition="transition"
                     className="navbar-link"
                     style={{
-                        marginRight: "15%",
+                        marginRight: "24%",
                         fontFamily: "Google Sans",
                         position: "absolute",
                         top: "2%"
                     }}><a href="https://forms.gle/95Kx8NHm6eyaCkeS8">Join Us</a>
                 </motion.div>}
 
-                {props.sizeWidth != 1 && <motion.div
+                {props.sizeWidth == 3 && <motion.div
+                    variants={linkVariant}
+                    whileHover={{
+                        scale: 1.2,
+                        borderBottom: "solid #1a73e8"
+                    }}
+                    initial="hidden"
+                    animate="visible"
+                    transition="transition"
+                    className="navbar-link"
+                    style={{
+                        marginRight: "16%",
+                        fontFamily: "Google Sans",
+                        position: "absolute",
+                        top: "2%"
+                    }}><a onClick={props.setMeetup}>Meetups</a>
+                </motion.div>}
+
+                {props.sizeWidth == 3 && <motion.div
+                    variants={linkVariant}
+                    whileHover={{
+                        scale: 1.2,
+                        borderBottom: "solid #fbbc04"
+                    }}
+                    initial="hidden"
+                    animate="visible"
+                    transition="transition"
+                    className="navbar-link"
+                    style={{
+                        marginRight: "8%",
+                        fontFamily: "Google Sans",
+                        position: "absolute",
+                        top: "2%"
+                    }}><a onClick={props.setEducation}>Courses</a>
+                </motion.div>}
+
+                {props.sizeWidth == 3 && <motion.div
                     variants={linkVariant}
                     whileHover={{
                         scale: 1.2,
@@ -139,10 +175,10 @@ const Navbar = (props) => {
                         fontFamily: "Google Sans",
                         position: "absolute",
                         top: "2%"
-                    }}><a onClick={props.setFunction}>Projects</a>
+                    }}><a onClick={props.setProject}>Projects</a>
                 </motion.div>}
                 <AnimatePresence>
-                    {showOptions && props.sizeWidth == 1 &&
+                    {showOptions && props.sizeWidth != 3 &&
                         <motion.div
                             initial={{
                                 y: "100vh"
@@ -172,7 +208,7 @@ const Navbar = (props) => {
 
                                 width: "100%",
                                 height: props.sizeHeight == 1 ? "100%" : "76%",
-                                fontSize: props.sizeHeight == 1 ? "70px" : "100px",
+                                fontSize: props.sizeHeight == 1 ? "60px" : "100px",
                                 fontFamily: "Google Sans",
 
                                 overflowY: 'scroll'
@@ -185,8 +221,10 @@ const Navbar = (props) => {
                                         backgroundColor: "#e84438",
                                         position: "absolute"
                                     }}/>
-                                <div onClick={props.setFunction}>Projects</div>
+                                <div onClick={props.setProject}>Projects</div>
                                 <div>Join Us</div>
+                                <div >Education</div>
+                                <div>Meetup</div>
                     </motion.div>}
                 </AnimatePresence>
         </div>

@@ -58,11 +58,11 @@ const Carousel = (props) => {
             <div
                 style={{
                     height: props.sizeWidth == 1 ? "100%" : "75%",
-                    width: props.sizeWidth == 1 ? "110%" : "",
+                    width: props.sizeWidth != 3 ? "110%" : "",
                     paddingRight: props.sizeWidth != 3 ? "140px" : "",
                     position: "absolute",
                     top: props.sizeWidth == 1 ? "10%" : "",
-                    overflowY: props.sizeWidth == 1 ? "scroll" : "hidden",
+                    overflowY: props.sizeWidth != 3 ? "scroll" : "hidden",
                     msScrollbarTrackColor: "orange"
                 }}
                 >
@@ -172,8 +172,8 @@ const Carousel = (props) => {
                         })
                     }
             </motion.div>}
-
-            {props.sizeWidth != 1 && <motion.div
+            
+            {props.sizeWidth != 1 && props.sizeHeight != 1 && <motion.div
                 initial={{
                     opacity: 0
                 }}

@@ -1,0 +1,23 @@
+.navbar-link {
+    font-family:        'Noto Sans';
+    font-size:          30px;
+    margin:             1%;
+    cursor:             pointer;
+}
+
+.navbar-link a {
+    text-decoration:    none;
+    color:              black;
+}
+
+.Hover {
+    text-decoration: none;
+    opacity: 1;
+}
+.Hover:hover {
+    text-decoration: underline;
+}
+
+.scrolling {
+    text-overflow: ellipsis;
+}

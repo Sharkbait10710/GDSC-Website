@@ -20,8 +20,14 @@ const Home = (props) => {
                 right: 0,
                 bottom: 0
             }}>
-            <Navbar init={props.init} sizeWidth={props.sizeWidth} sizeHeight={props.sizeHeight} setFunction={props.setFunction}/>
-            <Body init={props.init} sizeWidth={props.sizeWidth} delay={props.delay}/>
+            <Navbar init={props.init} 
+                sizeWidth={props.sizeWidth} 
+                sizeHeight={props.sizeHeight} 
+                setProject={props.setProject}
+                setJoinus={props.setJoinus}
+                setEducation={props.setEducation}
+                setMeetup={props.setMeetup}/>
+            <Body init={props.init} sizeWidth={props.sizeWidth} sizeHeight={props.sizeHeight} delay={props.delay}/>
             {props.sizeWidth != 1 && <Footer init={props.init}/>}
         </div>
     )

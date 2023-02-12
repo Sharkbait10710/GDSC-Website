@@ -2,8 +2,11 @@
 import * as React from "react"
 
 // Page imports
-import Home     from "./pages/Home"
-import Projects from "./pages/Projects"
+import Home       from "./pages/Home"
+import Projects   from "./pages/Projects"
+import Joinus     from "./pages/Joinus"
+import Meetup     from "./pages/Meetup"
+import Education  from "./pages/Education"
 
 function App() {
   const [page, setPage] = React.useState(() => {
@@ -46,11 +49,28 @@ function App() {
   return (
     
     <div id="app">
-      {page === "Home" && <Home init={init} sizeWidth={sizeWidth} sizeHeight={sizeHeight} delay={delay} setFunction={() => {
-        setPage("Projects")
-        setInit(false)
-        }}/>}
+      {page === "Home" && <Home 
+        init={init} 
+        sizeWidth={sizeWidth} 
+        sizeHeight={sizeHeight} 
+        delay={delay} 
+        setProject={() => {
+          setPage("Projects")
+        }}
+        setJoinus={() => {
+          setPage("Joinus")
+        }}
+        setEducation={() => {
+          setPage("Education")
+        }}
+        setMeetup={() => {
+          setPage("Meetup")
+        }}/>
+        }
       {page === "Projects" && <Projects sizeWidth={sizeWidth} sizeHeight={sizeHeight} setFunction={() => setPage("Home")}/>}
+      {page === "Joinus" && <Joinus sizeWidth={sizeWidth} sizeHeight={sizeHeight} setFunction={() => setPage("Home")}/>}
+      {page === "Education" && <Education sizeWidth={sizeWidth} sizeHeight={sizeHeight} setFunction={() => setPage("Home")}/>}
+      {page === "Meetup" && <Meetup sizeWidth={sizeWidth} sizeHeight={sizeHeight} setFunction={() => setPage("Home")}/>}
     </div>
   );
 }
