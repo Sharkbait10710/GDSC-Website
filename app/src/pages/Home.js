@@ -6,9 +6,6 @@ import Navbar               from "../components/Home/Navbar"
 import Body                 from "../components/Home/Body"      
 import Footer               from "../components/Home/Footer"      
 
-// Image imports
-import bgImg                from "../imgs/bgImg.jpg"
-
 const Home = (props) => {
 
     return (
@@ -23,8 +20,8 @@ const Home = (props) => {
                 right: 0,
                 bottom: 0
             }}>
-            <Navbar init={props.init} setFunction={props.setFunction}/>
-            <Body init={props.init}/>
+            <Navbar init={props.init} sizeWidth={props.sizeWidth} setFunction={props.setFunction}/>
+            <Body init={props.init} sizeWidth={props.sizeWidth} delay={props.delay}/>
             <Footer init={props.init}/>
         </div>
     )

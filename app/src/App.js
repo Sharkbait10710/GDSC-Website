@@ -14,6 +14,8 @@ function App() {
     return true
   })
 
+  setTimeout(() => setInit(false), 2000)
+  const delay = 1
   const [windowSize, setWindowSize] = React.useState(getWindowSize());
 
     React.useEffect(() => {
@@ -33,11 +35,18 @@ function App() {
         return {innerWidth, innerHeight};
     }
 
+  var mediumWidth  = windowSize.innerWidth >= 900 && !bigWidth
+  var bigWidth     = windowSize.innerWidth >= 1640
+  var sizeWidth    = bigWidth ? 3 : mediumWidth ? 2 : 1
+
+  var mediumHeight = windowSize.innerHeight >= 900 && !bigHeight
+  var bigHeight    = windowSize.innerHeight >= 1640
+  var sizeHeight   = bigHeight ? 3 : mediumHeight ? 2 : 1
 
   return (
     
     <div id="app">
-      {page === "Home" && <Home init={init} setFunction={() => {
+      {page === "Home" && <Home init={init} sizeWidth={sizeWidth} delay={delay} setFunction={() => {
         setPage("Projects")
         setInit(false)
         }}/>}

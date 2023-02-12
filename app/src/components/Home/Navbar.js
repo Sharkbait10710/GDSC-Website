@@ -8,7 +8,6 @@ import GDSC_logo            from "../../imgs/GDSC_Logo.png"
 import                      './styles.css'
 
 const Navbar = (props) => {
-    const delaytoShow = 1.5;
 
     const linkVariant = {
         hidden: {
@@ -17,49 +16,17 @@ const Navbar = (props) => {
         visible: {
             y: '0vh',
             transition: {
-                delay: delaytoShow,
+                delay: props.delay,
                 duration: 1
             }
         },
         transition: {
-            delay: delaytoShow,
+            delay: props.delay,
             duration: 1
         },
         hover: {
             scale: 1.2
         }
-    }
-
-    const appear = {
-        hidden: {
-            opacity: 0
-        },
-        visible: {
-            opacity: 1,
-            transition: {
-                delay: delaytoShow,
-                duration: 1
-            }
-        },
-    }
-
-    const [windowSize, setWindowSize] = React.useState(getWindowSize());
-
-    React.useEffect(() => {
-        function handleWindowResize() {
-        setWindowSize(getWindowSize());
-        }
-
-        window.addEventListener('resize', handleWindowResize);
-
-        return () => {
-        window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
-
-    function getWindowSize() {
-        const {innerWidth, innerHeight} = window;
-        return {innerWidth, innerHeight};
     }
     
     return (
@@ -80,19 +47,18 @@ const Navbar = (props) => {
                         scale: props.init ? 4 : 1
                     }}
                     animate={{
-                        x: windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? "10vw" : "0vw",
+                        x: "10vw",
                         y: "0vh",
-                        scale: windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? 1: 2
+                        scale: 1
                     }}
                     transition={{
-                        delay:     windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? delaytoShow : 0,
-                        duration:   windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? 2 : 0
+                        delay:      props.delay,
+                        duration:   2
                     }}
                     style={{
                         position: 'absolute',
-                        right: windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? '94vw' : 
-                            windowSize.innerWidth >= 700 ? '45vw' : '35vw',
-                        top: windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 ? '3.3%' : '40vh'
+                        right:'94vw',
+                        top: '3.3%'
                     }}>
                     <img src={GDSC_logo} alt="GDSC" height={50}/>
                 </motion.div>}
@@ -111,9 +77,11 @@ const Navbar = (props) => {
                         fontFamily: "Google Sans",
                         position: "absolute",
                         top: "2%",
-                        left: windowSize.innerWidth <= 1300 && windowSize.innerWidth >=880  ? "78%" : "16%",
+                        left: "16%",
                         fontWeight: 500
-                    }}><a>GDSC</a>
+                    }}>
+                        {props.sizeWidth == 3 && <a>Google Developer Student Club</a>}
+                        {props.sizeWidth != 3 && <a>GDSC</a>}
                 </motion.div>
 
                 <motion.div
@@ -134,7 +102,7 @@ const Navbar = (props) => {
                     }}><a href="https://forms.gle/95Kx8NHm6eyaCkeS8">Join Us</a>
                 </motion.div>
 
-                {windowSize.innerWidth >= 1300 && windowSize.innerHeight > 850 && <motion.div
+                <motion.div
                     variants={linkVariant}
                     whileHover={{
                         scale: 1.2,
@@ -150,7 +118,7 @@ const Navbar = (props) => {
                         position: "absolute",
                         top: "2%"
                     }}><a onClick={props.setFunction}>Projects</a>
-                </motion.div>}
+                </motion.div>
 
         </div>
     );

@@ -55,50 +55,58 @@ const Carousel = (props) => {
                 width: "100%",
                 overflow: "hidden"
             }}>
-            {props.data["arr"].map((ele) => {
-                return <AnimatePresence key={ele["index"]}>
-                    {slideNum == ele["index"]
-                    && <motion.div
-                            initial={{
-                                x: "-100vh",
-                                opacity: 0
-                            }}
-                            animate={{
-                                x: "0vh",
-                                opacity: 1
-                            }}
-                            transition={{
-                                delay: props.init ? props.delaytoShow : 1,
-                                duration: 1
-                            }}
-                            exit={{
-                                x: "-1000vw",
-                                transition: {
-                                    delay: 0,
-                                    duration: 1.5
+            <div
+                style={{
+                    height: "75%",
+                    position: "absolute",
+                    overflow: "hidden"
+                }}
+                >
+                {props.data["arr"].map((ele) => {
+                    return <AnimatePresence key={ele["index"]}>
+                        {slideNum == ele["index"]
+                        && <motion.div
+                                initial={{
+                                    x: "-100vh",
+                                    opacity: 0
+                                }}
+                                animate={{
+                                    x: "0vh",
+                                    opacity: 1
+                                }}
+                                transition={{
+                                    delay: props.init ? props.delaytoShow : 0.5,
+                                    duration: props.init ? 1 : 0.5
+                                }}
+                                exit={{
+                                    x: "-1000vw",
+                                    transition: {
+                                        delay: 0,
+                                        duration: 0.5
+                                    }
+                                }}
+                                className="slide">
+                                <h1>{ele["title"]}</h1>
+                                <h2
+                                    style={{
+                                        color: ele["subtitleColor"]
+                                    }}>{ele["subtitle"]}</h2>
+                                {
+                                    ele["points"].map((ele2) => {
+                                        return <div key={ele2["main"]}>
+                                                <h3>{ele2["main"]}</h3>
+                                                {ele2["sub"].map((ele3) => {
+                                                    return <p key={ele3}>- {ele3}</p>
+                                                })}
+                                        </div>
+                                    })
                                 }
-                            }}
-                            className="slide">
-                            <h1>{ele["title"]}</h1>
-                            <h2
-                                style={{
-                                    color: ele["subtitleColor"]
-                                }}>{ele["subtitle"]}</h2>
-                            {
-                                ele["points"].map((ele2) => {
-                                    return <div key={ele2["main"]}>
-                                            <h3>{ele2["main"]}</h3>
-                                            {ele2["sub"].map((ele3) => {
-                                                return <p key={ele3}>- {ele3}</p>
-                                            })}
-                                    </div>
-                                })
-                            }
-                        </motion.div>}
-                </AnimatePresence>
-            })}
+                            </motion.div>}
+                    </AnimatePresence>
+                })}
+            </div>
 
-            <motion.div
+            {props.sizeWidth == 3 && <motion.div
                 initial={{
                     opacity: 0
                 }}
@@ -157,9 +165,9 @@ const Carousel = (props) => {
                             </div>
                         })
                     }
-            </motion.div>
+            </motion.div>}
 
-            <motion.div
+            {props.sizeWidth != 1 && <motion.div
                 initial={{
                     opacity: 0
                 }}
@@ -183,7 +191,7 @@ const Carousel = (props) => {
                     style={{
                         height: "100%"
                     }}/>
-            </motion.div>
+            </motion.div>}
         </motion.div>
     )
 }
