@@ -2,7 +2,7 @@
 import { motion, AnimatePresence }  from "framer-motion"
 
 // Data
-import projectData                  from "../../data/projects.json"
+import educationData                from "../../data/education.json"
 
 // CSS
 import                              './styles.css'
@@ -36,67 +36,162 @@ const Body = (props) => {
                         opacity: "0.6"
                     }}/>
             {
-                projectData["arr"].map((ele) => {
-                    return <div
+                <AnimatePresence>
+                    <motion.div
+                        initial={{
+
+                        }}
+                        animate={{
+
+                        }}
+                        transition={{
+
+                        }}
+                        exit={{
+
+                        }}
                         style={{
+                            height: "100%",
                             width: "100%",
-                            height: "30%",
                             display: "flex",
-                            flexDirection: "column",
-                            borderBottom: "5.7px solid rgba(128, 128, 128, .6)"
-                        }}>
-                            <div
-                                style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "center",
-                                        
-                                    height: "100%"
-                                }}>
-                                    <div
-                                       style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        width: "60%",
-                                        height: "100%",
 
-                                        overflow: "hidden"
-                                       }}>
-                                        <div
-                                            style={{
-                                                fontFamily: "Google Sans",
-                                                fontSize: "30px",
+                            marginTop: "20px"
+                        }}
+                    >
+                        <motion.div
+                            style={{
+                                width: "33%",
+                                borderRight: "1px solid",
 
-                                                paddingLeft: "10px",
-                                                paddingTop: "20px",
-
-                                                opacity: 1
-                                            }}><a className="Hover" style={{color: "#1a73e8"}} href={ele["github"]}>{ele["name"]}</a></div>
-                                        <div
-                                            style={{
-                                                width: "90%",
-                                                fontFamily: "Google Sans",
-                                                fontSize: "25px",
-                                                
-                                                paddingLeft: "10px"
-
-                                            }}
-                                            className="scrolling">{ele["description"]}</div>
-                                    </div>
-                                    <div
+                                display: "flex",
+                                flexDirection: "column"
+                            }}>
+                                <div
+                                    style={{
+                                        fontSize: "50px",
+                                        fontFamily: "Google Sans",
+                                        textAlign: "center"
+                                    }}>
+                                        {educationData["arr"][0]["name"]}
+                                </div>
+                                {educationData["arr"][0]["content"].map((ele) => {
+                                    return <div
+                                        variant="outlined"
+                                        key={ele["name"]}
                                         style={{
-                                            width: "100px",
-                                            height: "100px",
-                                            
+                                            height: "20%",
+                                            width: "90%",
                                             display: "flex",
+                                            flexDirection: "column",
                                             justifyContent: "center",
                                             alignItems: "center",
-                                            
-                                            marginRight: "50px"
-                                        }}><img src={ele["icon"]} height="100%"/></div>
+
+                                            border: "1px solid gray",
+                                            borderRadius: "5px",
+
+                                            margin: "30px",
+
+                                            boxShadow: "10px 10px #d9d9d9"
+                                        }}
+                                        className="hovering">
+                                            <div>
+                                                <img 
+                                                    src={ele["image"]} 
+                                                    alt={ele["name"]} 
+                                                    style={{width: "300px"}}/>
+                                            </div>
+                                        </div>
+                                })}
+                        </motion.div>
+                        <motion.div
+                            style={{
+                                width: "33%",
+                                borderRight: "1px solid",
+
+                                display: "flex",
+                                flexDirection: "column"
+                            }}>
+                                <div
+                                    style={{
+                                        fontSize: "50px",
+                                        fontFamily: "Google Sans",
+                                        textAlign: "center"
+                                    }}>
+                                        {educationData["arr"][1]["name"]}
                                 </div>
-                        </div>
-                })
+                                {educationData["arr"][1]["content"].map((ele) => {
+                                    return <div
+                                        variant="outlined"
+                                        key={ele["name"]}
+                                        style={{
+                                            height: "20%",
+                                            width: "90%",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+
+                                            border: "1px solid gray",
+                                            borderRadius: "5px",
+
+                                            margin: "30px",
+                                            boxShadow: "10px 10px #d9d9d9"
+                                        }}
+                                        className="hovering">
+                                            <div>
+                                                <img 
+                                                    src={ele["image"]} 
+                                                    alt={ele["name"]} 
+                                                    style={{width: "300px"}}/>
+                                            </div>
+                                        </div>
+                                })}
+                        </motion.div>
+                        <motion.div
+                            style={{
+                                width: "33%",
+
+                                display: "flex",
+                                flexDirection: "column"
+                            }}>
+                                <div
+                                    style={{
+                                        fontSize: "50px",
+                                        fontFamily: "Google Sans",
+                                        textAlign: "center"
+                                    }}>
+                                        {educationData["arr"][2]["name"]}
+                                </div>
+                                {educationData["arr"][2]["content"].map((ele) => {
+                                    return <div
+                                        variant="outlined"
+                                        key={ele["name"]}
+                                        style={{
+                                            height: "20%",
+                                            width: "90%",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+
+                                            border: "1px solid gray",
+                                            borderRadius: "5px",
+
+                                            margin: "30px",
+                                            boxShadow: "10px 10px #d9d9d9"
+                                        }}
+                                        className="hovering">
+                                            <div>
+                                                <img 
+                                                    src={ele["image"]} 
+                                                    alt={ele["name"]} 
+                                                    style={{width: "100px"}}/>
+                                            </div>
+                                        </div>
+                                })}
+                        </motion.div>
+                    </motion.div>
+                </AnimatePresence>
             }
         </motion.div>
     )
