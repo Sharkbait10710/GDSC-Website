@@ -35,69 +35,65 @@ const Body = (props) => {
                         marginTop: "15px",
                         opacity: "0.6"
                     }}/>
-            {
-                projectData["arr"].map((ele) => {
-                    return <div
-                        style={{
-                            width: "100%",
-                            height: "30%",
-                            display: "flex",
-                            flexDirection: "column",
-                            borderBottom: "5.7px solid rgba(128, 128, 128, .6)"
-                        }}>
-                            <div
-                                style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "center",
-                                        
-                                    height: "100%"
-                                }}>
-                                    <div
-                                       style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        width: "60%",
-                                        height: "100%",
+                <motion.div
+                    style={{
+                        border: "1px solid",
+                        borderRadius: "10px",
+                        height: "74vh",
+                        width: "100%",
 
-                                        overflow: "hidden"
-                                       }}>
-                                        <div
-                                            style={{
-                                                fontFamily: "Google Sans",
-                                                fontSize: "30px",
+                        marginTop: "30px",
 
-                                                paddingLeft: "10px",
-                                                paddingTop: "20px",
+                        overflowY: "scroll",
+                        overflowX: "hidden",
 
-                                                opacity: 1
-                                            }}><a className="Hover" style={{color: "#1a73e8"}} href={ele["github"]}>{ele["name"]}</a></div>
-                                        <div
-                                            style={{
-                                                width: "90%",
-                                                fontFamily: "Google Sans",
-                                                fontSize: "25px",
-                                                
-                                                paddingLeft: "10px"
-
-                                            }}
-                                            className="scrolling">{ele["description"]}</div>
-                                    </div>
-                                    <div
+                        alignItems: "center"
+                    }}>
+                        {[0,1,2].map((ele) => {
+                            return <div
                                         style={{
-                                            width: "100px",
-                                            height: "100px",
-                                            
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            
-                                            marginRight: "50px"
-                                        }}><img src={ele["icon"]} height="100%"/></div>
+                                            width: "99%",
+                                            fontFamily: "Google Sans",
+                                            fontSize: "30px",
+                                            padding: "10px"
+                                        }}
+                                        key={"week" + ele + 1}>
+                                        Week {ele}  
+                                        <motion.div
+                                            style={{
+                                                width: "100%",
+                                                
+                                                display: "flex",
+                                                display: "flex",
+                                                justifyContent: "space_evenly",
+                                            }}>
+                                            <motion.div
+                                                style={{
+                                                    height: "30vh",
+                                                    width: "20%",
+                                                    border: "1px solid",
+                                                    borderRadius: "10px",
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    justifyContent: "space-evenly",
+                                                    alignItems: "center",
+
+                                                    boxShadow: "5px 5px #d9d9d9"
+                                                }}>
+                                                    <div>
+                                                        Monday
+                                                    </div>
+                                                    <div>
+                                                        General Meeting {ele + 1}
+                                                    </div>
+                                                    <div>
+                                                        2/{15+ele*7}/2023
+                                                    </div>
+                                            </motion.div>
+                                        </motion.div>
                                 </div>
-                        </div>
-                })
-            }
+                        })}
+                </motion.div>
         </motion.div>
     )
 }
