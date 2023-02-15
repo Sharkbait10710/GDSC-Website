@@ -4,3 +4,13 @@
     scale: 1.05;
     cursor: pointer;
 }
+
+.timing:hover {
+    cursor: pointer;
+    background-color: #00FF1D;
+}
+
+.displayItems {
+    margin-top: 10px;
+    margin-left: 10px;                              marginLeft: "10px"
+}

@@ -7,7 +7,6 @@ import projectData                  from "../../data/projects.json"
 // CSS
 import                              './styles.css'
 const Body = (props) => {
-
     return(
         <motion.div
             initial={{
