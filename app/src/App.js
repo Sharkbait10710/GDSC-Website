@@ -1,76 +1,54 @@
 // Node imports
-import * as React from "react"
+import * as React from 'react';
 
 // Page imports
-import Home       from "./pages/Home"
-import Projects   from "./pages/Projects"
-import Joinus     from "./pages/Joinus"
-import Meetup     from "./pages/Meetup"
-import Education  from "./pages/Education"
+import Home from './pages/Home';
+import Projects from './pages/Projects';
+import Joinus from './pages/Joinus';
+import Meetup from './pages/Meetup';
+import Education from './pages/Education';
+
+//Routing imports
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
+import Layout from './pages/Layout';
+
+function getWindowSize() {
+  const { innerWidth, innerHeight } = window;
+  return { innerWidth, innerHeight };
+}
+
+let windowSize = getWindowSize();
+var bigWidth = windowSize.innerWidth >= 1640;
+var mediumWidth = windowSize.innerWidth >= 900 && !bigWidth;
+var sizeWidth = bigWidth ? 3 : mediumWidth ? 2 : 1;
+
+var bigHeight = windowSize.innerHeight >= 900;
+var mediumHeight = windowSize.innerHeight >= 600 && !bigHeight;
+var sizeHeight = bigHeight ? 3 : mediumHeight ? 2 : 1;
+
+const delay = 1;
+
+let init = true;
+setTimeout(() => (init = false), 2000);
+
+// For more information on routers, read through this tutorial
+// https://reactrouter.com/en/main/start/tutorial
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home init={init} sizeWidth={sizeWidth} sizeHeight={sizeHeight} delay={delay} />} />
+      <Route path="projects" element={<Projects sizeWidth={sizeWidth} sizeHeight={sizeHeight} />} />
+      <Route path="join" element={<Joinus sizeWidth={sizeWidth} sizeHeight={sizeHeight} />} />
+      <Route path="education" element={<Education sizeWidth={sizeWidth} sizeHeight={sizeHeight} />} />
+      <Route path="meetup" element={<Meetup sizeWidth={sizeWidth} sizeHeight={sizeHeight} />} />
+    </Route>,
+  ),
+);
 
 function App() {
-  const [page, setPage] = React.useState(() => {
-    return "Home"
-  })
-
-  const [init, setInit] = React.useState(() => {
-    return true
-  })
-
-  setTimeout(() => setInit(false), 2000)
-  const delay = 1
-  const [windowSize, setWindowSize] = React.useState(getWindowSize());
-
-    React.useEffect(() => {
-        function handleWindowResize() {
-        setWindowSize(getWindowSize());
-        }
-
-        window.addEventListener('resize', handleWindowResize);
-
-        return () => {
-        window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
-
-    function getWindowSize() {
-        const {innerWidth, innerHeight} = window;
-        return {innerWidth, innerHeight};
-    }
-
-  var mediumWidth  = windowSize.innerWidth >= 900 && !bigWidth
-  var bigWidth     = windowSize.innerWidth >= 1640
-  var sizeWidth    = bigWidth ? 3 : mediumWidth ? 2 : 1
-
-  var mediumHeight = windowSize.innerHeight >= 600 && !bigHeight
-  var bigHeight    = windowSize.innerHeight >= 900
-  var sizeHeight   = bigHeight ? 3 : mediumHeight ? 2 : 1
-
   return (
-    
     <div id="app">
-      {page === "Home" && <Home 
-        init={init} 
-        sizeWidth={sizeWidth} 
-        sizeHeight={sizeHeight} 
-        delay={delay} 
-        setProject={() => {
-          setPage("Projects")
-        }}
-        setJoinus={() => {
-          setPage("Joinus")
-        }}
-        setEducation={() => {
-          setPage("Education")
-        }}
-        setMeetup={() => {
-          setPage("Meetup")
-        }}/>
-        }
-      {page === "Projects" && <Projects sizeWidth={sizeWidth} sizeHeight={sizeHeight} setFunction={() => setPage("Home")}/>}
-      {page === "Joinus" && <Joinus sizeWidth={sizeWidth} sizeHeight={sizeHeight} setFunction={() => setPage("Home")}/>}
-      {page === "Education" && <Education sizeWidth={sizeWidth} sizeHeight={sizeHeight} setFunction={() => setPage("Home")}/>}
-      {page === "Meetup" && <Meetup sizeWidth={sizeWidth} sizeHeight={sizeHeight} setFunction={() => setPage("Home")}/>}
+      <RouterProvider router={router} />
     </div>
   );
 }

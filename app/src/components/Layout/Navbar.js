@@ -1,12 +1,8 @@
 // Node imports
 import * as React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 // MUI Icons
 import MenuIcon from '@mui/icons-material/Menu';
-import LoginIcon from '@mui/icons-material/Login';
-import SendTimeExtensionIcon from '@mui/icons-material/SendTimeExtension';
 
 // Image imports
 import GDSC_logo from '../../imgs/GDSC_Logo.png';
@@ -14,15 +10,9 @@ import GDSC_logo from '../../imgs/GDSC_Logo.png';
 import './styles.css';
 
 //Authentication
-import {
-  addAuthListener,
-  getProfilePicUrl,
-  getUserName,
-  isUserSignedIn,
-  signIn,
-  signOutUser,
-} from '../../firebase/Auth';
+import { addAuthListener, getProfilePicUrl, getUserName, signIn, signOutUser } from '../../firebase/Auth';
 import { Avatar, IconButton, Menu, MenuItem } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
   const linkVariant = {
@@ -49,28 +39,9 @@ const Navbar = (props) => {
     return false;
   });
 
-  const [register, setRegister] = React.useState(() => {
-    return false;
-  });
-
   const handleSignIn = () => {
     signIn();
   };
-
-  React.useEffect(() => {
-    const handleKeypresses = (event) => {
-      if (event.key == `Escape`) {
-        setRegister(false);
-        setIsSignedIn(false);
-      }
-    };
-
-    document.addEventListener('keydown', handleKeypresses);
-
-    return function cleanupListener() {
-      document.removeEventListener('keydown', handleKeypresses);
-    };
-  });
 
   // ----- Authentication --------
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -113,7 +84,7 @@ const Navbar = (props) => {
       {
         <motion.div
           initial={{
-            x: props.init && props.sizeWidth != 1 ? '45vw' : '10vw',
+            x: props.init && props.sizeWidth !== 1 ? '45vw' : '10vw',
             y: props.init ? '50vh' : '0vh',
             scale: props.init ? 4 : 1,
           }}
@@ -128,8 +99,8 @@ const Navbar = (props) => {
           }}
           style={{
             position: 'absolute',
-            right: props.sizeWidth != 1 ? '94vw' : props.sizeHeight == 1 ? '45%' : '50%',
-            top: props.sizeHeight == 1 ? '5%' : '3.3%',
+            right: props.sizeWidth !== 1 ? '94vw' : props.sizeHeight === 1 ? '45%' : '50%',
+            top: props.sizeHeight === 1 ? '5%' : '3.3%',
           }}
         >
           <img src={GDSC_logo} alt="GDSC" height={50} />
@@ -149,15 +120,15 @@ const Navbar = (props) => {
         style={{
           fontFamily: 'Google Sans',
           position: 'absolute',
-          top: props.sizeWidth == 3 ? '2%' : props.sizeHeight == 1 ? '4.3%' : '2.3%',
+          top: props.sizeWidth === 3 ? '2%' : props.sizeHeight === 1 ? '4.3%' : '2.3%',
           left: '17.5%',
           fontWeight: 500,
         }}
       >
-        {props.sizeWidth == 3 && <a>Google Developer Student Club</a>}
-        {props.sizeWidth != 3 && props.sizeWidth != 1 && <a>GDSC</a>}
+        {props.sizeWidth === 3 && <Link to="/">Google Developer Student Club</Link>}
+        {props.sizeWidth !== 3 && props.sizeWidth !== 1 && <Link to="/">GDSC</Link>}
       </motion.div>
-      {props.sizeWidth != 3 && (
+      {props.sizeWidth !== 3 && (
         <motion.div
           initial={{
             opacity: props.init ? 0 : 1,
@@ -170,15 +141,15 @@ const Navbar = (props) => {
             duration: 1,
           }}
           style={{
-            marginTop: props.sizeHeight == 1 && props.sizeWidth == 1 ? '50px' : '5%',
+            marginTop: props.sizeHeight === 1 && props.sizeWidth === 1 ? '50px' : '5%',
           }}
         >
-          <a onClick={() => setshowOptions(!showOptions)}>
+          <IconButton aria-label="open menu" onClick={() => setshowOptions(!showOptions)}>
             <MenuIcon />
-          </a>
+          </IconButton>
         </motion.div>
       )}
-      {props.sizeWidth == 3 && (
+      {props.sizeWidth === 3 && (
         <motion.div
           variants={linkVariant}
           whileHover={{
@@ -196,11 +167,13 @@ const Navbar = (props) => {
             top: '2%',
           }}
         >
-          <a href="https://forms.gle/95Kx8NHm6eyaCkeS8">Join Us</a>
+          <a target="_blank" rel="noreferrer" href="https://forms.gle/95Kx8NHm6eyaCkeS8">
+            Join Us
+          </a>
         </motion.div>
       )}
 
-      {props.sizeWidth == 3 && (
+      {props.sizeWidth === 3 && (
         <motion.div
           variants={linkVariant}
           whileHover={{
@@ -218,11 +191,11 @@ const Navbar = (props) => {
             top: '2%',
           }}
         >
-          <a onClick={props.setMeetup}>Meetups</a>
+          <Link to="/meetup">Meetups</Link>
         </motion.div>
       )}
 
-      {props.sizeWidth == 3 && (
+      {props.sizeWidth === 3 && (
         <motion.div
           variants={linkVariant}
           whileHover={{
@@ -240,11 +213,11 @@ const Navbar = (props) => {
             top: '2%',
           }}
         >
-          <a onClick={props.setEducation}>Courses</a>
+          <Link to="/education">Courses</Link>
         </motion.div>
       )}
 
-      {props.sizeWidth == 3 && (
+      {props.sizeWidth === 3 && (
         <motion.div
           variants={linkVariant}
           whileHover={{
@@ -262,10 +235,10 @@ const Navbar = (props) => {
             top: '2%',
           }}
         >
-          <a onClick={props.setProject}>Projects</a>
+          <Link to="/projects">Projects</Link>
         </motion.div>
       )}
-      {props.sizeWidth == 3 &&
+      {props.sizeWidth === 3 &&
         (isSignedIn ? (
           <div>
             <IconButton
@@ -323,11 +296,11 @@ const Navbar = (props) => {
               top: '2%',
             }}
           >
-            <a onClick={handleSignIn}>Sign In</a>
+            <button onClick={handleSignIn}>Sign In</button>
           </motion.div>
         ))}
       <AnimatePresence>
-        {showOptions && props.sizeWidth != 3 && (
+        {showOptions && props.sizeWidth !== 3 && (
           <motion.div
             initial={{
               y: '100vh',
@@ -346,7 +319,7 @@ const Navbar = (props) => {
             }}
             style={{
               position: 'absolute',
-              top: props.sizeHeight == 1 ? '20%' : '12%',
+              top: props.sizeHeight === 1 ? '20%' : '12%',
               right: '-4%',
               marginRight: '0px',
               zIndex: 1,
@@ -356,8 +329,8 @@ const Navbar = (props) => {
               backgroundColor: 'white',
 
               width: '100%',
-              height: props.sizeHeight == 1 ? '100%' : '76%',
-              fontSize: props.sizeHeight == 1 ? '60px' : '100px',
+              height: props.sizeHeight === 1 ? '100%' : '76%',
+              fontSize: props.sizeHeight === 1 ? '60px' : '100px',
               fontFamily: 'Google Sans',
 
               overflowY: 'scroll',

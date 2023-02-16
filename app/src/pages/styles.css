@@ -1,0 +1,54 @@
+.hovering:hover {
+  scale: 1.05;
+  cursor: pointer;
+}
+
+.timing:hover {
+  cursor: pointer;
+  background-color: #00ff1d;
+}
+
+.displayItems {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-left: '10px';
+}
+
+.navbar-link {
+  font-family: 'Noto Sans';
+  font-size: 30px;
+  margin: 1%;
+  cursor: pointer;
+}
+
+.navbar-link a {
+  text-decoration: none;
+  color: black;
+}
+
+.Hover {
+  text-decoration: none;
+  opacity: 1;
+}
+.Hover:hover {
+  text-decoration: underline;
+}
+
+.scrolling {
+  text-overflow: ellipsis;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eff1ef;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1a73e8;
+  border-radius: 10px;
+}
