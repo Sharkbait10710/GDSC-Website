@@ -69,6 +69,10 @@ const Navbar = (props) => {
     setAnchorEl(null);
   };
 
+  const handleProfile = () => {
+    handleClose();
+  };
+
   return (
     <div
       style={{
@@ -266,7 +270,9 @@ const Navbar = (props) => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <Link to="/profile" style={{ all: 'unset' }}>
+                <MenuItem onClick={handleProfile}>Profile</MenuItem>
+              </Link>
               <MenuItem onClick={handleClose}>My account</MenuItem>
               <MenuItem
                 onClick={() => {

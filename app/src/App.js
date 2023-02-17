@@ -11,6 +11,7 @@ import Education from './pages/Education';
 //Routing imports
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import Layout from './pages/Layout';
+import Profile from './pages/Profile';
 
 function getWindowSize() {
   const { innerWidth, innerHeight } = window;
@@ -26,7 +27,7 @@ var bigHeight = windowSize.innerHeight >= 900;
 var mediumHeight = windowSize.innerHeight >= 600 && !bigHeight;
 var sizeHeight = bigHeight ? 3 : mediumHeight ? 2 : 1;
 
-const delay = 1;
+const delay = 0.5;
 
 let init = true;
 setTimeout(() => (init = false), 2000);
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
       <Route path="join" element={<Joinus sizeWidth={sizeWidth} sizeHeight={sizeHeight} />} />
       <Route path="education" element={<Education sizeWidth={sizeWidth} sizeHeight={sizeHeight} />} />
       <Route path="meetup" element={<Meetup sizeWidth={sizeWidth} sizeHeight={sizeHeight} />} />
+      <Route path="profile" element={<Profile />} />
     </Route>,
   ),
 );

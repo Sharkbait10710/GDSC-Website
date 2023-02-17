@@ -8,6 +8,7 @@ import { loadProjects, saveProject } from '../firebase/Firestore';
 
 // CSS
 import './styles.css';
+
 const Projects = (props) => {
   const [firestoreProjectData, setFirestoreProjectData] = React.useState([]);
   const [uploadImage, setUploadImage] = React.useState(null);
