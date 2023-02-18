@@ -293,7 +293,7 @@ const Navbar = (props) => {
               marginRight: '0%',
               fontFamily: 'Google Sans',
               position: 'absolute',
-              top: '2%',
+              top: '2%'
             }}
           >
             <button onClick={handleSignIn}>Sign In</button>

@@ -1,5 +1,8 @@
 // Node imports
-import { Box, Button, Input, InputLabel, TextField } from '@mui/material';
+import { Button, Input, InputLabel, TextField } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import ReplayIcon from '@mui/icons-material/Replay';
 import { motion } from 'framer-motion';
 import React from 'react';
 
@@ -11,6 +14,24 @@ import './styles.css';
 const Projects = (props) => {
   const [firestoreProjectData, setFirestoreProjectData] = React.useState([]);
   const [uploadImage, setUploadImage] = React.useState(null);
+  const [showAdd, setshowAdd] = React.useState(() => {
+    return false;
+  });
+
+  React.useEffect(() => {
+    const handleKeypresses = (event) => {
+      if (event.key === `Escape`) {
+        setshowAdd(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeypresses);
+
+    return function cleanupListener() {
+      document.removeEventListener('keydown', handleKeypresses);
+    };
+  });
+
   const loadProjectData = async () => {
     const projects = await loadProjects();
     console.log('projects loaded', projects);
@@ -73,7 +94,7 @@ const Projects = (props) => {
             height: '5px',
             backgroundColor: 'gray',
 
-            marginTop: '15px',
+            marginTop: '3%',
             opacity: '0.6',
           }}
         />
@@ -82,96 +103,237 @@ const Projects = (props) => {
             <div
               style={{
                 width: '100%',
-                height: '30%',
+                height: '20vh',
                 display: 'flex',
-                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignItems: 'center',
                 borderBottom: '5.7px solid rgba(128, 128, 128, .6)',
               }}
             >
               <div
                 style={{
                   display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-
+                  flexDirection: 'column',
+                  width: '60%',
                   height: '100%',
+
+                  overflow: 'hidden',
                 }}
               >
                 <div
                   style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: '60%',
-                    height: '100%',
+                    fontFamily: 'Google Sans',
+                    fontSize: '30px',
 
-                    overflow: 'hidden',
+                    paddingLeft: '10px',
+                    paddingTop: '20px',
+
+                    opacity: 1,
                   }}
                 >
-                  <div
-                    style={{
-                      fontFamily: 'Google Sans',
-                      fontSize: '30px',
-
-                      paddingLeft: '10px',
-                      paddingTop: '20px',
-
-                      opacity: 1,
-                    }}
+                  <a
+                    className="Hover"
+                    style={{ color: '#1a73e8' }}
+                    target="_blank"
+                    rel="noreferrer"
+                    href={project.githubLink}
                   >
-                    <a
-                      className="Hover"
-                      style={{ color: '#1a73e8' }}
-                      target="_blank"
-                      rel="noreferrer"
-                      href={project.githubLink}
-                    >
-                      {project.title}
-                    </a>
-                  </div>
-                  <div
-                    style={{
-                      width: '90%',
-                      fontFamily: 'Google Sans',
-                      fontSize: '25px',
-
-                      paddingLeft: '10px',
-                    }}
-                    className="scrolling"
-                  >
-                    {project.description}
-                  </div>
+                    {project.title}
+                  </a>
                 </div>
                 <div
                   style={{
-                    width: '100px',
-                    height: '100px',
+                    width: '90%',
+                    fontFamily: 'Google Sans',
+                    fontSize: '25px',
 
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-
-                    marginRight: '50px',
+                    paddingLeft: '10px',
                   }}
+                  className="scrolling"
                 >
-                  <img src={project.imageUrl} alt="project" height="100%" />
+                  {project.description}
                 </div>
+              </div>
+              <div
+                style={{
+                  width: '100px',
+                  height: '100px',
+
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+
+                  marginRight: '50px',
+                }}
+              >
+                <img src={project.imageUrl} alt="project" height="100%" />
               </div>
             </div>
           );
         })}
       </motion.div>
-      <Button onClick={loadProjectData}>Reload Projects</Button>
-      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-        <TextField margin="normal" required fullWidth id="title" label="Project Title" name="title" />
-        <TextField margin="normal" required fullWidth id="description" label="Project Description" name="description" />
-        <TextField margin="normal" required fullWidth id="githublink" label="Github Link" name="githublink" />
-        <TextField margin="normal" fullWidth id="publiclink" label="Public Project Link" name="publiclink" />
-        <InputLabel htmlFor="image">Select Image for Project</InputLabel>
-        <Input type="file" id="image" onChange={handleImage} placeholder="Upload image of the project" />
-        <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-          Upload Project to Firestore
-        </Button>
-      </Box>
+
+      <button
+        onClick={() => setshowAdd(true)}
+        style={{
+          position: 'absolute',
+          bottom: '10%',
+          right: '4%',
+          width: '74px',
+          height: '74px',
+          borderRadius: '37px',
+
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#e84438',
+
+          boxShadow: '2px 2px #d9d9d9',
+        }}
+      >
+        <AddIcon style={{ color: 'white', fontSize: '60px' }} />
+      </button>
+      <button
+        onClick={loadProjectData}
+        style={{
+          position: 'absolute',
+          bottom: '10%',
+          left: '4%',
+          width: '74px',
+          height: '74px',
+          borderRadius: '37px',
+
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#e84438',
+
+          boxShadow: '2px 2px #d9d9d9',
+        }}
+      >
+        <ReplayIcon style={{ color: 'white', fontSize: '60px' }} />
+      </button>
+      {showAdd && (
+        <motion.div
+          initial={{
+            y: '100vh',
+            opacity: 0
+          }}
+          animate={{
+            y: '0vh',
+            opacity: 1
+          }}
+          transition={{
+            duration: 0.5,
+          }}
+          style={{
+            position: 'absolute',
+            width: '70vw',
+            height: '70vh',
+
+            border: '1px solid',
+            borderRadius: '10px',
+            top: '20vh',
+
+            backgroundColor: 'white',
+            zIndex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="title"
+            label="Project Title"
+            name="title"
+            InputProps={{ style: { fontSize: 40 } }}
+            InputLabelProps={{ style: { fontSize: 40 } }}
+            sx={{
+              width: '80%',
+            }}
+          />
+          <TextField
+            margin="normal"
+            required
+            multiline
+            rows={4}
+            id="description"
+            label="Project Description"
+            name="description"
+            InputProps={{ style: { fontSize: 20 } }}
+            InputLabelProps={{ style: { fontSize: 20 } }}
+            sx={{
+              width: '80%',
+            }}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="githublink"
+            label="Github Link"
+            name="githublink"
+            InputProps={{ style: { fontSize: 20 } }}
+            InputLabelProps={{ style: { fontSize: 20 } }}
+            sx={{
+              width: '80%',
+            }}
+          />
+          <TextField
+            margin="normal"
+            fullWidth
+            id="publiclink"
+            label="Public Project Link"
+            name="publiclink"
+            InputProps={{ style: { fontSize: 20 } }}
+            InputLabelProps={{ style: { fontSize: 20 } }}
+            sx={{
+              width: '80%',
+            }}
+          />
+          <div
+            style={{
+              width: '80%',
+              position: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <InputLabel htmlFor="image" style={{ fontSize: '20px' }}>
+              Project Icon
+            </InputLabel>
+            <Input
+              type="file"
+              id="image"
+              onChange={handleImage}
+              placeholder="Upload image of the project"
+              sx={{
+                fontSize: '20px',
+              }}
+            />
+          </div>
+          <div
+            style={{
+              marginTop: '20px',
+              width: '80%',
+            }}
+          >
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                width: '50px',
+                height: '50px',
+                backgroundColor: '#1a73e8',
+              }}
+            >
+              <FileUploadIcon />
+            </Button>
+          </div>
+        </motion.div>
+      )}
     </>
   );
 };

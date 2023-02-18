@@ -61,6 +61,8 @@ const Footer = (props) => {
         padding: '10px',
         height: '7%',
         width: '80%',
+        position: "relative",
+        right: "5.3%"
       }}
     >
       <div
