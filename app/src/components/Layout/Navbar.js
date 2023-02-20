@@ -1,8 +1,8 @@
 // Node imports
 import * as React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, useAnimationControls } from 'framer-motion';
 // MUI Icons
-import MenuIcon from '@mui/icons-material/Menu';
+import AppsIcon from '@mui/icons-material/Apps';
 
 // Image imports
 import GDSC_logo from '../../imgs/GDSC_Logo.png';
@@ -10,11 +10,12 @@ import GDSC_logo from '../../imgs/GDSC_Logo.png';
 import './styles.css';
 
 //Authentication
-import { addAuthListener, getProfilePicUrl, getUserName, signIn, signOutUser } from '../../firebase/Auth';
-import { Avatar, IconButton, Menu, MenuItem } from '@mui/material';
+import { addAuthListener, signIn} from '../../firebase/Auth'
 import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
+  const framerControl = useAnimationControls()
+
   const linkVariant = {
     hidden: {
       y: props.init ? '-10vh' : '0vh',
@@ -34,6 +35,9 @@ const Navbar = (props) => {
       scale: 1.2,
     },
   };
+
+  const userOptions = ['Join Us', 'Meetups', 'Courses', 'Projects'];
+  const Links = ['https://forms.gle/95Kx8NHm6eyaCkeS8', '/meetup', '/education', '/projects'];
 
   const [showOptions, setshowOptions] = React.useState(() => {
     return false;
@@ -128,230 +132,29 @@ const Navbar = (props) => {
         {props.sizeWidth === 3 && <Link to="/">Google Developer Student Club</Link>}
         {props.sizeWidth !== 3 && props.sizeWidth !== 1 && <Link to="/">GDSC</Link>}
       </motion.div>
-      {props.sizeWidth !== 3 && (
-        <motion.div
-          initial={{
-            opacity: props.init ? 0 : 1,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{
-            delay: 1,
-            duration: 1,
-          }}
-          style={{
-            marginTop: props.sizeHeight === 1 && props.sizeWidth === 1 ? '50px' : '5%',
-          }}
-        >
-          <IconButton aria-label="open menu" onClick={() => setshowOptions(!showOptions)}>
-            <MenuIcon />
-          </IconButton>
-        </motion.div>
-      )}
-      {props.sizeWidth === 3 && (
-        <motion.div
-          variants={linkVariant}
-          whileHover={{
-            scale: 1.2,
-            borderBottom: 'solid #e84438',
-          }}
-          initial="hidden"
-          animate="visible"
-          transition="transition"
-          className="navbar-link"
-          style={{
-            marginRight: '32%',
-            fontFamily: 'Google Sans',
-            position: 'absolute',
-            top: '2%',
-          }}
-        >
-          <a target="_blank" rel="noreferrer" href="https://forms.gle/95Kx8NHm6eyaCkeS8">
-            Join Us
-          </a>
-        </motion.div>
-      )}
 
-      {props.sizeWidth === 3 && (
-        <motion.div
-          variants={linkVariant}
-          whileHover={{
-            scale: 1.2,
-            borderBottom: 'solid #1a73e8',
-          }}
-          initial="hidden"
-          animate="visible"
-          transition="transition"
-          className="navbar-link"
-          style={{
-            marginRight: '24%',
-            fontFamily: 'Google Sans',
-            position: 'absolute',
-            top: '2%',
-          }}
-        >
-          <Link to="/meetup">Meetups</Link>
-        </motion.div>
-      )}
-
-      {props.sizeWidth === 3 && (
-        <motion.div
-          variants={linkVariant}
-          whileHover={{
-            scale: 1.2,
-            borderBottom: 'solid #fbbc04',
-          }}
-          initial="hidden"
-          animate="visible"
-          transition="transition"
-          className="navbar-link"
-          style={{
-            marginRight: '16%',
-            fontFamily: 'Google Sans',
-            position: 'absolute',
-            top: '2%',
-          }}
-        >
-          <Link to="/education">Courses</Link>
-        </motion.div>
-      )}
-
-      {props.sizeWidth === 3 && (
-        <motion.div
-          variants={linkVariant}
-          whileHover={{
-            scale: 1.2,
-            borderBottom: 'solid #3cba54',
-          }}
-          initial="hidden"
-          animate="visible"
-          transition="transition"
-          className="navbar-link"
-          style={{
-            marginRight: '8%',
-            fontFamily: 'Google Sans',
-            position: 'absolute',
-            top: '2%',
-          }}
-        >
-          <Link to="/projects">Projects</Link>
-        </motion.div>
-      )}
-      {props.sizeWidth === 3 &&
-        (isSignedIn ? (
-          <div>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            >
-              <Avatar alt={getUserName()} src={getProfilePicUrl()} />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  signOutUser();
-                }}
-              >
-                Sign Out
-              </MenuItem>
-            </Menu>
-          </div>
-        ) : (
-          <motion.div
-            variants={linkVariant}
-            whileHover={{
-              scale: 1.2,
-              borderBottom: 'solid #e84438',
-            }}
-            initial="hidden"
-            animate="visible"
-            transition="transition"
-            className="navbar-link"
-            style={{
-              marginRight: '0%',
-              fontFamily: 'Google Sans',
-              position: 'absolute',
-              top: '2%'
-            }}
-          >
-            <button onClick={handleSignIn}>Sign In</button>
-          </motion.div>
-        ))}
-      <AnimatePresence>
-        {showOptions && props.sizeWidth !== 3 && (
-          <motion.div
-            initial={{
-              y: '100vh',
-            }}
-            animate={{
-              y: '0vh',
-            }}
-            transition={{
-              duration: 0.5,
-            }}
-            exit={{
-              y: '100vh',
-              transition: {
-                duration: 0.5,
-              },
-            }}
-            style={{
-              position: 'absolute',
-              top: props.sizeHeight === 1 ? '20%' : '12%',
-              right: '-4%',
-              marginRight: '0px',
-              zIndex: 1,
-
-              display: 'flex',
-              flexDirection: 'column',
-              backgroundColor: 'white',
-
-              width: '100%',
-              height: props.sizeHeight === 1 ? '100%' : '76%',
-              fontSize: props.sizeHeight === 1 ? '60px' : '100px',
-              fontFamily: 'Google Sans',
-
-              overflowY: 'scroll',
-            }}
-            className="navbar-link"
-          >
-            <div
-              style={{
-                width: '90%',
-                height: '5px',
-                backgroundColor: '#e84438',
-                position: 'absolute',
-              }}
-            />
-            <div onClick={props.setProject}>Projects</div>
-            <div>Join Us</div>
-            <div>Education</div>
-            <div>Meetup</div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        initial={{
+          opacity: props.init ? 0 : 1,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          delay: 1,
+          duration: 1,
+        }}
+        style={{
+          marginTop: "2%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 2
+        }}
+        className="scaling"
+      >
+        <AppsIcon className="rotating" style={{height: "40px", width: "40px"}}/>
+      </motion.div>
     </div>
   );
 };

@@ -16,3 +16,19 @@ a {
 button {
     all: unset;
 }
+
+.scaling {
+    transition: scale 0.5s ease-in-out 50ms;
+}
+
+.scaling:hover {
+    scale: 2
+}
+
+.rotating {
+    transition: rotate 0.5s ease-in-out 50ms;
+}
+
+.rotating:hover {
+    rotate: 180deg;
+}
