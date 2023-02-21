@@ -10,7 +10,8 @@ import GDSC_logo from '../../imgs/GDSC_Logo.png';
 import './styles.css';
 
 //Authentication
-import { addAuthListener, signIn } from '../../firebase/Auth';
+import { addAuthListener, getProfilePicUrl, getUserName, signIn, signOutUser } from '../../firebase/Auth';
+import { Avatar, IconButton, Menu, MenuItem } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
@@ -146,7 +147,56 @@ const Navbar = (props) => {
         {props.sizeWidth === 3 && <Link to="/">Google Developer Student Club</Link>}
         {props.sizeWidth !== 3 && props.sizeWidth !== 1 && <Link to="/">GDSC</Link>}
       </motion.div>
-
+      {isSignedIn && (
+        <div
+          style={{
+            marginTop: '2%',
+            marginRight: '2%'
+          }}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
+            color="inherit"
+          >
+            <Avatar alt={getUserName()} src={getProfilePicUrl()} />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+            style={{
+              marginLeft: "-3.5%",
+              marginTop: "0.3%"
+              
+            }}
+          >
+            <MenuItem onClick={handleClose} sx={{fontSize: "20px"}}>Profile</MenuItem>
+            <MenuItem onClick={handleClose} sx={{fontSize: "20px"}}>My account</MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                signOutUser();
+              }}
+              sx={{fontSize: "20px"}}
+            >
+              Sign Out
+            </MenuItem>
+          </Menu>
+        </div>
+      )}
       <motion.button
         onClick={() => {
           setshowOptions(true);
