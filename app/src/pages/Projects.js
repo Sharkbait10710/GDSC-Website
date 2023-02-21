@@ -86,15 +86,22 @@ const Projects = (props) => {
           display: 'flex',
           flexDirection: 'column',
           width: '95%',
-          height: '100%',
+          height: '90%'
         }}
       >
+        <div
+          style={{
+            width: "100%",
+            height: "85%",
+            overflowY: "scroll"
+          }}>
         <div
           style={{
             width: '100%',
             height: '5px',
             backgroundColor: 'gray',
 
+            marginLeft: "10px",
             marginTop: '3%',
             opacity: '0.6',
           }}
@@ -107,6 +114,8 @@ const Projects = (props) => {
                 height: '20vh',
                 display: 'flex',
                 justifyContent: 'space-between',
+                marginLeft: "10px",
+                paddingBottom: "20px",
                 alignItems: 'center',
                 borderBottom: '5.7px solid rgba(128, 128, 128, .6)',
               }}
@@ -172,6 +181,7 @@ const Projects = (props) => {
             </div>
           );
         })}
+        </div>
       </motion.div>
 
       <button
@@ -196,7 +206,10 @@ const Projects = (props) => {
         <AddIcon style={{ color: 'white', fontSize: '60px' }} />
       </button>
       <button
-        onClick={loadProjectData}
+        onClick={() => {
+          loadProjectData()
+          setshowAdd(false)
+        }}
         style={{
           position: 'absolute',
           bottom: '10%',
@@ -245,7 +258,10 @@ const Projects = (props) => {
             alignItems: 'center',
           }}
         >
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={() => {
+            handleSubmit()
+            setshowAdd(false)
+          }}>
             <TextField
               margin="normal"
               required
