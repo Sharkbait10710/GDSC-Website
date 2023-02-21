@@ -1,12 +1,13 @@
 // Node imports
-import { Box, Button, Input, InputLabel, TextField } from '@mui/material';
-import { getAuth } from 'firebase/auth';
+import { Button, Input, InputLabel, TextField } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import ReplayIcon from '@mui/icons-material/Replay';
 import { motion } from 'framer-motion';
 import React from 'react';
-import { isUserSignedIn } from '../firebase/Auth';
 
 // Firestore
-import { getUserProfile, loadProjects, saveProject } from '../firebase/Firestore';
+import { loadProjects, saveProject } from '../firebase/Firestore';
 
 // CSS
 import './styles.css';
@@ -14,7 +15,23 @@ import './styles.css';
 const Projects = (props) => {
   const [firestoreProjectData, setFirestoreProjectData] = React.useState([]);
   const [uploadImage, setUploadImage] = React.useState(null);
-  const [userIsAdmin, setUserIsAdmin] = React.useState(false);
+  const [showAdd, setshowAdd] = React.useState(() => {
+    return false;
+  });
+
+  React.useEffect(() => {
+    const handleKeypresses = (event) => {
+      if (event.key === `Escape`) {
+        setshowAdd(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeypresses);
+
+    return function cleanupListener() {
+      document.removeEventListener('keydown', handleKeypresses);
+    };
+  });
 
   const loadProjectData = async () => {
     const projects = await loadProjects();
@@ -46,19 +63,10 @@ const Projects = (props) => {
     await saveProject(project.title, project.description, project.githublink, uploadImage, project.publiclink);
     console.log('project successfully uploaded!');
   };
-  const checkUserAdmin = async function () {
-    if (!isUserSignedIn()) {
-      setUserIsAdmin(false);
-      return;
-    }
-    getUserProfile(getAuth().currentUser.uid).then((userProfile) => {
-      setUserIsAdmin(userProfile.admin);
-    });
-  };
+
   //Load the projects from firestore
   React.useEffect(() => {
     loadProjectData();
-    checkUserAdmin();
   }, []);
 
   return (
@@ -165,26 +173,169 @@ const Projects = (props) => {
           );
         })}
       </motion.div>
-      <Button onClick={loadProjectData}>Reload Projects</Button>
-      {userIsAdmin && (
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField margin="normal" required fullWidth id="title" label="Project Title" name="title" />
+
+      <button
+        onClick={() => setshowAdd(true)}
+        style={{
+          position: 'absolute',
+          bottom: '10%',
+          right: '4%',
+          width: '74px',
+          height: '74px',
+          borderRadius: '37px',
+
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#e84438',
+
+          boxShadow: '2px 2px #d9d9d9',
+        }}
+        className="hovering"
+      >
+        <AddIcon style={{ color: 'white', fontSize: '60px' }} />
+      </button>
+      <button
+        onClick={loadProjectData}
+        style={{
+          position: 'absolute',
+          bottom: '10%',
+          left: '4%',
+          width: '74px',
+          height: '74px',
+          borderRadius: '37px',
+
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#e84438',
+
+          boxShadow: '2px 2px #d9d9d9',
+        }}
+        className="hovering"
+      >
+        <ReplayIcon style={{ color: 'white', fontSize: '60px' }} />
+      </button>
+      {showAdd && (
+        <motion.div
+          initial={{
+            y: '100vh',
+            opacity: 0
+          }}
+          animate={{
+            y: '0vh',
+            opacity: 1
+          }}
+          transition={{
+            duration: 0.5,
+          }}
+          style={{
+            position: 'absolute',
+            width: '70vw',
+            height: '70vh',
+
+            border: '1px solid',
+            borderRadius: '10px',
+            top: '20vh',
+
+            backgroundColor: 'white',
+            zIndex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
           <TextField
             margin="normal"
             required
             fullWidth
+            id="title"
+            label="Project Title"
+            name="title"
+            InputProps={{ style: { fontSize: 40 } }}
+            InputLabelProps={{ style: { fontSize: 40 } }}
+            sx={{
+              width: '80%',
+            }}
+          />
+          <TextField
+            margin="normal"
+            required
+            multiline
+            rows={4}
             id="description"
             label="Project Description"
             name="description"
+            InputProps={{ style: { fontSize: 20 } }}
+            InputLabelProps={{ style: { fontSize: 20 } }}
+            sx={{
+              width: '80%',
+            }}
           />
-          <TextField margin="normal" required fullWidth id="githublink" label="Github Link" name="githublink" />
-          <TextField margin="normal" fullWidth id="publiclink" label="Public Project Link" name="publiclink" />
-          <InputLabel htmlFor="image">Select Image for Project</InputLabel>
-          <Input type="file" id="image" onChange={handleImage} placeholder="Upload image of the project" />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Upload Project to Firestore
-          </Button>
-        </Box>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="githublink"
+            label="Github Link"
+            name="githublink"
+            InputProps={{ style: { fontSize: 20 } }}
+            InputLabelProps={{ style: { fontSize: 20 } }}
+            sx={{
+              width: '80%',
+            }}
+          />
+          <TextField
+            margin="normal"
+            fullWidth
+            id="publiclink"
+            label="Public Project Link"
+            name="publiclink"
+            InputProps={{ style: { fontSize: 20 } }}
+            InputLabelProps={{ style: { fontSize: 20 } }}
+            sx={{
+              width: '80%',
+            }}
+          />
+          <div
+            style={{
+              width: '80%',
+              position: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <InputLabel htmlFor="image" style={{ fontSize: '20px' }}>
+              Project Icon
+            </InputLabel>
+            <Input
+              type="file"
+              id="image"
+              onChange={handleImage}
+              placeholder="Upload image of the project"
+              sx={{
+                fontSize: '20px',
+              }}
+            />
+          </div>
+          <div
+            style={{
+              marginTop: '20px',
+              width: '80%',
+            }}
+          >
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                width: '50px',
+                height: '50px',
+                backgroundColor: '#1a73e8',
+              }}
+            >
+              <FileUploadIcon />
+            </Button>
+          </div>
+        </motion.div>
       )}
     </>
   );
