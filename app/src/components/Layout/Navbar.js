@@ -356,7 +356,7 @@ const Navbar = (props) => {
                     width: '100%',
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center',
                   }}
                   className="appsColor2"
                 >
@@ -377,11 +377,17 @@ const Navbar = (props) => {
                     width: '100%',
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center',
                   }}
                   className="appsColor2"
                 >
-                  <button className="Links" onClick={() => setshowOptions(false)}>
+                  <button
+                    className="Links"
+                    onClick={() => {
+                      setshowOptions(false);
+                      handleSignIn();
+                    }}
+                  >
                     Sign In
                   </button>
                 </div>
