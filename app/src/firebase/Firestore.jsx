@@ -57,7 +57,7 @@ export async function getUserProfile(uid) {
       photoUrl: user.photoURL,
       bio: DEFAULT_BIO,
       timestamp: serverTimestamp(),
-      admin: false
+      admin: false,
     };
     await setDoc(doc(getFirestore(), 'users', uid), userProfile);
     const querySnapshot = await getDoc(doc(getFirestore(), 'users', uid));
@@ -115,20 +115,18 @@ export async function saveProject(title, description, githubLink, image, publicL
   }
 }
 
-
-
 /**
  * Loads all meetings in the 'meetings' collection on firestore, and returns a list of the meeting objects.
  * @async
  * @returns {list} list of meeting objects in the form { title, description, date, location, name, authorUid, timestamp }
  */
 export async function loadMeetings() {
-  const querySnapshot = (await getDocs(query(collection(getFirestore(), 'meetings'), orderBy("date", 'asc')) ));
+  const querySnapshot = await getDocs(query(collection(getFirestore(), 'meetings'), orderBy('date', 'asc')));
   let allMeetings = [];
   querySnapshot.forEach((doc) => {
     allMeetings.push(doc.data());
   });
-    
+
   return allMeetings;
 }
 
@@ -141,7 +139,6 @@ export async function loadMeetings() {
  * @param {string} location location of the meeting
  */
 export async function saveMeeting(title, description, date, location) {
-
   try {
     // Push a new meeting to firestore
     await addDoc(collection(getFirestore(), 'meetings'), {

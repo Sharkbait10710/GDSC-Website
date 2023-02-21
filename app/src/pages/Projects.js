@@ -61,6 +61,8 @@ const Projects = (props) => {
     };
     console.log(project);
     await saveProject(project.title, project.description, project.githublink, uploadImage, project.publiclink);
+    setshowAdd(false);
+    await loadProjectData();
     console.log('project successfully uploaded!');
   };
 
@@ -86,102 +88,103 @@ const Projects = (props) => {
           display: 'flex',
           flexDirection: 'column',
           width: '95%',
-          height: '90%'
+          height: '90%',
         }}
       >
         <div
           style={{
-            width: "100%",
-            height: "75%",
-            overflowY: "scroll"
-          }}>
-        <div
-          style={{
             width: '100%',
-            height: '5px',
-            backgroundColor: 'gray',
-
-            marginLeft: "10px",
-            marginTop: '3%',
-            opacity: '0.6',
+            height: '75%',
+            overflowY: 'scroll',
           }}
-        />
-        {firestoreProjectData.map((project, i) => {
-          return (
-            <div
-              style={{
-                width: '100%',
-                height: '20vh',
-                display: 'flex',
-                justifyContent: 'space-between',
-                marginLeft: "10px",
-                paddingBottom: "20px",
-                alignItems: 'center',
-                borderBottom: '5.7px solid rgba(128, 128, 128, .6)',
-              }}
-            >
+        >
+          <div
+            style={{
+              width: '100%',
+              height: '5px',
+              backgroundColor: 'gray',
+
+              marginLeft: '10px',
+              marginTop: '3%',
+              opacity: '0.6',
+            }}
+          />
+          {firestoreProjectData.map((project, i) => {
+            return (
               <div
+                key={i}
                 style={{
+                  width: '100%',
+                  height: '20vh',
                   display: 'flex',
-                  flexDirection: 'column',
-                  width: '60%',
-                  height: '100%',
-
-                  overflow: 'hidden',
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: 'Google Sans',
-                    fontSize: '30px',
-
-                    paddingLeft: '10px',
-                    paddingTop: '20px',
-
-                    opacity: 1,
-                  }}
-                >
-                  <a
-                    className="Hover"
-                    style={{ color: '#1a73e8' }}
-                    target="_blank"
-                    rel="noreferrer"
-                    href={project.githubLink}
-                  >
-                    {project.title}
-                  </a>
-                </div>
-                <div
-                  style={{
-                    width: '90%',
-                    fontFamily: 'Google Sans',
-                    fontSize: '25px',
-
-                    paddingLeft: '10px',
-                  }}
-                  className="scrolling"
-                >
-                  {project.description}
-                </div>
-              </div>
-              <div
-                style={{
-                  width: '100px',
-                  height: '100px',
-
-                  display: 'flex',
-                  justifyContent: 'center',
+                  justifyContent: 'space-between',
+                  marginLeft: '10px',
+                  paddingBottom: '20px',
                   alignItems: 'center',
-
-                  marginRight: '50px',
+                  borderBottom: '5.7px solid rgba(128, 128, 128, .6)',
                 }}
               >
-                <img src={project.imageUrl} alt="project" height="100%" />
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '60%',
+                    height: '100%',
+
+                    overflow: 'hidden',
+                  }}
+                >
+                  <div
+                    style={{
+                      fontFamily: 'Google Sans',
+                      fontSize: '30px',
+
+                      paddingLeft: '10px',
+                      paddingTop: '20px',
+
+                      opacity: 1,
+                    }}
+                  >
+                    <a
+                      className="Hover"
+                      style={{ color: '#1a73e8' }}
+                      target="_blank"
+                      rel="noreferrer"
+                      href={project.githubLink}
+                    >
+                      {project.title}
+                    </a>
+                  </div>
+                  <div
+                    style={{
+                      width: '90%',
+                      fontFamily: 'Google Sans',
+                      fontSize: '25px',
+
+                      paddingLeft: '10px',
+                    }}
+                    className="scrolling"
+                  >
+                    {project.description}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    width: '100px',
+                    height: '100px',
+
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+
+                    marginRight: '50px',
+                  }}
+                >
+                  <img src={project.imageUrl} alt="project" height="100%" />
+                </div>
               </div>
-            </div>
-          );
-        })}
-        
+            );
+          })}
         </div>
       </motion.div>
 
@@ -208,8 +211,8 @@ const Projects = (props) => {
       </button>
       <button
         onClick={() => {
-          loadProjectData()
-          setshowAdd(false)
+          loadProjectData();
+          setshowAdd(false);
         }}
         style={{
           position: 'absolute',
@@ -259,10 +262,7 @@ const Projects = (props) => {
             alignItems: 'center',
           }}
         >
-          <form onSubmit={() => {
-            handleSubmit()
-            setshowAdd(false)
-          }}>
+          <form onSubmit={handleSubmit}>
             <TextField
               margin="normal"
               required
