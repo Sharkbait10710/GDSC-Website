@@ -276,21 +276,32 @@ const Navbar = (props) => {
               y: '0',
               opacity: 1,
             }}
+            transition={{
+              duration: 1
+            }}
             style={{
-              height: '70vh',
+              height: '80vh',
               width: '80vw',
               display: 'flex',
               flexDirection: 'column',
 
-              boxShadow: '0px 0px 1px 5000px rgba(0,0,0,0.1)',
+              boxShadow: '1px 1px 1px 5000px rgba(0,0,0,0.1)',
               zIndex: 3,
 
               position: 'absolute',
-              top: '15vh',
+              top: '10vh',
               left: '10vw',
-              backgroundColor: '#f0ecee',
+              backgroundColor: 'white',
 
               overflow: 'hidden',
+              borderLeft: "10px solid #1a73e8",
+              borderBottom: "10px solid #fbbc04",
+              borderTop: "10px solid #0f9d58",
+              borderRight: "10px solid #e84438",
+
+              borderRadius: "10px",
+
+              padding: "5px"
             }}
           >
             <motion.div
