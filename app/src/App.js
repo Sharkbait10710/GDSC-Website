@@ -12,7 +12,6 @@ import Profile from './pages/Profile';
 //Routing imports
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import Layout from './pages/Layout';
-import Profile from './pages/Profile';
 
 function getWindowSize() {
   const { innerWidth, innerHeight } = window;

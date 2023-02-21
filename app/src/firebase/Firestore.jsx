@@ -17,44 +17,6 @@ import { getUserName, getProfilePicUrl } from './Auth';
 import { getAuth } from 'firebase/auth';
 
 /**
- * Fetches the users profile. If it doesn't exist, add the user to the /users/ collection and return their profile.
- * @param {string} uid unique identifier of a user, generated from getAuth().currentUser.uid
- * @returns an object representing all of the fields in the user profile
- */
-export async function getUserProfile(uid) {
-  const querySnapshot = await getDoc(doc(getFirestore(), 'users', uid));
-  if (querySnapshot.exists()) {
-    return querySnapshot.data();
-  } else {
-    // Create user profile
-    const DEFAULT_BIO = 'Hello and welcome to my profile!';
-    console.log('Creating user profile for uid ', uid);
-    const user = getAuth().currentUser;
-    if (!user) {
-      console.error('cannot create null user');
-    }
-    const userProfile = {
-      displayName: user.displayName,
-      username: uid,
-      email: user.email,
-      emailVerified: user.emailVerified,
-      photoUrl: user.photoURL,
-      bio: DEFAULT_BIO,
-      timestamp: serverTimestamp(),
-      admin: false
-    };
-    await setDoc(doc(getFirestore(), 'users', uid), userProfile);
-    const querySnapshot = await getDoc(doc(getFirestore(), 'users', uid));
-    if (querySnapshot.exists()) {
-      return querySnapshot.data();
-    } else {
-      console.error('error creating user');
-      return null;
-    }
-  }
-}
-
-/**
  * Loads all projects in the 'projects' collection on firestore, and returns a list of the project objects.
  * @async
  * @returns {list} list of project objects in the form { title, description, githubLink, publicLink, imageUrl, profilePicUrl, timestamp }
