@@ -11,8 +11,81 @@
 
 a {
     cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.Links {
+    color: unset 
+}
+
+.Links:hover{
+    scale: 1.1;
+}
+
+.appObjects {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 250px;
+    padding: 20px;
+    font-family: "Google Sans";
+    font-size: 50px;
+    border: 1px solid;
+    background-color: white;
+    background-size: 100% 200%;
+    -webkit-transition: background-position 0.3s;
+    -moz-transition: background-position 0.3s;
+    transition: background-position 0.3s;
+    z-index: 5;
+}
+
+.appObjects:hover {
+    background-position: 0 -100%;
 }
 
 button {
     all: unset;
+}
+
+.scaling {
+    transition: scale 0.3s ease-in-out 50ms;
+}
+
+.scaling:hover {
+    scale: 1.5;
+}
+
+.rotating {
+    transition: rotate 0.3s ease-in-out 50ms;
+}
+
+.rotating:hover {
+    rotate: 180deg;
+}
+
+.slidingBackground {
+    background-size: 100% 200%;
+    background-image: linear-gradient(to bottom, white 50%, #569efc 50%);
+    -webkit-transition: background-position 0.3s;
+    -moz-transition: background-position 0.3s;
+    transition: background-position 0.3s;
+}
+.slidingBackground:hover {
+    background-position: 0 -100%;
+}
+
+.appsColor {
+    transition: color 0.3s ease-in-out 50ms;
+}
+.appsColor:hover {
+    color: white;
+}
+
+.appsColor2 {
+    transition: color 0.05s ease-in-out 50ms;
+}
+.appsColor2:hover {
+    color: white;
 }

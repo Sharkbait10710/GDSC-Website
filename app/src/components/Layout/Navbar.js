@@ -1,8 +1,8 @@
 // Node imports
 import * as React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 // MUI Icons
-import MenuIcon from '@mui/icons-material/Menu';
+import AppsIcon from '@mui/icons-material/Apps';
 
 // Image imports
 import GDSC_logo from '../../imgs/GDSC_Logo.png';
@@ -15,6 +15,8 @@ import { Avatar, IconButton, Menu, MenuItem } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
+  const framerControl = useAnimationControls();
+
   const linkVariant = {
     hidden: {
       y: props.init ? '-10vh' : '0vh',
@@ -35,6 +37,9 @@ const Navbar = (props) => {
     },
   };
 
+  const userOptions = ['Join Us', 'Meetups', 'Courses', 'Projects'];
+  const Links = ['https://forms.gle/95Kx8NHm6eyaCkeS8', '/meetup', '/education', '/projects'];
+
   const [showOptions, setshowOptions] = React.useState(() => {
     return false;
   });
@@ -42,6 +47,24 @@ const Navbar = (props) => {
   const handleSignIn = () => {
     signIn();
   };
+
+  const handleProfile = () => {
+    handleClose();
+  };
+  
+  React.useEffect(() => {
+    const handleKeypresses = (event) => {
+      if (event.key === `Escape`) {
+        setshowOptions(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeypresses);
+
+    return function cleanupListener() {
+      document.removeEventListener('keydown', handleKeypresses);
+    };
+  });
 
   // ----- Authentication --------
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -128,230 +151,311 @@ const Navbar = (props) => {
         {props.sizeWidth === 3 && <Link to="/">Google Developer Student Club</Link>}
         {props.sizeWidth !== 3 && props.sizeWidth !== 1 && <Link to="/">GDSC</Link>}
       </motion.div>
-      {props.sizeWidth !== 3 && (
-        <motion.div
-          initial={{
-            opacity: props.init ? 0 : 1,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{
-            delay: 1,
-            duration: 1,
-          }}
+      {isSignedIn && (
+        <div
           style={{
-            marginTop: props.sizeHeight === 1 && props.sizeWidth === 1 ? '50px' : '5%',
+            marginTop: '2%',
+            marginRight: '2%',
           }}
         >
-          <IconButton aria-label="open menu" onClick={() => setshowOptions(!showOptions)}>
-            <MenuIcon />
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
+            color="inherit"
+          >
+            <Avatar alt={getUserName()} src={getProfilePicUrl()} />
           </IconButton>
-        </motion.div>
-      )}
-      {props.sizeWidth === 3 && (
-        <motion.div
-          variants={linkVariant}
-          whileHover={{
-            scale: 1.2,
-            borderBottom: 'solid #e84438',
-          }}
-          initial="hidden"
-          animate="visible"
-          transition="transition"
-          className="navbar-link"
-          style={{
-            marginRight: '32%',
-            fontFamily: 'Google Sans',
-            position: 'absolute',
-            top: '2%',
-          }}
-        >
-          <a target="_blank" rel="noreferrer" href="https://forms.gle/95Kx8NHm6eyaCkeS8">
-            Join Us
-          </a>
-        </motion.div>
-      )}
-
-      {props.sizeWidth === 3 && (
-        <motion.div
-          variants={linkVariant}
-          whileHover={{
-            scale: 1.2,
-            borderBottom: 'solid #1a73e8',
-          }}
-          initial="hidden"
-          animate="visible"
-          transition="transition"
-          className="navbar-link"
-          style={{
-            marginRight: '24%',
-            fontFamily: 'Google Sans',
-            position: 'absolute',
-            top: '2%',
-          }}
-        >
-          <Link to="/meetup">Meetups</Link>
-        </motion.div>
-      )}
-
-      {props.sizeWidth === 3 && (
-        <motion.div
-          variants={linkVariant}
-          whileHover={{
-            scale: 1.2,
-            borderBottom: 'solid #fbbc04',
-          }}
-          initial="hidden"
-          animate="visible"
-          transition="transition"
-          className="navbar-link"
-          style={{
-            marginRight: '16%',
-            fontFamily: 'Google Sans',
-            position: 'absolute',
-            top: '2%',
-          }}
-        >
-          <Link to="/education">Courses</Link>
-        </motion.div>
-      )}
-
-      {props.sizeWidth === 3 && (
-        <motion.div
-          variants={linkVariant}
-          whileHover={{
-            scale: 1.2,
-            borderBottom: 'solid #3cba54',
-          }}
-          initial="hidden"
-          animate="visible"
-          transition="transition"
-          className="navbar-link"
-          style={{
-            marginRight: '8%',
-            fontFamily: 'Google Sans',
-            position: 'absolute',
-            top: '2%',
-          }}
-        >
-          <Link to="/projects">Projects</Link>
-        </motion.div>
-      )}
-      {props.sizeWidth === 3 &&
-        (isSignedIn ? (
-          <div>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            >
-              <Avatar alt={getUserName()} src={getProfilePicUrl()} />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  signOutUser();
-                }}
-              >
-                Sign Out
-              </MenuItem>
-            </Menu>
-          </div>
-        ) : (
-          <motion.div
-            variants={linkVariant}
-            whileHover={{
-              scale: 1.2,
-              borderBottom: 'solid #e84438',
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
             }}
-            initial="hidden"
-            animate="visible"
-            transition="transition"
-            className="navbar-link"
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
             style={{
-              marginRight: '0%',
-              fontFamily: 'Google Sans',
-              position: 'absolute',
-              top: '2%'
+              marginLeft: '-3.5%',
+              marginTop: '0.3%',
             }}
           >
-            <button onClick={handleSignIn}>Sign In</button>
-          </motion.div>
-        ))}
-      <AnimatePresence>
-        {showOptions && props.sizeWidth !== 3 && (
-          <motion.div
-            initial={{
-              y: '100vh',
-            }}
-            animate={{
-              y: '0vh',
-            }}
-            transition={{
-              duration: 0.5,
-            }}
-            exit={{
-              y: '100vh',
-              transition: {
-                duration: 0.5,
-              },
-            }}
+            <Link to="/profile" style={{ all: 'unset' }}>
+              <MenuItem onClick={handleProfile} sx={{ fontSize: '20px' }}>
+                Profile
+              </MenuItem>
+            </Link>
+            <MenuItem onClick={handleClose} sx={{ fontSize: '20px' }}>
+              My account
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                handleClose();
+                signOutUser();
+              }}
+              sx={{ fontSize: '20px' }}
+            >
+              Sign Out
+            </MenuItem>
+          </Menu>
+        </div>
+      )}
+      <motion.button
+        onClick={() => {
+          setshowOptions(true);
+        }}
+        initial={{
+          opacity: props.init ? 0 : 1,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        transition={{
+          delay: 1,
+          duration: 1,
+        }}
+        style={{
+          marginTop: '2%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 2,
+        }}
+        className="scaling"
+      >
+        <div
+          style={{
+            backgroundColor: '#1a73e8',
+            height: '100%',
+            width: '100%',
+            display: 'flex',
+          }}
+          className="slidingBackground"
+        >
+          <div
             style={{
-              position: 'absolute',
-              top: props.sizeHeight === 1 ? '20%' : '12%',
-              right: '-4%',
-              marginRight: '0px',
-              zIndex: 1,
-
-              display: 'flex',
-              flexDirection: 'column',
-              backgroundColor: 'white',
-
+              height: '100%',
               width: '100%',
-              height: props.sizeHeight === 1 ? '100%' : '76%',
-              fontSize: props.sizeHeight === 1 ? '60px' : '100px',
-              fontFamily: 'Google Sans',
-
-              overflowY: 'scroll',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
-            className="navbar-link"
+            className="rotating"
           >
             <div
               style={{
-                width: '90%',
-                height: '5px',
-                backgroundColor: '#e84438',
+                height: '100%',
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              className="appsColor"
+            >
+              <AppsIcon style={{ height: '40px', width: '40px' }} />
+            </div>
+          </div>
+        </div>
+      </motion.button>
+
+      {showOptions && (
+        <AnimatePresence>
+          <motion.div
+            initial={{
+              y: '100vh',
+              opacity: 0,
+            }}
+            animate={{
+              y: '0',
+              opacity: 1,
+            }}
+            style={{
+              height: '70vh',
+              width: '80vw',
+              display: 'flex',
+              flexDirection: 'column',
+
+              boxShadow: '0px 0px 1px 5000px rgba(0,0,0,0.1)',
+              zIndex: 3,
+
+              position: 'absolute',
+              top: '15vh',
+              left: '10vw',
+              backgroundColor: '#f0ecee',
+
+              overflow: 'hidden',
+            }}
+          >
+            <motion.div
+              initial={{
+                y: '100vh',
+                x: '-100vw',
+                opacity: 0.3,
+              }}
+              animate={{
+                y: '-100vh',
+                x: '100vw',
+              }}
+              transition={{
+                duration: 1.7,
+              }}
+              style={{
                 position: 'absolute',
+                height: '70vh',
+                width: '80vw',
+                border: '1px solid',
+                background: 'linear-gradient(#1a73e8, #0f9d58)',
               }}
             />
-            <div onClick={props.setProject}>Projects</div>
-            <div>Join Us</div>
-            <div>Education</div>
-            <div>Meetup</div>
+            <div
+              style={{
+                width: '100%',
+                height: '50%',
+
+                display: 'flex',
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+              }}
+            >
+              <div
+                className="appObjects"
+                style={{
+                  backgroundImage: 'linear-gradient(to bottom, white 50%, #569efc 50%)',
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  className="appsColor2"
+                >
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://forms.gle/95Kx8NHm6eyaCkeS8"
+                    className="Links appsColor2"
+                  >
+                    Join Us
+                  </a>
+                </div>
+              </div>
+              <div
+                className="appObjects"
+                style={{
+                  backgroundImage: 'linear-gradient(to bottom, white 50%, #e84438 50%)',
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  className="appsColor2"
+                >
+                  <Link to="/meetup" className="Links appsColor2" onClick={() => setshowOptions(false)}>
+                    Meetups
+                  </Link>
+                </div>
+              </div>
+              <div
+                className="appObjects"
+                style={{
+                  backgroundImage: 'linear-gradient(to bottom, white 50%, #0f9d58 50%)',
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  className="appsColor2"
+                >
+                  <Link to="/education" className="Links appsColor2" onClick={() => setshowOptions(false)}>
+                    Courses
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                width: '100%',
+                height: '50%',
+
+                display: 'flex',
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+              }}
+            >
+              <div
+                className="appObjects"
+                style={{
+                  backgroundImage: 'linear-gradient(to bottom, white 50%, #fbbc04 50%)',
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  className="appsColor2"
+                >
+                  <Link to="/projects" className="Links" onClick={() => setshowOptions(false)}>
+                    Projects
+                  </Link>
+                </div>
+              </div>
+              <div
+                className="appObjects"
+                style={{
+                  backgroundImage: 'linear-gradient(to bottom, white 50%, #1a73e8 50%)',
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  className="appsColor2"
+                >
+                  <button
+                    className="Links"
+                    onClick={() => {
+                      setshowOptions(false);
+                      handleSignIn();
+                    }}
+                  >
+                    Sign In
+                  </button>
+                </div>
+              </div>
+            </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </AnimatePresence>
+      )}
     </div>
   );
 };
