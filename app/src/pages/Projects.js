@@ -1,10 +1,12 @@
 // Node imports
 import { Box, Button, Input, InputLabel, TextField } from '@mui/material';
+import { getAuth } from 'firebase/auth';
 import { motion } from 'framer-motion';
 import React from 'react';
+import { isUserSignedIn } from '../firebase/Auth';
 
 // Firestore
-import { loadProjects, saveProject } from '../firebase/Firestore';
+import { getUserProfile, loadProjects, saveProject } from '../firebase/Firestore';
 
 // CSS
 import './styles.css';
@@ -12,6 +14,8 @@ import './styles.css';
 const Projects = (props) => {
   const [firestoreProjectData, setFirestoreProjectData] = React.useState([]);
   const [uploadImage, setUploadImage] = React.useState(null);
+  const [userIsAdmin, setUserIsAdmin] = React.useState(false);
+
   const loadProjectData = async () => {
     const projects = await loadProjects();
     console.log('projects loaded', projects);
@@ -42,10 +46,19 @@ const Projects = (props) => {
     await saveProject(project.title, project.description, project.githublink, uploadImage, project.publiclink);
     console.log('project successfully uploaded!');
   };
-
+  const checkUserAdmin = async function () {
+    if (!isUserSignedIn()) {
+      setUserIsAdmin(false);
+      return;
+    }
+    getUserProfile(getAuth().currentUser.uid).then((userProfile) => {
+      setUserIsAdmin(userProfile.admin);
+    });
+  };
   //Load the projects from firestore
   React.useEffect(() => {
     loadProjectData();
+    checkUserAdmin();
   }, []);
 
   return (
@@ -162,17 +175,26 @@ const Projects = (props) => {
         })}
       </motion.div>
       <Button onClick={loadProjectData}>Reload Projects</Button>
-      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-        <TextField margin="normal" required fullWidth id="title" label="Project Title" name="title" />
-        <TextField margin="normal" required fullWidth id="description" label="Project Description" name="description" />
-        <TextField margin="normal" required fullWidth id="githublink" label="Github Link" name="githublink" />
-        <TextField margin="normal" fullWidth id="publiclink" label="Public Project Link" name="publiclink" />
-        <InputLabel htmlFor="image">Select Image for Project</InputLabel>
-        <Input type="file" id="image" onChange={handleImage} placeholder="Upload image of the project" />
-        <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-          Upload Project to Firestore
-        </Button>
-      </Box>
+      {userIsAdmin && (
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField margin="normal" required fullWidth id="title" label="Project Title" name="title" />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="description"
+            label="Project Description"
+            name="description"
+          />
+          <TextField margin="normal" required fullWidth id="githublink" label="Github Link" name="githublink" />
+          <TextField margin="normal" fullWidth id="publiclink" label="Public Project Link" name="publiclink" />
+          <InputLabel htmlFor="image">Select Image for Project</InputLabel>
+          <Input type="file" id="image" onChange={handleImage} placeholder="Upload image of the project" />
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            Upload Project to Firestore
+          </Button>
+        </Box>
+      )}
     </>
   );
 };

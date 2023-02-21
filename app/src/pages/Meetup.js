@@ -1,15 +1,17 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 import './styles.css';
-import { loadMeetings, saveMeeting } from '../firebase/Firestore';
+import { getUserProfile, loadMeetings, saveMeeting } from '../firebase/Firestore';
 
 import { Button, Card, InputLabel, Paper, TextField, Typography } from '@mui/material';
 import { Timestamp } from 'firebase/firestore';
+import { isUserSignedIn } from '../firebase/Auth';
+import { getAuth } from 'firebase/auth';
 
 const Meetup = (props) => {
   const [firestoreMeetingData, setFirestoreMeetingData] = React.useState([]);
   const [addingNewEvent, setAddingNewEvent] = React.useState(false);
-
+  const [userIsAdmin, setUserIsAdmin] = React.useState(false);
   const loadMeetingData = async () => {
     const meetings = await loadMeetings();
     console.log('meetups loaded', meetings);
@@ -31,14 +33,26 @@ const Meetup = (props) => {
     loadMeetingData();
     setAddingNewEvent(false);
   };
-
+  const checkUserAdmin = async function () {
+    if (!isUserSignedIn()) {
+      setUserIsAdmin(false);
+      return;
+    }
+    getUserProfile(getAuth().currentUser.uid).then((userProfile) => {
+      setUserIsAdmin(userProfile.admin);
+    });
+  };
   React.useEffect(() => {
     loadMeetingData();
+    // checkUserAdmin();
+    checkUserAdmin();
   }, []);
+
   return (
     <div style={{ width: '80%' }}>
       <div style={{ margin: 20 }}>
-        {!addingNewEvent && <Button onClick={() => setAddingNewEvent(true)}>Add new event</Button>}
+        {console.log(userIsAdmin) ||
+          (userIsAdmin && !addingNewEvent && <Button onClick={() => setAddingNewEvent(true)}>Add new event</Button>)}
         {addingNewEvent && (
           <Paper
             id="newMeetingForm"
