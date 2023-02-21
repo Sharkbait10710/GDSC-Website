@@ -62,6 +62,9 @@ const Profile = (props) => {
         y: '0vh',
         opacity: 1,
       }}
+      transition={{
+        duration: 1
+      }}
       style={{
         marginTop: '2%',
         display: 'flex',
