@@ -52,20 +52,33 @@ const Meetup = (props) => {
     <div
       style={{
         width: '80%',
+        height: '80%',
+        border: '1px solid',
         overflowY: 'scroll',
         marginTop: '2%',
         paddingTop: '2.3%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
 
         overflowX: 'hidden',
       }}
     >
       <div>
         {console.log(userIsAdmin) ||
-          (userIsAdmin && !addingNewEvent && <Button onClick={() => setAddingNewEvent(true)}>Add new event</Button>)}
+          (userIsAdmin && !addingNewEvent && (
+            <Button
+              sx={{
+                position: 'absolute',
+                top: '15%',
+                left: '12%',
+                fontSize: '20px',
+              }}
+              onClick={() => setAddingNewEvent(true)}
+            >
+              Add new event
+            </Button>
+          ))}
         {addingNewEvent && (
           <Paper
             id="newMeetingForm"
