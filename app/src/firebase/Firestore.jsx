@@ -17,6 +17,44 @@ import { getUserName, getProfilePicUrl } from './Auth';
 import { getAuth } from 'firebase/auth';
 
 /**
+ * Fetches the users profile. If it doesn't exist, add the user to the /users/ collection and return their profile.
+ * @param {string} uid unique identifier of a user, generated from getAuth().currentUser.uid
+ * @returns an object representing all of the fields in the user profile
+ */
+export async function getUserProfile(uid) {
+  const querySnapshot = await getDoc(doc(getFirestore(), 'users', uid));
+  if (querySnapshot.exists()) {
+    return querySnapshot.data();
+  } else {
+    // Create user profile
+    const DEFAULT_BIO = 'Hello and welcome to my profile!';
+    console.log('Creating user profile for uid ', uid);
+    const user = getAuth().currentUser;
+    if (!user) {
+      console.error('cannot create null user');
+    }
+    const userProfile = {
+      displayName: user.displayName,
+      username: uid,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      photoUrl: user.photoURL,
+      bio: DEFAULT_BIO,
+      timestamp: serverTimestamp(),
+      admin: false
+    };
+    await setDoc(doc(getFirestore(), 'users', uid), userProfile);
+    const querySnapshot = await getDoc(doc(getFirestore(), 'users', uid));
+    if (querySnapshot.exists()) {
+      return querySnapshot.data();
+    } else {
+      console.error('error creating user');
+      return null;
+    }
+  }
+}
+
+/**
  * Loads all projects in the 'projects' collection on firestore, and returns a list of the project objects.
  * @async
  * @returns {list} list of project objects in the form { title, description, githubLink, publicLink, imageUrl, profilePicUrl, timestamp }
@@ -93,6 +131,7 @@ export async function saveProject(title, description, githubLink, image, publicL
       imageUrl: LOADING_IMAGE_URL,
       profilePicUrl: getProfilePicUrl(),
       timestamp: serverTimestamp(),
+      authorUid: getAuth().currentUser.uid,
     });
 
     // 2 - Upload the image to Cloud Storage.
@@ -111,5 +150,50 @@ export async function saveProject(title, description, githubLink, image, publicL
     console.log('project saved in firestore');
   } catch (error) {
     console.error('There was an error uploading a file to Cloud Storage:', error);
+  }
+}
+
+
+
+/**
+ * Loads all meetings in the 'meetings' collection on firestore, and returns a list of the meeting objects.
+ * @async
+ * @returns {list} list of meeting objects in the form { title, description, date, location, name, authorUid, timestamp }
+ */
+export async function loadMeetings() {
+  const querySnapshot = (await getDocs(query(collection(getFirestore(), 'meetings'), orderBy("date", 'asc')) ));
+  let allMeetings = [];
+  querySnapshot.forEach((doc) => {
+    allMeetings.push(doc.data());
+  });
+    
+  return allMeetings;
+}
+
+/**
+ * Saves a Meeting to the firestore 'meetings' collection
+ * @async
+ * @param {string} title title of the meeting
+ * @param {string} description description of the meeting
+ * @param {string} date date of the meeting
+ * @param {string} location location of the meeting
+ */
+export async function saveMeeting(title, description, date, location) {
+
+  try {
+    // Push a new meeting to firestore
+    await addDoc(collection(getFirestore(), 'meetings'), {
+      title,
+      description,
+      date,
+      location,
+      name: getUserName(),
+      authorUid: getAuth().currentUser.uid,
+      timestamp: serverTimestamp(),
+    });
+
+    console.log('meeting saved in firestore');
+  } catch (error) {
+    console.error('There was an error writing a meeting to firebase database:', error);
   }
 }
