@@ -7,6 +7,7 @@ import Projects from './pages/Projects';
 import Joinus from './pages/Joinus';
 import Meetup from './pages/Meetup';
 import Education from './pages/Education';
+import Profile from './pages/Profile';
 
 //Routing imports
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
       <Route path="join" element={<Joinus sizeWidth={sizeWidth} sizeHeight={sizeHeight} />} />
       <Route path="education" element={<Education sizeWidth={sizeWidth} sizeHeight={sizeHeight} />} />
       <Route path="meetup" element={<Meetup sizeWidth={sizeWidth} sizeHeight={sizeHeight} />} />
+      <Route path="profile" element={<Profile />} />
     </Route>,
   ),
 );

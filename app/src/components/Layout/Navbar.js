@@ -48,6 +48,10 @@ const Navbar = (props) => {
     signIn();
   };
 
+  const handleProfile = () => {
+    handleClose();
+  };
+  
   React.useEffect(() => {
     const handleKeypresses = (event) => {
       if (event.key === `Escape`) {
@@ -151,8 +155,9 @@ const Navbar = (props) => {
         <div
           style={{
             marginTop: '2%',
-            marginRight: '2%'
-          }}>
+            marginRight: '2%',
+          }}
+        >
           <IconButton
             size="large"
             aria-label="account of current user"
@@ -178,19 +183,24 @@ const Navbar = (props) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
             style={{
-              marginLeft: "-3.5%",
-              marginTop: "0.3%"
-              
+              marginLeft: '-3.5%',
+              marginTop: '0.3%',
             }}
           >
-            <MenuItem onClick={handleClose} sx={{fontSize: "20px"}}>Profile</MenuItem>
-            <MenuItem onClick={handleClose} sx={{fontSize: "20px"}}>My account</MenuItem>
+            <Link to="/profile" style={{ all: 'unset' }}>
+              <MenuItem onClick={handleProfile} sx={{ fontSize: '20px' }}>
+                Profile
+              </MenuItem>
+            </Link>
+            <MenuItem onClick={handleClose} sx={{ fontSize: '20px' }}>
+              My account
+            </MenuItem>
             <MenuItem
               onClick={() => {
                 handleClose();
                 signOutUser();
               }}
-              sx={{fontSize: "20px"}}
+              sx={{ fontSize: '20px' }}
             >
               Sign Out
             </MenuItem>
