@@ -10,11 +10,11 @@ import GDSC_logo from '../../imgs/GDSC_Logo.png';
 import './styles.css';
 
 //Authentication
-import { addAuthListener, signIn} from '../../firebase/Auth'
+import { addAuthListener, signIn } from '../../firebase/Auth';
 import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
-  const framerControl = useAnimationControls()
+  const framerControl = useAnimationControls();
 
   const linkVariant = {
     hidden: {
@@ -133,7 +133,10 @@ const Navbar = (props) => {
         {props.sizeWidth !== 3 && props.sizeWidth !== 1 && <Link to="/">GDSC</Link>}
       </motion.div>
 
-      <motion.div
+      <motion.button
+        onClick={() => {
+          setshowOptions(true)
+        }}
         initial={{
           opacity: props.init ? 0 : 1,
         }}
@@ -145,16 +148,47 @@ const Navbar = (props) => {
           duration: 1,
         }}
         style={{
-          marginTop: "2%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          zIndex: 2
+          marginTop: '2%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 2,
         }}
         className="scaling"
       >
-        <AppsIcon className="rotating" style={{height: "40px", width: "40px"}}/>
-      </motion.div>
+        <div
+          style={{
+            backgroundColor: '#1a73e8',
+            height: '100%',
+            width: '100%',
+            display: 'flex',
+          }}
+          className="slidingBackground"
+        >
+          <div
+            style={{
+              height: '100%',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            className="rotating"
+          >
+            <div
+              style={{
+                height: '100%',
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              className="appsColor">
+              <AppsIcon style={{ height: '40px', width: '40px' }} />
+            </div>
+          </div>
+        </div>
+      </motion.button>
     </div>
   );
 };

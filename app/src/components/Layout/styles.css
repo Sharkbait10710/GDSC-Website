@@ -18,17 +18,35 @@ button {
 }
 
 .scaling {
-    transition: scale 0.5s ease-in-out 50ms;
+    transition: scale 0.3s ease-in-out 50ms;
 }
 
 .scaling:hover {
-    scale: 2
+    scale: 1.5;
 }
 
 .rotating {
-    transition: rotate 0.5s ease-in-out 50ms;
+    transition: rotate 0.3s ease-in-out 50ms;
 }
 
 .rotating:hover {
     rotate: 180deg;
+}
+
+.slidingBackground {
+    background-size: 100% 200%;
+    background-image: linear-gradient(to bottom, white 50%, #569efc 50%);
+    -webkit-transition: background-position 0.3s;
+    -moz-transition: background-position 0.3s;
+    transition: background-position 0.3s;
+}
+.slidingBackground:hover {
+    background-position: 0 -100%;
+}
+
+.appsColor {
+    transition: color 0.3s ease-in-out 50ms;
+}
+.appsColor:hover {
+    color: white;
 }
