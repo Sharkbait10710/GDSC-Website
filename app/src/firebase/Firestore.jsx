@@ -41,6 +41,7 @@ export async function getUserProfile(uid) {
       photoUrl: user.photoURL,
       bio: DEFAULT_BIO,
       timestamp: serverTimestamp(),
+      admin: false
     };
     await setDoc(doc(getFirestore(), 'users', uid), userProfile);
     const querySnapshot = await getDoc(doc(getFirestore(), 'users', uid));
