@@ -43,7 +43,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #eff1ef;
+  background: none;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -59,4 +59,12 @@
   margin-left: 20px;
   padding: 10px;
   font-size: 25px;
+}
+
+.meetupItems:hover {
+  scale: 1.02;
+}
+
+.meetItems::-webkit-scrollbar-thumb {
+  background: none;
 }

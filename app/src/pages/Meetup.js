@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import React from 'react';
-import './styles.css';
+import './meetupStyles.css';
 import { getUserProfile, loadMeetings, saveMeeting } from '../firebase/Firestore';
 
 import { Button, Card, InputLabel, Paper, TextField, Typography } from '@mui/material';
@@ -49,8 +49,21 @@ const Meetup = (props) => {
   }, []);
 
   return (
-    <div style={{ width: '80%' }}>
-      <div style={{ margin: 20 }}>
+    <div
+      style={{
+        width: '80%',
+        overflowY: 'scroll',
+        marginTop: '2%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: "100px",
+
+        overflowX: "hidden"
+      }}
+    >
+      <div>
         {console.log(userIsAdmin) ||
           (userIsAdmin && !addingNewEvent && <Button onClick={() => setAddingNewEvent(true)}>Add new event</Button>)}
         {addingNewEvent && (
@@ -58,7 +71,7 @@ const Meetup = (props) => {
             id="newMeetingForm"
             component="form"
             elevation={3}
-            style={{ padding: 20 }}
+            sx={{ padding: 20 }}
             onSubmit={handleSubmit}
             noValidate
           >
@@ -87,103 +100,34 @@ const Meetup = (props) => {
       {firestoreMeetingData &&
         firestoreMeetingData.map((meeting, i) => {
           return (
-            <Paper elevation={2} style={{ width: '90%', minWidth: '500px', padding: 30 }}>
+            <Paper
+              elevation={2}
+              style={{
+                width: '90%',
+                minHeight: "20vh",
+                minWidth: '500px',
+                padding: "30px",
+                margin: "10px",
+                
+                border: "1px solid#d9d9d9",
+                boxShadow: "10px 10px #d9d9d9",
+                overflowY: "scroll",
+                overflowX: "hidden"
+              }}
+              className="meetupItems"
+            >
               <Typography variant="h4">{meeting.title}</Typography>
               <Typography variant="body1" color="text.secondary">
-                Location: {meeting.location}
+                <span style={{fontWeight: "bold"}}>Location:</span> {meeting.location}
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                Date: {meeting.date.toDate().toDateString()}
+              <span style={{fontWeight: "bold"}}>Date:</span> {meeting.date.toDate().toDateString()}
               </Typography>
-              <Typography variant="subtitle1">{meeting.description}</Typography>
+              <Typography variant="subtitle1">{meeting.description}asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf </Typography>
             </Paper>
           );
         })}
     </div>
-  );
-  return (
-    <motion.div
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-      }}
-      transition={{
-        duration: 1,
-      }}
-      style={{
-        marginTop: props.sizeHeight === 1 ? '20%' : '1%',
-        display: 'flex',
-        flexDirection: 'column',
-        width: '95%',
-        height: '100%',
-      }}
-    >
-      <div
-        style={{
-          width: '100%',
-          height: '5px',
-          backgroundColor: 'gray',
-          marginTop: '15px',
-          opacity: '0.6',
-        }}
-      />
-      <motion.div
-        style={{
-          border: '1px solid',
-          borderRadius: '10px',
-          height: '74vh',
-          width: '100%',
-          marginTop: '30px',
-          overflowY: 'scroll',
-          overflowX: 'hidden',
-          alignItems: 'center',
-        }}
-      >
-        {[0, 1, 2].map((ele) => {
-          return (
-            <div
-              style={{
-                width: '99%',
-                fontFamily: 'Google Sans',
-                fontSize: '30px',
-                padding: '10px',
-              }}
-              key={'week' + ele + 1}
-            >
-              Week {ele}
-              <motion.div
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  justifyContent: 'space_evenly',
-                }}
-              >
-                <motion.div
-                  style={{
-                    height: '30vh',
-                    width: '20%',
-                    border: '1px solid',
-                    borderRadius: '10px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-evenly',
-                    alignItems: 'center',
-
-                    boxShadow: '5px 5px #d9d9d9',
-                  }}
-                >
-                  <div>Monday</div>
-                  <div>General Meeting {ele + 1}</div>
-                  <div>2/{15 + ele * 7}/2023</div>
-                </motion.div>
-              </motion.div>
-            </div>
-          );
-        })}
-      </motion.div>
-    </motion.div>
   );
 };
 
