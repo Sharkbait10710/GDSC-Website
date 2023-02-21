@@ -53,7 +53,6 @@ const Meetup = (props) => {
       style={{
         width: '80%',
         height: '80%',
-        border: '1px solid',
         overflowY: 'scroll',
         marginTop: '2%',
         paddingTop: '2.3%',
