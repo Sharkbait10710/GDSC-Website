@@ -54,13 +54,13 @@ const Meetup = (props) => {
         width: '80%',
         overflowY: 'scroll',
         marginTop: '2%',
-        paddingTop: "2.3%",
+        paddingTop: '2.3%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
 
-        overflowX: "hidden"
+        overflowX: 'hidden',
       }}
     >
       <div>
@@ -104,26 +104,26 @@ const Meetup = (props) => {
               elevation={2}
               style={{
                 width: '90%',
-                minHeight: "20vh",
+                minHeight: '20vh',
                 minWidth: '500px',
-                padding: "30px",
-                margin: "10px",
-                
-                border: "1px solid#d9d9d9",
-                boxShadow: "10px 10px #d9d9d9",
-                overflowY: "scroll",
-                overflowX: "hidden"
+                padding: '30px',
+                margin: '10px',
+
+                border: '1px solid#d9d9d9',
+                boxShadow: '10px 10px #d9d9d9',
+                overflowY: 'scroll',
+                overflowX: 'hidden',
               }}
               className="meetupItems"
             >
               <Typography variant="h4">{meeting.title}</Typography>
               <Typography variant="body1" color="text.secondary">
-                <span style={{fontWeight: "bold"}}>Location:</span> {meeting.location}
+                <span style={{ fontWeight: 'bold' }}>Location:</span> {meeting.location}
               </Typography>
               <Typography variant="body1" color="text.secondary">
-              <span style={{fontWeight: "bold"}}>Date:</span> {meeting.date.toDate().toDateString()}
+                <span style={{ fontWeight: 'bold' }}>Date:</span> {meeting.date.toDate().toDateString()}
               </Typography>
-              <Typography variant="subtitle1">{meeting.description}asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf asdfaerasf </Typography>
+              <Typography variant="subtitle1">{meeting.description}</Typography>
             </Paper>
           );
         })}

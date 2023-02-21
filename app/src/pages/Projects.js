@@ -220,11 +220,11 @@ const Projects = (props) => {
         <motion.div
           initial={{
             y: '100vh',
-            opacity: 0
+            opacity: 0,
           }}
           animate={{
             y: '0vh',
-            opacity: 1
+            opacity: 1,
           }}
           transition={{
             duration: 0.5,
@@ -245,96 +245,98 @@ const Projects = (props) => {
             alignItems: 'center',
           }}
         >
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="title"
-            label="Project Title"
-            name="title"
-            InputProps={{ style: { fontSize: 40 } }}
-            InputLabelProps={{ style: { fontSize: 40 } }}
-            sx={{
-              width: '80%',
-            }}
-          />
-          <TextField
-            margin="normal"
-            required
-            multiline
-            rows={4}
-            id="description"
-            label="Project Description"
-            name="description"
-            InputProps={{ style: { fontSize: 20 } }}
-            InputLabelProps={{ style: { fontSize: 20 } }}
-            sx={{
-              width: '80%',
-            }}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="githublink"
-            label="Github Link"
-            name="githublink"
-            InputProps={{ style: { fontSize: 20 } }}
-            InputLabelProps={{ style: { fontSize: 20 } }}
-            sx={{
-              width: '80%',
-            }}
-          />
-          <TextField
-            margin="normal"
-            fullWidth
-            id="publiclink"
-            label="Public Project Link"
-            name="publiclink"
-            InputProps={{ style: { fontSize: 20 } }}
-            InputLabelProps={{ style: { fontSize: 20 } }}
-            sx={{
-              width: '80%',
-            }}
-          />
-          <div
-            style={{
-              width: '80%',
-              position: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <InputLabel htmlFor="image" style={{ fontSize: '20px' }}>
-              Project Icon
-            </InputLabel>
-            <Input
-              type="file"
-              id="image"
-              onChange={handleImage}
-              placeholder="Upload image of the project"
+          <form onSubmit={handleSubmit}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="title"
+              label="Project Title"
+              name="title"
+              InputProps={{ style: { fontSize: 40 } }}
+              InputLabelProps={{ style: { fontSize: 40 } }}
               sx={{
-                fontSize: '20px',
+                width: '80%',
               }}
             />
-          </div>
-          <div
-            style={{
-              marginTop: '20px',
-              width: '80%',
-            }}
-          >
-            <Button
-              type="submit"
-              variant="contained"
+            <TextField
+              margin="normal"
+              required
+              multiline
+              rows={4}
+              id="description"
+              label="Project Description"
+              name="description"
+              InputProps={{ style: { fontSize: 20 } }}
+              InputLabelProps={{ style: { fontSize: 20 } }}
               sx={{
-                width: '50px',
-                height: '50px',
-                backgroundColor: '#1a73e8',
+                width: '80%',
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="githublink"
+              label="Github Link"
+              name="githublink"
+              InputProps={{ style: { fontSize: 20 } }}
+              InputLabelProps={{ style: { fontSize: 20 } }}
+              sx={{
+                width: '80%',
+              }}
+            />
+            <TextField
+              margin="normal"
+              fullWidth
+              id="publiclink"
+              label="Public Project Link"
+              name="publiclink"
+              InputProps={{ style: { fontSize: 20 } }}
+              InputLabelProps={{ style: { fontSize: 20 } }}
+              sx={{
+                width: '80%',
+              }}
+            />
+            <div
+              style={{
+                width: '80%',
+                position: 'flex',
+                flexDirection: 'column',
               }}
             >
-              <FileUploadIcon />
-            </Button>
-          </div>
+              <InputLabel htmlFor="image" style={{ fontSize: '20px' }}>
+                Project Icon
+              </InputLabel>
+              <Input
+                type="file"
+                id="image"
+                onChange={handleImage}
+                placeholder="Upload image of the project"
+                sx={{
+                  fontSize: '20px',
+                }}
+              />
+            </div>
+            <div
+              style={{
+                marginTop: '20px',
+                width: '80%',
+              }}
+            >
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  width: '50px',
+                  height: '50px',
+                  backgroundColor: '#1a73e8',
+                }}
+              >
+                <FileUploadIcon />
+              </Button>
+            </div>
+          </form>
         </motion.div>
       )}
     </>
