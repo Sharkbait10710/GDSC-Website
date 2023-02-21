@@ -14,6 +14,7 @@ import './styles.css';
 
 const Projects = (props) => {
   const [firestoreProjectData, setFirestoreProjectData] = React.useState([]);
+  const [userIsAdmin, setUserIsAdmin] = React.useState(false);
   const [uploadImage, setUploadImage] = React.useState(null);
   const [showAdd, setshowAdd] = React.useState(() => {
     return false;
@@ -188,51 +189,55 @@ const Projects = (props) => {
         </div>
       </motion.div>
 
-      <button
-        onClick={() => setshowAdd(true)}
-        style={{
-          position: 'absolute',
-          bottom: '10%',
-          right: '4%',
-          width: '74px',
-          height: '74px',
-          borderRadius: '37px',
+      {userIsAdmin && (
+        <button
+          onClick={() => setshowAdd(true)}
+          style={{
+            position: 'absolute',
+            bottom: '10%',
+            right: '4%',
+            width: '74px',
+            height: '74px',
+            borderRadius: '37px',
 
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#e84438',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#e84438',
 
-          boxShadow: '2px 2px #d9d9d9',
-        }}
-        className="hovering"
-      >
-        <AddIcon style={{ color: 'white', fontSize: '60px' }} />
-      </button>
-      <button
-        onClick={() => {
-          loadProjectData();
-          setshowAdd(false);
-        }}
-        style={{
-          position: 'absolute',
-          bottom: '10%',
-          left: '4%',
-          width: '74px',
-          height: '74px',
-          borderRadius: '37px',
+            boxShadow: '2px 2px #d9d9d9',
+          }}
+          className="hovering"
+        >
+          <AddIcon style={{ color: 'white', fontSize: '60px' }} />
+        </button>
+      )}
+      {userIsAdmin && (
+        <button
+          onClick={() => {
+            loadProjectData();
+            setshowAdd(false);
+          }}
+          style={{
+            position: 'absolute',
+            bottom: '10%',
+            left: '4%',
+            width: '74px',
+            height: '74px',
+            borderRadius: '37px',
 
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#e84438',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#e84438',
 
-          boxShadow: '2px 2px #d9d9d9',
-        }}
-        className="hovering"
-      >
-        <ReplayIcon style={{ color: 'white', fontSize: '60px' }} />
-      </button>
+            boxShadow: '2px 2px #d9d9d9',
+          }}
+          className="hovering"
+        >
+          <ReplayIcon style={{ color: 'white', fontSize: '60px' }} />
+        </button>
+      )}
       {showAdd && (
         <motion.div
           initial={{
