@@ -1,7 +1,40 @@
 import { motion } from 'framer-motion';
+import React from 'react';
 import './styles.css';
+import { loadMeetings, saveMeeting } from '../firebase/Firestore';
+import { Paper, Typography } from '@mui/material';
 
 const Meetup = (props) => {
+  const [firestoreMeetingData, setFirestoreMeetingData] = React.useState([]);
+
+  const loadMeetingData = async () => {
+    const meetings = await loadMeetings();
+    console.log('meetups loaded', meetings);
+    setFirestoreMeetingData(meetings);
+  };
+
+  React.useEffect(() => {
+    loadMeetingData();
+  }, []);
+  return (
+    <div style={{ width: '80%' }}>
+      {firestoreMeetingData &&
+        firestoreMeetingData.map((meeting, i) => {
+          return (
+            <Paper elevation={2} style={{ width: '90%', minWidth: '500px', padding: 30 }}>
+              <Typography variant="h4">{meeting.title}</Typography>
+              <Typography variant="body1" color="text.secondary">
+                Location: {meeting.location}
+              </Typography>
+              <Typography variant="body1" color="text.secondary">
+                Date: {meeting.date.toDate().toDateString()}
+              </Typography>
+              <Typography variant="subtitle1">{meeting.description}</Typography>
+            </Paper>
+          );
+        })}
+    </div>
+  );
   return (
     <motion.div
       initial={{

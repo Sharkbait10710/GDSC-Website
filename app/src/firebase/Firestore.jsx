@@ -8,6 +8,9 @@ import {
   getDoc,
   setDoc,
   doc,
+  query,
+  orderBy,
+  onSnapshot,
 } from 'firebase/firestore';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { getUserName, getProfilePicUrl } from './Auth';
@@ -108,5 +111,55 @@ export async function saveProject(title, description, githubLink, image, publicL
     console.log('project saved in firestore');
   } catch (error) {
     console.error('There was an error uploading a file to Cloud Storage:', error);
+  }
+}
+
+
+
+/**
+ * Loads all meetings in the 'meetings' collection on firestore, and returns a list of the meeting objects.
+ * @async
+ * @returns {list} list of meeting objects in the form { title, description, date, location, name, authorUid, timestamp }
+ */
+export async function loadMeetings() {
+  // const querySnapshot = await getDocs(collection(getFirestore(), 'meetings'));
+  const querySnapshot = query(collection(getFirestore(), 'meetings'), orderBy('timestamp', 'desc'));
+  // query(collection(getFirestore(), 'messages'), orderBy('timestamp', 'desc'), limit(12));
+  let allMeetings = [];
+  onSnapshot(querySnapshot, (query) => {
+    query.docs.forEach((doc) => {
+      allMeetings.push(doc.data());
+    });
+    
+  })
+
+  return allMeetings;
+}
+
+/**
+ * Saves a Meeting to the firestore 'meetings' collection
+ * @async
+ * @param {string} title title of the meeting
+ * @param {string} description description of the meeting
+ * @param {string} date date of the meeting
+ * @param {string} location location of the meeting
+ */
+export async function saveMeeting(title, description, date, location) {
+
+  try {
+    // Push a new meeting to firestore
+    await addDoc(collection(getFirestore(), 'meetings'), {
+      title,
+      description,
+      date,
+      location,
+      name: getUserName(),
+      authorUid: getAuth().currentUser.uid,
+      timestamp: serverTimestamp(),
+    });
+
+    console.log('meeting saved in firestore');
+  } catch (error) {
+    console.error('There was an error writing a meeting to firebase database:', error);
   }
 }
