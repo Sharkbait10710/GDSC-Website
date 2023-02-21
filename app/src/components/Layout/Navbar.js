@@ -148,7 +148,7 @@ const Navbar = (props) => {
           fontWeight: 500,
         }}
       >
-        {props.sizeWidth === 3 && <Link to="/">Google Developer Student Club</Link>}
+        {props.sizeWidth === 3 && <Link to="/" onClick={() => setshowOptions(false)}>Google Developer Student Club</Link>}
         {props.sizeWidth !== 3 && props.sizeWidth !== 1 && <Link to="/">GDSC</Link>}
       </motion.div>
       {isSignedIn && (
