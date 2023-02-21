@@ -63,52 +63,68 @@ const Meetup = (props) => {
         overflowX: 'hidden',
       }}
     >
-      <div>
-        {console.log(userIsAdmin) ||
-          (userIsAdmin && !addingNewEvent && (
-            <Button
-              sx={{
-                position: 'absolute',
-                top: '15%',
-                left: '12%',
-                fontSize: '20px',
-              }}
-              onClick={() => setAddingNewEvent(true)}
+      <motion.div
+        initial={{
+          y: "100vh",
+          opacity: 0
+        }}
+        animate={{
+          y: "0vh",
+          opacity: 1
+        }}
+        transition={{
+          duration: 1
+        }}
+        style={{
+          width: "100%",
+          height: "100%",
+          border: "1px solid"
+        }}>
+        <div>
+          {console.log(userIsAdmin) ||
+            (userIsAdmin && !addingNewEvent && (
+              <Button
+                sx={{
+                  marginTop: "30px",
+                  fontSize: '20px',
+                  zIndex: 3
+                }}
+                onClick={() => setAddingNewEvent(true)}
+              >
+                Add new event
+              </Button>
+            ))}
+          {addingNewEvent && (
+            <Paper
+              id="newMeetingForm"
+              component="form"
+              elevation={3}
+              sx={{ padding: 20 }}
+              onSubmit={handleSubmit}
+              noValidate
             >
-              Add new event
-            </Button>
-          ))}
-        {addingNewEvent && (
-          <Paper
-            id="newMeetingForm"
-            component="form"
-            elevation={3}
-            sx={{ padding: 20 }}
-            onSubmit={handleSubmit}
-            noValidate
-          >
-            <Typography variant="h5">Add a new meeting:</Typography>
-            <TextField margin="normal" required fullWidth id="title" label="Meeting Title" name="title" />
-            <InputLabel htmlFor="meeting-time">Meeting Date</InputLabel>
-            <TextField
-              id="meeting-time"
-              name="meeting-time"
-              type="datetime-local"
-              required
-              fullWidth
-              defaultValue={new Date().toString()}
-            />
-            <TextField margin="normal" required fullWidth id="location" label="Location" name="location" />
-            <TextField margin="normal" required fullWidth id="description" label="Description" name="description" />
-            <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
-              Save event
-            </Button>
-            <Button variant="outlined" onClick={() => setAddingNewEvent(false)} sx={{ mt: 3, mb: 2 }}>
-              Cancel
-            </Button>
-          </Paper>
-        )}
-      </div>
+              <Typography variant="h5">Add a new meeting:</Typography>
+              <TextField margin="normal" required fullWidth id="title" label="Meeting Title" name="title" />
+              <InputLabel htmlFor="meeting-time">Meeting Date</InputLabel>
+              <TextField
+                id="meeting-time"
+                name="meeting-time"
+                type="datetime-local"
+                required
+                fullWidth
+                defaultValue={new Date().toString()}
+              />
+              <TextField margin="normal" required fullWidth id="location" label="Location" name="location" />
+              <TextField margin="normal" required fullWidth id="description" label="Description" name="description" />
+              <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+                Save event
+              </Button>
+              <Button variant="outlined" onClick={() => setAddingNewEvent(false)} sx={{ mt: 3, mb: 2 }}>
+                Cancel
+              </Button>
+            </Paper>
+          )}
+        </div>
       {firestoreMeetingData &&
         firestoreMeetingData.map((meeting, i) => {
           return (
@@ -139,6 +155,7 @@ const Meetup = (props) => {
             </Paper>
           );
         })}
+      </motion.div>
     </div>
   );
 };
