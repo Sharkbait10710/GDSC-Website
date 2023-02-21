@@ -1,6 +1,6 @@
 // Node imports
 import * as React from 'react';
-import { motion, useAnimationControls } from 'framer-motion';
+import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 // MUI Icons
 import AppsIcon from '@mui/icons-material/Apps';
 
@@ -46,6 +46,20 @@ const Navbar = (props) => {
   const handleSignIn = () => {
     signIn();
   };
+
+  React.useEffect(() => {
+    const handleKeypresses = (event) => {
+      if (event.key === `Escape`) {
+        setshowOptions(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeypresses);
+
+    return function cleanupListener() {
+      document.removeEventListener('keydown', handleKeypresses);
+    };
+  });
 
   // ----- Authentication --------
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -135,7 +149,7 @@ const Navbar = (props) => {
 
       <motion.button
         onClick={() => {
-          setshowOptions(true)
+          setshowOptions(true);
         }}
         initial={{
           opacity: props.init ? 0 : 1,
@@ -183,12 +197,199 @@ const Navbar = (props) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
-              className="appsColor">
+              className="appsColor"
+            >
               <AppsIcon style={{ height: '40px', width: '40px' }} />
             </div>
           </div>
         </div>
       </motion.button>
+
+      {showOptions && (
+        <AnimatePresence>
+          <motion.div
+            initial={{
+              y: '100vh',
+              opacity: 0,
+            }}
+            animate={{
+              y: '0',
+              opacity: 1,
+            }}
+            style={{
+              height: '70vh',
+              width: '80vw',
+              display: 'flex',
+              flexDirection: 'column',
+
+              boxShadow: '0px 0px 1px 5000px rgba(0,0,0,0.1)',
+              zIndex: 3,
+
+              position: 'absolute',
+              top: '15vh',
+              left: '10vw',
+              backgroundColor: '#f0ecee',
+
+              overflow: 'hidden',
+            }}
+          >
+            <motion.div
+              initial={{
+                y: '100vh',
+                x: '-100vw',
+                opacity: 0.3,
+              }}
+              animate={{
+                y: '-100vh',
+                x: '100vw',
+              }}
+              transition={{
+                duration: 1.7,
+              }}
+              style={{
+                position: 'absolute',
+                height: '70vh',
+                width: '80vw',
+                border: '1px solid',
+                background: 'linear-gradient(#1a73e8, #0f9d58)',
+              }}
+            />
+            <div
+              style={{
+                width: '100%',
+                height: '50%',
+
+                display: 'flex',
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+              }}
+            >
+              <div
+                className="appObjects"
+                style={{
+                  backgroundImage: 'linear-gradient(to bottom, white 50%, #569efc 50%)',
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  className="appsColor2"
+                >
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://forms.gle/95Kx8NHm6eyaCkeS8"
+                    className="Links appsColor2"
+                  >
+                    Join Us
+                  </a>
+                </div>
+              </div>
+              <div
+                className="appObjects"
+                style={{
+                  backgroundImage: 'linear-gradient(to bottom, white 50%, #e84438 50%)',
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  className="appsColor2"
+                >
+                  <Link to="/meetup" className="Links appsColor2" onClick={() => setshowOptions(false)}>
+                    Meetups
+                  </Link>
+                </div>
+              </div>
+              <div
+                className="appObjects"
+                style={{
+                  backgroundImage: 'linear-gradient(to bottom, white 50%, #0f9d58 50%)',
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  className="appsColor2"
+                >
+                  <Link to="/education" className="Links appsColor2" onClick={() => setshowOptions(false)}>
+                    Courses
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                width: '100%',
+                height: '50%',
+
+                display: 'flex',
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+              }}
+            >
+              <div
+                className="appObjects"
+                style={{
+                  backgroundImage: 'linear-gradient(to bottom, white 50%, #fbbc04 50%)',
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}
+                  className="appsColor2"
+                >
+                  <Link to="/projects" className="Links" onClick={() => setshowOptions(false)}>
+                    Projects
+                  </Link>
+                </div>
+              </div>
+              <div
+                className="appObjects"
+                style={{
+                  backgroundImage: 'linear-gradient(to bottom, white 50%, #1a73e8 50%)',
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}
+                  className="appsColor2"
+                >
+                  <button className="Links" onClick={() => setshowOptions(false)}>
+                    Sign In
+                  </button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      )}
     </div>
   );
 };
