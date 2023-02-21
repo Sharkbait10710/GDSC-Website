@@ -122,17 +122,12 @@ export async function saveProject(title, description, githubLink, image, publicL
  * @returns {list} list of meeting objects in the form { title, description, date, location, name, authorUid, timestamp }
  */
 export async function loadMeetings() {
-  // const querySnapshot = await getDocs(collection(getFirestore(), 'meetings'));
-  const querySnapshot = query(collection(getFirestore(), 'meetings'), orderBy('timestamp', 'desc'));
-  // query(collection(getFirestore(), 'messages'), orderBy('timestamp', 'desc'), limit(12));
+  const querySnapshot = (await getDocs(query(collection(getFirestore(), 'meetings'), orderBy("date", 'asc')) ));
   let allMeetings = [];
-  onSnapshot(querySnapshot, (query) => {
-    query.docs.forEach((doc) => {
-      allMeetings.push(doc.data());
-    });
+  querySnapshot.forEach((doc) => {
+    allMeetings.push(doc.data());
+  });
     
-  })
-
   return allMeetings;
 }
 
