@@ -282,7 +282,7 @@ const Education = (props) => {
               position: 'absolute',
               width: '80vw',
               height: '75vh',
-              top: '14vh',
+              top: '15vh',
               left: '10vw',
 
               backgroundColor: 'white',
@@ -393,7 +393,7 @@ const Education = (props) => {
               >
                 <FormControl
                   style={{
-                    width: '30%',
+                    width: '40%',
                   }}
                 >
                   <InputLabel>Year</InputLabel>
