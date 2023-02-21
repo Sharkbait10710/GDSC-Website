@@ -52,3 +52,11 @@
   background: #1a73e8;
   border-radius: 10px;
 }
+
+.profileEle {
+  font-family: 'Google Sans';
+  display: flex;
+  margin-left: 20px;
+  padding: 10px;
+  font-size: 25px;
+}
