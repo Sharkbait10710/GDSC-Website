@@ -92,10 +92,6 @@ const Navbar = (props) => {
     setAnchorEl(null);
   };
 
-  const handleProfile = () => {
-    handleClose();
-  };
-
   return (
     <div
       style={{
