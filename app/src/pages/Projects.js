@@ -92,7 +92,7 @@ const Projects = (props) => {
         <div
           style={{
             width: "100%",
-            height: "85%",
+            height: "75%",
             overflowY: "scroll"
           }}>
         <div
@@ -181,6 +181,7 @@ const Projects = (props) => {
             </div>
           );
         })}
+        
         </div>
       </motion.div>
 
