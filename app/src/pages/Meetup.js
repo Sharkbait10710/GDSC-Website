@@ -54,11 +54,11 @@ const Meetup = (props) => {
         width: '80%',
         overflowY: 'scroll',
         marginTop: '2%',
+        paddingTop: "2.3%",
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: "100px",
 
         overflowX: "hidden"
       }}

@@ -97,31 +97,33 @@ const Profile = (props) => {
               display: 'flex',
               flexDirection: 'column',
               height: '70vh',
-              width: '80vw',
+              width: '80vw'
             }}
           >
             {profilePicUrl !== '' && (
               <div
                 style={{
-                  height: '20%',
-                  width: '90%',
+                  height: '30%',
+                  width: '93%',
                   padding: '30px',
                   display: 'flex',
                   flexDirection: 'row-reverse',
                   alignItems: 'center',
+
+                  position: "absolute"
                 }}
               >
                 <div
                   style={{
                     border: '1px solid',
-                    borderRadius: '90px',
+                    borderRadius: '125px',
                     overflow: 'hidden',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}
                 >
-                  <img alt="profile" src={profilePicUrl} height="150px" />
+                  <img alt="profile" src={getProfilePicUrl()} height="250px" />
                 </div>
               </div>
             )}
@@ -134,6 +136,7 @@ const Profile = (props) => {
             >
               Welcome Home, {userName}
             </Typography>
+            <div style={{height: "10%"}}/>
             {profile && (
               <ul>
                 {Object.entries(profile).map(([key, value], index) => {
@@ -145,10 +148,13 @@ const Profile = (props) => {
                           style={{
                             display: 'flex',
                             alignItems: 'center',
+                            overflowWrap: 'break-word',
+                            width: "80%"
                           }}
                         >
-                          <div style={{ fontWeight: '600', marginRight: '5px', fontSize: '30px' }}>{key}</div>{' '}
-                          <div style={{ marginTop: '5px' }}>- {value.toString()} </div>
+                          <div style={{ fontWeight: '600', marginRight: '5px', fontSize: '30px' }}>{key}</div>
+                          <div style={{ marginTop: '5px', marginLeft: '5px', marginRight: "5px"}}>{' - '}</div>
+                          <div style={{ marginTop: '5px' }}> {value.toString()} </div>
                         </div>
                       </li>
                     );
