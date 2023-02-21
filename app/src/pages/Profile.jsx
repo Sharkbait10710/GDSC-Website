@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Typography } from '@mui/material';
+import { motion } from 'framer-motion';
 import { addAuthListener, getProfilePicUrl, getUserName, isUserSignedIn } from '../firebase/Auth';
 import { getUserProfile } from '../firebase/Firestore';
 import { getAuth } from 'firebase/auth';
@@ -52,9 +53,17 @@ const Profile = (props) => {
   }, [profile]);
 
   return (
-    <div
+    <motion.div
+      initial={{
+        y: '100vh',
+        opacity: 0,
+      }}
+      animate={{
+        y: '0vh',
+        opacity: 1,
+      }}
       style={{
-        marginTop: "2%",
+        marginTop: '2%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-evenly',
@@ -64,21 +73,22 @@ const Profile = (props) => {
     >
       {isSignedIn ? (
         <>
-            <div
-                style={{
-                    position: "absolute",
-                    height: '80vh',
-                    width: '80%',
-                    overflow: "hidden",
-                    border: "1px solid #ececec",
-                    boxShadow: "8px 10px #d9d9d9",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    zIndex: -1
-                }}>
-                    <img src={profile_bg} alt="bg" height={1500} />
-            </div>
+          <div
+            style={{
+              position: 'absolute',
+              height: '80vh',
+              width: '100%',
+              overflow: 'hidden',
+              border: '1px solid #ececec',
+              boxShadow: '8px 10px #d9d9d9',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: -1,
+            }}
+          >
+            <img src={profile_bg} alt="bg" height={1500} />
+          </div>
           <div
             style={{
               display: 'flex',
@@ -135,7 +145,7 @@ const Profile = (props) => {
                           }}
                         >
                           <div style={{ fontWeight: '600', marginRight: '5px', fontSize: '30px' }}>{key}</div>{' '}
-                          <div style={{marginTop: "5px"}}>- {value.toString()} </div>
+                          <div style={{ marginTop: '5px' }}>- {value.toString()} </div>
                         </div>
                       </li>
                     );
@@ -149,7 +159,7 @@ const Profile = (props) => {
       ) : (
         <Typography>Please Sign In to View This Page</Typography>
       )}
-    </div>
+    </motion.div>
   );
 };
 
