@@ -53,19 +53,10 @@
   border-radius: 10px;
 }
 
-button {
-  all: unset;
-}
-
-button:hover {
-  scale: 1.2;
-  cursor: pointer;
-}
-
-input[type=file]::file-selector-button {
-  border: none;
-  background: #1a73e8;
-  color: #fff;
-  cursor: pointer;
-  border-radius: 10px;
+.profileEle {
+  font-family: 'Google Sans';
+  display: flex;
+  margin-left: 20px;
+  padding: 10px;
+  font-size: 25px;
 }

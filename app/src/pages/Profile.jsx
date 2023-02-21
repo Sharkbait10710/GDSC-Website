@@ -54,6 +54,7 @@ const Profile = (props) => {
   return (
     <div
       style={{
+        marginTop: "2%",
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-evenly',
